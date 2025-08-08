@@ -1,0 +1,616 @@
+:: StoryTitle
+Keep Talking and The Ship Doesn't Explode
+
+
+:: StoryData
+{
+  "ifid": "26707158-3609-4AB7-9F63-6FC214FB02C7",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Back to Menu",
+  "zoom": 1
+}
+
+
+:: ASTRONAUT {"position":"1000,75","size":"100,100"}
+<center>WELCOME ASTRONAUT</center>
+
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to ask your flight controller on how to solve these problems</center>
+<center>Your goal is to provide clear communication with your flight controllers to obtain the correct answers to restore your spacecraft into safe conditions</center>
+<center>Every incorrect action may cause the countdown timer to deduct a couple of seconds. </center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center>
+
+<center>[[Begin Game]]</center>
+<center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
+
+
+[[StarFix（Astronaut）|StarFix: ASTR Seed]]
+
+
+
+:: Antenna Repair {"position":"1100,600","size":"100,100"}
+''ANTENNA REPAIR''
+//Antennas in spacecrafts are crucial to transmit and communicate with flight controllers to send and receive important data and valuable information. 
+
+//Antenna will be in need of repair if its damaged, broken, or facing limited or delayed communications.//
+
+//Antenna repairs will require spacewalk and may cause death//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: BEGIN MISSION {"position":"525,300","size":"100,100"}
+<center>CHOOSE YOUR ROLE</center>
+
+<center>[[ASTRONAUT]]</center>
+
+<center>[[FLIGHT CONTROLLER]]</center>
+
+
+:: Back to Menu {"position":"100,300","size":"100,100"}
+<center>KEEP TALKING AND THE SHIP DOESN'T EXPLODE</center>
+
+<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg/1024px-The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+
+<center>[[Start Game]]</center>
+
+
+:: Begin Game {"position":"650,0","size":"100,100"}
+<<include "Timer">>
+
+Image of a puzzle
+
+<<link "WRONG ANSWER">>
+    <<set $seconds -= 10>>
+    <<goto "Begin Game">>
+<</link>>
+
+[[RIGHT ANSWER|Victory Screen]]
+
+
+
+:: Computer Failure {"position":"950,600","size":"100,100"}
+''COMPUTER FAILURE''
+//Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew.
+
+//Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation.//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Controller Error Screen {"position":"900,800","size":"100,100"}
+<<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair')>>
+
+<center>
+  RESTARTING COMPUTER<br>
+  PLEASE BE EXTREMELY PATIENT<br>
+  WE WILL "TRY" TO REMEMBER WHERE YOU LEFT OFF<br><br>
+  </center>
+
+<center>
+  <<timed 5s>><<link 'Turn on Computer'>>
+    <<goto _psg>>
+  <</link>>
+<</timed>></center>
+<<set $manualSeconds to random(5,30)>>
+
+
+:: FIX FROM INSIDE {"position":"1250,725","size":"100,100"}
+// (instructions on how to fix from the inside)
+
+<<print either("hub", "ble")>>
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FIX FROM OUTSIDE {"position":"1375,725","size":"100,100"}
+// (instructions on how to fix on the outside, likely requires spacewalk)
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FLIGHT CONTROLLER {"position":"700,400","size":"100,100"}
+<center>WELCOME FLIGHT CONTROLLER</center>
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to provide directions for your astronaut to solve these problems</center>
+<center>Your goal is to provide clear communication and instructions with your astronaut to restore the spacecraft into safe conditions</center>
+<center>Your manual may randomly restart on their own in different intervals as the game progresses</center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR ASTRONAUT IS READY TO START THE GAME</center>
+
+
+<center>[[OPEN MANUAL]]</center>
+<center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
+
+
+
+:: Game Over {"position":"300,500","size":"100,100"}
+<center><h1 id="lose-text">Game Over...</h1></center>
+
+<center>Your spacecraft exploded and you must pretend that you are dead and  exploded into a million pieces to tell your flight commander that the game is over</center>
+<center>And if you are playing solo, I beg you to please get a homie to play with you, you rule breaker</center>
+
+
+<center>[[Back to Menu]]</center>
+
+
+:: Manual Timer {"position":"100,550","size":"100,100"}
+<!-- This sample code was take from Twine SugarCube: Timed Passage with modifications-->
+
+<<silently>>
+	<<repeat 1s>>
+		<<set $manualSeconds to $manualSeconds - 1>>
+		<<if $manualSeconds lte 0>>
+			<<goto 'Controller Error Screen'>>
+			<<stop>>
+		<</if>>
+	<</repeat>>
+<</silently>>
+
+
+:: OPEN MANUAL {"position":"1000,225","size":"100,100"}
+TABLE OF CONTENTS
+
+[[Oxygen Leak]]
+
+[[Solar Panel Repairs]]		<!-- COMING SOON?-->
+
+[[Computer Failure]]    	<!-- COMING SOON?-->
+
+[[Antenna Repair]]   		<!-- COMING SOON?-->
+
+<<include 'Manual Timer'>>
+
+[[StarFix（Flight Controller）|StarFix: HOU Seed]]
+
+
+
+:: Oxygen Leak {"position":"650,600","size":"100,100"}
+''OXYGEN LEAK REPAIR''
+//Oxygen is vital in any existing spacecraft for your crew, using machines like oxygen generators, pressurized oxygen tanks, or oxygen candles to produce oxygen//
+//Solar panels and a water recycling machine are also required to power the oxygen machines, in order to conduct electrolysis to make hydrogen and oxygen out of water.//
+
+//Oxygen leaks can happen if the vacuume jumper hose malfunctioned that show signs of small tears that will require replacements, limited amount of electricity to power the oxygen machine, or the oxygen machine malfunctioned.//
+
+[[BACK|OPEN MANUAL]]
+
+<<include 'Manual Timer'>>
+
+
+
+
+
+
+
+
+:: Proceed {"position":"400,300","size":"100,100"}
+<center>This is a placeholder text to talk about the lore of the game.</center>
+<center>I don't know the story, but I heard that it will be insanely epic.</center>
+<center>Where will we go, who knows? What problems will we face? Who knows?</center>
+
+<center>Something something something just start game.</center>
+
+<center><span id="begin-button">[[BEGIN MISSION]]</span></center>
+
+
+:: Radiation Shield Failure {"position":"1250,600","size":"100,100"}
+//Radiation shielding is important for keeping a space station safe from solar radiation. This radiation can seriously damage a ship and its components, so thin aluminum coating is required to keep all systems stable and running.
+
+Other materials can be used such as water or plastic. NASA uses a hybrid carbon/metal fabric to shield their space stations and other spacecraft. 
+
+Radiation shielding can be fixed either from the inside or the outside.
+
+[[FIX FROM INSIDE]]
+[[FIX FROM OUTSIDE]]
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Solar Panel Repairs {"position":"800,600","size":"100,100"}
+''SOLAR PANEL REPAIR''
+//Most spacecraft operating in the Inner Solar System rely on solar panels to generate energy from sunlight. This energy is essential for the crew to carry out critical tasks like communication with the flight controllers, and maintain a livable environment on board, like producing oxygen.//
+
+//Solar panels can be damaged by improper retraction, collisions with large space debris, or prolonged exposure to space radiation.//
+
+//Solar panel repairs will require spacewalk and may cause death//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: StarFix: ASTR Seed {"position":"1250,75","size":"100,100"}
+\:: StarFix: ASTR Seed
+<div class="ui-card">
+  <h3>Enter Task Code</h3>
+  <p class="hint">Ask the Flight Controller for the code and type it below.</p>
+  <<textbox "$sf_seed" autocapitalize="off" autocorrect="off">>
+  <div class="btnrow">
+    <<button "Start Mission">>
+      <<if !$sf_seed or $sf_seed.trim()==="">>
+        <<replace "#msg">><span class="bad">Please enter the task code.</span><</replace>>
+      <<else>>
+        <<set $sf_seed = $sf_seed.trim()>>
+        <<set $sf_stage = 1>>
+        <<set $sf_current = 0>>
+        <<goto "StarFix: Scope">>
+      <</if>>
+    <</button>>
+  </div>
+  <div id="msg" class="hint"></div>
+</div>
+
+
+
+:: StarFix: Check {"position":"1650,100","size":"100,100"}
+\:: StarFix: Check
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+<<set _ok = Math.abs($sf_current - _rec) <= 3>>
+
+<div class="ui-card">
+  <<if _ok>>
+    <p class="good">Calibration complete! Deviation ≤ 3°.</p>
+    <div class="btnrow">
+      <<button "continue">>
+        <<if $sf_stage >= $sf_totalStages>>
+          <<goto "Victory Screen">>
+        <<else>>
+          <<set $sf_stage += 1>>
+          <<set $sf_current = 0>>
+          <<goto "StarFix: Scope">>
+        <</if>>
+      <</button>>
+    </div>
+  <<else>>
+    <p class="bad">Not aligned yet.</p>
+    <div class="btnrow">
+      <<button "Return to continue adjustment">><<goto "StarFix: Scope">><</button>>
+    </div>
+  <</if>>
+</div>
+
+
+
+:: StarFix: HOU Seed {"position":"1250,275","size":"100,100"}
+\:: StarFix: HOU Seed
+<<set $sf_seed = ("TASK-" + random(1000,9999))>>
+<div class="ui-card">
+  <h3>Task Code (Tell the Astronaut):</h3>
+  <p class="good"><b><<print $sf_seed>></b></p>
+  <div class="btnrow">
+    <<button "Open the console">>
+      <<set $sf_stage = 1>>
+      <<goto "StarFix: Houston">>
+    <</button>>
+  </div>
+  <p class="hint">Astronaut should enter this code on their side.</p>
+</div>
+
+
+
+
+:: StarFix: Houston {"position":"1500,225","size":"100,100"}
+\:: StarFix: Houston
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+
+<div class="ui-card">
+  <b>Mission Code:</b> <<print $sf_seed>>
+  　<b>Stage:</b> <<print $sf_stage>> / <<print $sf_totalStages>>
+</div>
+
+<div id="sf_svg_hou" class="ui-card">Rendering constellation...</div>
+
+<div class="ui-card">
+  <p><b>Constellations to be seen (Answer View)</b>: Rendered above.</p>
+  <p><b>Recommended heading angle:</b> <span class="good"><<print _rec>>°</span> (Read out to the astronaut)</p>
+
+  <<if $sf_stage >= $sf_totalStages>>
+    <p class="good">The astronaut should have completed all stages.</p>
+    <div class="btnrow">
+      <<button "End Mission">><<goto "OPEN MANUAL">><</button>>
+      <<button "Restart Mission">>
+        <<set $sf_stage = 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+    </div>
+  <<else>>
+    <div class="btnrow">
+      <<button "Next Stage (Click after astronaut passes)">>
+        <<set $sf_stage += 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+      <<button "Redraw">><<goto "StarFix: Houston">><</button>>
+    </div>
+  <</if>>
+</div>
+
+<script>
+(function(){
+  const v = (SugarCube.State?.variables || State.variables);
+  const pts = genConstellation(v.sf_seed, v.sf_stage);
+  const rec = recommendAngle(pts);
+  const ptsAns = rotatePts(pts, rec);   // Show the view at the “correct answer” angle
+  renderConstellationSVG("sf_svg_hou", ptsAns);
+})();
+</script>
+
+
+
+:: StarFix: Scope {"position":"1475,75","size":"100,100"}
+\:: StarFix: Scope
+<<include "Timer">>
+<<if typeof $sf_stage === 'undefined'>><<set $sf_stage = 1>><</if>>
+<<if typeof $sf_current === 'undefined'>><<set $sf_current = 0>><</if>>
+
+<div class="ui-card">
+  <b>Task Code:</b> <<print $sf_seed>>　<b>Flight segment:</b> <<print $sf_stage>>
+</div>
+
+<div id="sf_svg_scope" class="ui-card">Loading telescope view…</div>
+
+<div class="ui-card">
+  <b>Current angle:</b> <span id="curAngle"><<print $sf_current>>°</span>
+  <div class="btnrow">
+    <<button "⟲ -10°">>
+      <<set $sf_current -= 10>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟲ -5°">>
+      <<set $sf_current -= 5>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟲ -1°">>
+      <<set $sf_current -= 1>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +1°">>
+      <<set $sf_current += 1>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +5°">>
+      <<set $sf_current += 5>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +10°">>
+      <<set $sf_current += 10>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+  </div>
+
+  <div class="btnrow">
+    <<button "Check Alignment">><<goto "StarFix: Check">><</button>>
+    <<button "Redraw">><<goto "StarFix: Scope">><</button>>
+  </div>
+  <p class="hint">Coordinate with the Flight Controller’s recommended heading/shape description, then check.</p>
+</div>
+
+<script>
+(function(){
+  const v = SugarCube.State.variables;
+  const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+  renderConstellationSVG("sf_svg_scope", ptsRot);
+})();
+</script>
+
+
+
+:: Start Game {"position":"250,300","size":"100,100"}
+<center><h1 id="big-warning">WARNING!!!</h1></center>
+<center><h3 class="small-warning">THIS GAME IS NOT MEANT TO BE PLAYED WITH A SINGLE PERSON.</h3></center>
+<center><h3 class="small-warning">YOU ARE REQUIRED TO HAVE TWO PLAYERS IN SEPERATE DEVICES TO PLAY THIS GAME.</h3></center>
+
+<center>But of course, you could ignore this warning, I can't stop you.</center>
+
+<center>[[Proceed]]</center>
+
+
+:: StoryInit {"position":"100,700","size":"100,100"}
+<<set $seconds to 100>>
+<<set $manualSeconds to random(5,30)>>
+
+\:: StoryInit
+<<set $sf_totalStages = 3>>  /* 想改成几段就改这里 */
+
+
+
+:: Timer {"position":"100,450","size":"100,100"}
+<!-- This sample code was take from Twine SugarCube: Timed Passage with modifications-->
+
+<span id="countdown">The spacecraft will explode in $seconds seconds.</span>
+<<silently>>
+    <<repeat 1s>>
+        <<set $seconds to $seconds - 1>>
+        <<if $seconds gt 0>>
+            <<replace "#countdown">>The spacecraft will explode in $seconds seconds.<</replace>>
+        <<else>>
+			<<replace "#countdown">><</replace>>
+			<<goto "Game Over">>
+			<<stop>>
+        <</if>>
+    <</repeat>>
+<</silently>>
+
+
+:: Victory Screen {"position":"300,100","size":"100,100"}
+<center><h1 id="win-text">YOU WIN!!!</h1></center>
+
+<center>Your spacecraft is now in stable conditions and you should celebrate with your flight controller</center>
+<center>And if you are playing solo, well I don't know what to say. Congrats?</center>
+
+<center>But something is over there, something bright.</center>
+
+<center>[[Back to Menu]]</center>
+
+
+:: StoryScript [script]
+Config.history.controls = false;
+	/* ==== StarFix: seeded constellation module ==== */
+/* 1) 固定种子随机 */
+window.seedRand = function(seed){
+  let h=1779033703^seed.length;
+  for (let i=0;i<seed.length;i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 3432918353);
+    h = (h<<13)|(h>>>19);
+  }
+  return function(){
+    h = Math.imul(h ^ (h>>>16), 2246822507);
+    h = Math.imul(h ^ (h>>>13), 3266489909);
+    h = (h ^ (h>>>16)) >>> 0;
+    return h / 4294967296;
+  };
+};
+
+/* 2) 基于 seed + stage 生成“星座”点列（简单折线） */
+window.genConstellation = function(seed, stage){
+  const rng = seedRand(seed + "|" + stage);
+  const n = 5 + Math.floor(rng()*3); // 5~7 个点
+  const pts = [];
+  for(let i=0;i<n;i++){
+    pts.push({ x: Math.floor(rng()*80 - 40), y: Math.floor(rng()*80 - 40) });
+  }
+  pts.sort((a,b)=>a.x-b.x);
+  return pts;
+};
+
+/* 3) 推荐角度（将平均朝向调回水平） */
+window.recommendAngle = function(pts){
+  if(!pts || !pts.length) return 0;
+  const angs = [];
+  for(let i=1;i<pts.length;i++){
+    const dx = pts[i].x - pts[i-1].x;
+    const dy = pts[i].y - pts[i-1].y;
+    angs.push(Math.atan2(dy, dx));
+  }
+  const avg = angs.reduce((a,b)=>a+b,0)/angs.length;
+  return Math.round(-avg * 180/Math.PI);
+};
+
+/* 4) 旋转点列 */
+window.rotatePts = function(pts, deg){
+  const rad = deg * Math.PI/180;
+  const cos = Math.cos(rad), sin = Math.sin(rad);
+  return pts.map(p => ({
+    x: Math.round(p.x*cos - p.y*sin),
+    y: Math.round(p.x*sin + p.y*cos)
+  }));
+};
+
+/* 5) 渲染为 SVG */
+window.renderConstellationSVG = function(containerId, pts, opts = {}){
+  const scale = opts.scale ?? 3;
+  const w = 300, h = 300, cx = Math.round(w/2), cy = Math.round(h/2);
+  const toPath = (arr)=>arr.map((p,i)=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return (i===0?`M ${X} ${Y}`:`L ${X} ${Y}`);
+  }).join(" ");
+  const stars = (arr)=>arr.map(p=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return `<circle cx="${X}" cy="${Y}" r="2"></circle>`;
+  }).join("");
+  const path = toPath(pts);
+  const svg = `
+    <svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="0" y="0" width="${w}" height="${h}" class="sky-bg"></rect>
+      <g><path d="${path}" class="star-link" fill="none"></path>${stars(pts)}</g>
+      <circle cx="${cx}" cy="${cy}" r="4" class="reticle"></circle>
+    </svg>`;
+  const el = document.getElementById(containerId);
+  if(el){ el.innerHTML = svg; }
+};
+
+// 让 State 在任何 SugarCube 2 环境都可用
+(function(){
+  if (typeof window.State === 'undefined' && window.SugarCube && SugarCube.State) {
+    window.State = SugarCube.State;
+  }
+})();
+
+
+:: StoryStylesheet [stylesheet]
+#menu-saves, #menu-restart {
+	display: none;
+}
+
+#menu-core {
+	display: none;
+}
+
+#menu-item-saves, #menu-item-restart {
+	display: none;
+}
+
+#begin-button a {
+  	font-size: 20px;
+  	font-weight: bold;
+	color: red;
+}
+
+#big-warning {
+	color: yellow;
+}
+
+#lose-text {
+	color: red;
+}
+
+#win-text {
+	color: lime;
+}
+
+.small-warning {
+  	margin: 0px;
+	padding: 1px;
+  	line-height: 20%;
+}
+
+/* ==== StarFix styles ==== */
+.sky-bg { fill: #0b1020; }
+.star-link { stroke: #7fd0ff; stroke-width: 2; }
+svg circle { fill: #fff; }
+.reticle { fill: none; stroke: #ffd54a; stroke-width: 1.5; }
+.ui-card { border: 1px solid #2b2f45; border-radius: 10px; padding: 12px; margin: 10px 0; background: #121422; }
+.btnrow button { margin-right: 6px; margin-bottom: 6px; }
+.hint { color: #9ad; }
+.bad { color: #f88; }
+.good { color: #9f9; }
