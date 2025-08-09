@@ -323,7 +323,7 @@ Computer Failure Puzzle
 
 
 :: SATELLITE 1 {"position":"1800,1075","size":"100,100"}
-<<include "Satellite Variables">>
+
 <center><h1>Satellite 1</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input1 km</h2></center>
@@ -353,7 +353,7 @@ Move this satellite to the correct altitude! (610 km)
 
 
 :: SATELLITE 2 {"position":"1950,1075","size":"100,100"}
-<<include "Satellite Variables">>
+
 <center><h1>Satellite 2</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input2 km</h2></center>
@@ -383,7 +383,7 @@ Move this satellite to the correct altitude! (772 km)
 
 
 :: SATELLITE 3 {"position":"2100,1075","size":"100,100"}
-<<include "Satellite Variables">>
+
 <center><h1>Satellite 3</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input3 km</h2></center>
@@ -413,7 +413,7 @@ Move this satellite to the correct altitude! (599 km)
 
 
 :: SATELLITE 4 {"position":"2250,1075","size":"100,100"}
-<<include "Satellite Variables">>
+
 <center><h1>Satellite 4</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input4 km</h2></center>
