@@ -1,0 +1,1163 @@
+:: StoryTitle
+Keep Talking and The Ship Doesn_t Explode (Prototype w/ 4 Puzzles)
+
+
+:: StoryData
+{
+  "ifid": "26707158-3609-4AB7-9F63-6FC214FB02C7",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Back to Menu",
+  "zoom": 1
+}
+
+
+:: ASTRONAUT {"position":"1400,800","size":"100,100"}
+<center>WELCOME ASTRONAUT</center>
+
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to ask your flight controller on how to solve these problems</center>
+<center>Your goal is to provide clear communication with your flight controllers to obtain the correct answers to restore your spacecraft into safe conditions</center>
+<center>Every incorrect action may cause the countdown timer to deduct a couple of seconds. </center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center>
+
+<center>[[BEGIN MISSION|Meeting Room]]</center>
+<center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
+
+
+:: Air Lock {"position":"1850,750","size":"100,100"}
+<<include "Timer">>
+<center>AIRLOCK ROOM</center>
+<center><img src="https://scalar.chapman.edu/scalar/interior-space---a-visual-exploration-of-the-international-space-station-photographs-by-paolo-nespo/media/Quest%20Airlock%20from%20Node1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: center;">[[Mess Hall]]</td>
+  </tr>
+</table>
+
+
+:: Antenna Repair {"position":"650,1100","size":"100,100"}
+''ANTENNA REPAIR''
+//Antennas in spacecrafts are crucial to transmit and communicate with flight controllers to send and receive important data and valuable information. 
+
+//Antenna will be in need of repair if its damaged, broken, or facing limited or delayed communications.//
+
+//Antenna repairs will require spacewalk and may cause death//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: BEGIN MISSION {"position":"525,600","size":"100,100"}
+<center>CHOOSE YOUR ROLE</center>
+
+<center>[[ASTRONAUT]]</center>
+
+<center>[[FLIGHT CONTROLLER]]</center>
+
+
+:: Back to Menu {"position":"100,600","size":"100,100"}
+<center>KEEP TALKING AND THE SHIP DOESN'T EXPLODE</center>
+
+<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg/1024px-The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+
+<center>[[Start Game]]</center>
+<<set $seconds to 10000>>
+
+
+:: Command Center {"position":"2000,600","size":"100,100"}
+<<include "Timer">>
+<center>COMMAND CENTER ROOM</center>
+<center><img src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2014/10/space_station_office/15002125-1-eng-GB/Space_Station_office_pillars.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: center;">[[Mess Hall]]</td>
+  </tr>
+</table>
+
+[[Adjust Satellites|Satellite Adjustment]]
+
+[[StarFix（Astronaut）|StarFix: ASTR Seed]]
+
+
+:: Computer Failure {"position":"525,1100","size":"100,100"}
+''COMPUTER FAILURE''
+//Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew.
+
+//Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation.//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Controller Error Screen {"position":"500,825","size":"100,100"}
+<<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Toilet Repair', 'Radiation Shield Failure')>>
+
+<center>
+  RESTARTING COMPUTER<br>
+  PLEASE BE EXTREMELY PATIENT<br>
+  WE WILL "TRY" TO REMEMBER WHERE YOU LEFT OFF<br><br>
+  </center>
+
+<center>
+  <<timed 3s>><<link 'Turn on Computer'>>
+    <<goto _psg>>
+  <</link>>
+<</timed>></center>
+<<set $manualSeconds to random(100,300)>>
+
+
+:: Dorm Toilet {"position":"1850,300","size":"100,100"}
+<<include "Timer">>
+<center>DORMITORY TOILET</center>
+<center><img src="
+https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr> <td style="text-align: center;">[[Dormitory]]</td> </tr> </table> <center> <a class="yellow-link" data-passage="Toilet Puzzle"> Check for Issue</a>
+</center>
+
+
+:: Dormitory {"position":"1850,450","size":"100,100"}
+<<include "Timer">>
+<center>DORMITORY</center>
+<center><img src="
+https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Life Support]]</td>
+     <td style="text-align: center;">[[Dorm Toilet]]</td>
+    <td style="text-align: right;">[[Mess Hall]]</td>
+  </tr>
+</table>
+
+
+:: Engine {"position":"1325,600","size":"100,100"}
+<<include "Timer">>
+<center>ENGINE ROOM</center>
+<center><img src="https://cdn2.unrealengine.com/body1-iss-space-explorers-spotlight-1920x1080-cba01dce33fe.jpg?resize=1&w=1920" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: center;">[[Hallway]]</td>
+  </tr>
+</table>
+
+
+:: FIX FROM INSIDE {"position":"1175,1225","size":"100,100"}
+// (instructions on how to fix from the inside)
+
+<<print either("hub", "ble")>>
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FIX FROM OUTSIDE {"position":"1025,1225","size":"100,100"}
+// (instructions on how to fix on the outside, likely requires spacewalk)
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FLIGHT CONTROLLER {"position":"650,700","size":"100,100"}
+<center>WELCOME FLIGHT CONTROLLER</center>
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to provide directions for your astronaut to solve these problems</center>
+<center>Your goal is to provide clear communication and instructions with your astronaut to restore the spacecraft into safe conditions</center>
+<center>Your manual may randomly restart on their own in different intervals as the game progresses</center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR ASTRONAUT IS READY TO START THE GAME</center>
+
+
+<center>[[OPEN MANUAL]]</center>
+<center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
+
+
+:: Game Over {"position":"300,200","size":"100,100"}
+<center><h1 id="lose-text">Game Over...</h1></center>
+
+<center>Your spacecraft exploded and you must pretend that you are dead and  exploded into a million pieces to tell your flight commander that the game is over</center>
+<center>And if you are playing solo, I beg you to please get a homie to play with you, you rule breaker</center>
+
+
+<center>[[Back to Menu]]</center>
+
+
+:: Hallway {"position":"1500,600","size":"100,100"}
+<<include "Timer">>
+<center>HALLWAY</center>
+<center><img src="https://www.nasa.gov/wp-content/uploads/2021/02/sts_98_destiny_on_fd5_feb_11_2001_s98e5113.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Life Support]]</td>
+    <td style="text-align: center;">[[Engine]]</td>
+    <td style="text-align: right;">[[Meeting Room]]</td>
+  </tr>
+</table>
+
+
+:: Life Support {"position":"1700,450","size":"100,100"}
+<<include "Timer">>
+<center>LIFE SUPPORT</center>
+<center><img src="https://img.freepik.com/premium-photo/hospital-room-featuring-bed-range-essential-medical-equipment-scifi-medical-room-space-vessel-ai-generated_538213-38852.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Dormitory]]</td>
+    <td style="text-align: center;">[[Meeting Room]]</td>
+    <td style="text-align: right;">[[Hallway]]</td>
+  </tr>
+</table>
+
+
+:: Manual Timer {"position":"100,850","size":"100,100"}
+<!-- This sample code was take from Twine SugarCube: Timed Passage with modifications-->
+
+<<silently>>
+	<<repeat 1s>>
+		<<set $manualSeconds to $manualSeconds - 1>>
+		<<if $manualSeconds lte 0>>
+			<<goto 'Controller Error Screen'>>
+			<<stop>>
+		<</if>>
+	<</repeat>>
+<</silently>>
+
+
+:: Meeting Room {"position":"1700,600","size":"100,100"}
+<<include "Timer">>
+<center>MEETING ROOM</center>
+<center><img src="https://static01.nyt.com/images/2020/10/30/science/00SCI-OUTTHERE-SCENES12/00SCI-OUTTHERE-SCENES12-mediumSquareAt3X.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Hallway]]</td>
+    <td style="text-align: center;">[[Life Support]]</td>
+    <td style="text-align: right;">[[Mess Hall]]</td>
+  </tr>
+</table>
+
+
+:: Mess Hall {"position":"1850,600","size":"100,100"}
+<<include "Timer">>
+<center>MESS HALL</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Dormitory]]</td>
+    <td style="text-align: center;">[[Command Center]]</td>
+    <td style="text-align: right;">[[Air Lock]]</td>
+  </tr>
+</table>
+<table style="width: 100%;">
+  <tr>
+    <td>[[Life Support]]</td>
+    <td style="text-align: center;">
+    <a class="yellow-link" data-passage="Water Recycling Machine Puzzle 1/2">Check for Issue</a>
+    </td>
+    <td style="text-align: right;">[[Meeting Room]]</td>
+  </tr>
+</table>
+
+
+:: OPEN MANUAL {"position":"650,825","size":"100,100"}
+TABLE OF CONTENTS
+
+[[Oxygen Leak]]
+
+[[Toilet Repair]] 
+
+[[Solar Panel Repairs]]		<!-- COMING SOON?-->
+
+[[Water Recycling Machine Repair]] 
+
+[[Satellite Realignment]]
+
+[[Computer Failure]]    	<!-- COMING SOON?-->
+
+[[Antenna Repair]]   		<!-- COMING SOON?-->
+
+[[Radiation Shield Failure]]
+
+[[StarFix（Flight Controller）|StarFix: HOU Seed]]
+
+<<include 'Manual Timer'>>
+
+
+:: Oxygen Leak {"position":"275,1100","size":"100,100"}
+''OXYGEN LEAK REPAIR''
+//Oxygen is vital in any existing spacecraft for your crew, using machines like oxygen generators, pressurized oxygen tanks, or oxygen candles to produce oxygen//
+//Solar panels and a water recycling machine are also required to power the oxygen machines, in order to conduct electrolysis to make hydrogen and oxygen out of water.//
+
+//Oxygen leaks can happen if the vacuume jumper hose malfunctioned that show signs of small tears that will require replacements, limited amount of electricity to power the oxygen machine, or the oxygen machine malfunctioned.//
+
+[[BACK|OPEN MANUAL]]
+
+<<include 'Manual Timer'>>
+
+
+:: Proceed {"position":"400,600","size":"100,100"}
+<center>This is a placeholder text to talk about the lore of the game.</center>
+<center>I don't know the story, but I heard that it will be insanely epic.</center>
+<center>Where will we go, who knows? What problems will we face? Who knows?</center>
+
+<center>Something something something just start game.</center>
+
+<center><span id="begin-button">[[BEGIN MISSION]]</span></center>
+
+
+:: Radiation Shield Failure {"position":"1100,1100","size":"100,100"}
+//Radiation shielding is important for keeping a space station safe from solar radiation. This radiation can seriously damage a ship and its components, so thin aluminum coating is required to keep all systems stable and running.
+
+Other materials can be used such as water or plastic. NASA uses a hybrid carbon/metal fabric to shield their space stations and other spacecraft. 
+
+Radiation shielding can be fixed either from the inside or the outside.
+
+[[FIX FROM INSIDE]]
+[[FIX FROM OUTSIDE]]
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Random Puzzle {"position":"1700,100","size":"100,100"}
+<<include "Timer">>
+
+Computer Failure Puzzle
+
+<<link "WRONG ANSWER">>
+    <<set $seconds -= 10>>
+    <<goto "Begin Game">>
+<</link>>
+
+[[RIGHT ANSWER|Victory Screen]]
+
+
+:: SATELLITE 1 {"position":"1812.5,975","size":"100,100"}
+
+<center><h1>Satellite 1</h1></center>
+
+<center><h2 id="altitude">Current Altitude: $input1 km</h2></center>
+
+Move this satellite to the correct altitude! (610 km)
+
+<<if $satellite1>>
+    <span class="status-text">Satellite Altitude: </span><span id="s1">Nominal</span>
+    <<else>>
+    <span class="status-text">Satellite Altitude: </span><span id="s1">Incorrect</span>
+<</if>>
+
+<<textbox "$input1" "" autofocus>><<button "Move Satellite">>
+    <<replace "#altitude">>Current Altitude: $input1 km<</replace>>
+	<<if ["610"].includes($input1.toLowerCase())>>
+    	<<replace "#s1">>Nominal<</replace>>
+		<<set $status1 to true>>
+        <<set $satellite1 to true>>
+	<<else>>
+    	<<replace "#s1">>Incorrect<</replace>>
+		<<set $status1 to false>>
+        <<set $satellite1 to false>>
+    <</if>>
+<</button>>
+
+[[BACK|Satellite Adjustment]]
+
+
+:: SATELLITE 2 {"position":"1950,975","size":"100,100"}
+
+<center><h1>Satellite 2</h1></center>
+
+<center><h2 id="altitude">Current Altitude: $input2 km</h2></center>
+
+Move this satellite to the correct altitude! (772 km)
+
+<<if $satellite2>>
+    <span class="status-text">Satellite Altitude: </span><span id="s2">Nominal</span>
+    <<else>>
+    <span class="status-text">Satellite Altitude: </span><span id="s2">Incorrect</span>
+<</if>>
+
+<<textbox "$input2" "" autofocus>><<button "Move Satellite">>
+    <<replace "#altitude">>Current Altitude: $input2 km<</replace>>
+	<<if ["772"].includes($input2.toLowerCase())>>
+    	<<replace "#s2">>Nominal<</replace>>
+		<<set $status2 to true>>
+        <<set $satellite2 to true>>
+	<<else>>
+    	<<replace "#s2">>Incorrect<</replace>>
+		<<set $status2 to false>>
+        <<set $satellite2 to false>>
+    <</if>>
+<</button>>
+
+[[BACK|Satellite Adjustment]]
+
+
+:: SATELLITE 3 {"position":"2062.5,975","size":"100,100"}
+
+<center><h1>Satellite 3</h1></center>
+
+<center><h2 id="altitude">Current Altitude: $input3 km</h2></center>
+
+Move this satellite to the correct altitude! (599 km)
+
+<<if $satellite3>>
+    <span class="status-text">Satellite Altitude: </span><span id="s3">Nominal</span>
+    <<else>>
+    <span class="status-text">Satellite Altitude: </span><span id="s3">Incorrect</span>
+<</if>>
+
+<<textbox "$input3" "" autofocus>><<button "Move Satellite">>
+    <<replace "#altitude">>Current Altitude: $input3 km<</replace>>
+	<<if ["599"].includes($input3.toLowerCase())>>
+    	<<replace "#s3">>Nominal<</replace>>
+		<<set $status3 to true>>
+        <<set $satellite3 to true>>
+	<<else>>
+    	<<replace "#s3">>Incorrect<</replace>>
+		<<set $status3 to false>>
+        <<set $satellite3 to false>>
+    <</if>>
+<</button>>
+
+[[BACK|Satellite Adjustment]]
+
+
+:: SATELLITE 4 {"position":"2200,975","size":"100,100"}
+
+<center><h1>Satellite 4</h1></center>
+
+<center><h2 id="altitude">Current Altitude: $input4 km</h2></center>
+
+Move this satellite to the correct altitude! (1178 km)
+
+<<if $satellite4>>
+    <span class="status-text">Satellite Altitude: </span><span id="s4">Nominal</span>
+    <<else>>
+    <span class="status-text">Satellite Altitude: </span><span id="s4">Incorrect</span>
+<</if>>
+
+<<textbox "$input4" "" autofocus>><<button "Move Satellite">>
+    <<replace "#altitude">>Current Altitude: $input4 km<</replace>>
+	<<if ["1178"].includes($input4.toLowerCase())>>
+    	<<replace "#s4">>Nominal<</replace>>
+		<<set $status4 to true>>
+        <<set $satellite4 to true>>
+	<<else>>
+    	<<replace "#s4">>Incorrect<</replace>>
+		<<set $status4 to false>>
+        <<set $satellite4 to false>>
+    <</if>>
+<</button>>
+
+[[BACK|Satellite Adjustment]]
+
+
+:: Satellite Adjustment {"position":"2000,725","size":"100,100"}
+// Satellite Minigame!
+
+// Fix the altitudes of the satellites according to the manual.
+
+[[SATELLITE 1]]
+[[SATELLITE 2]]
+[[SATELLITE 3]]
+[[SATELLITE 4]]
+
+<<if $satellite1 is true and $satellite2 is true and $satellite3 is true and $satellite4 is true>>
+    <span id="success-text">All satellites have been restored to their proper altitudes!</span>
+    <<else>>
+    <span id="warning-text">The satellites are misaligned!</span>
+<</if>>
+
+[[BACK|Command Center]]
+
+
+:: Satellite Realignment {"position":"300,1250","size":"100,100"}
+// This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes. 
+
+// In order to adjust the satellites, an astronaut will have to change the satellites' altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
+
+// Below are the correct altitudes for the four satellites:
+
+SATELLITE 1 - 
+SATELLITE 2 -
+SATELLITE 3 -
+SATELLITE 4 -
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Solar Panel Repairs {"position":"400,1100","size":"100,100"}
+''SOLAR PANEL REPAIR''
+//Most spacecraft operating in the Inner Solar System rely on solar panels to generate energy from sunlight. This energy is essential for the crew to carry out critical tasks like communication with the flight controllers, and maintain a livable environment on board, like producing oxygen.//
+
+//Solar panels can be damaged by improper retraction, collisions with large space debris, or prolonged exposure to space radiation.//
+
+//Solar panel repairs will require spacewalk and may cause death//
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: StarFix: ASTR Seed {"position":"2175,700","size":"100,100"}
+\:: StarFix: ASTR Seed
+<div class="ui-card">
+  <h3>Enter Task Code</h3>
+  <p class="hint">Ask the Flight Controller for the code and type it below.</p>
+  <<textbox "$sf_seed" autocapitalize="off" autocorrect="off">>
+  <div class="btnrow">
+    <<button "Start Mission">>
+      <<if !$sf_seed or $sf_seed.trim()==="">>
+        <<replace "#msg">><span class="bad">Please enter the task code.</span><</replace>>
+      <<else>>
+        <<set $sf_seed = $sf_seed.trim()>>
+        <<set $sf_stage = 1>>
+        <<set $sf_current = 0>>
+        <<goto "StarFix: Scope">>
+      <</if>>
+    <</button>>
+  </div>
+  <div id="msg" class="hint"></div>
+</div>
+
+
+
+:: StarFix: Check {"position":"1275,800","size":"100,100"}
+\:: StarFix: Check
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+<<set _ok = Math.abs($sf_current - _rec) <= 3>>
+
+<div class="ui-card">
+  <<if _ok>>
+    <p class="good">Calibration complete! Deviation ≤ 3°.</p>
+    <div class="btnrow">
+      <<button "continue">>
+        <<if $sf_stage >= $sf_totalStages>>
+          <<goto "Victory Screen">>
+        <<else>>
+          <<set $sf_stage += 1>>
+          <<set $sf_current = 0>>
+          <<goto "StarFix: Scope">>
+        <</if>>
+      <</button>>
+    </div>
+  <<else>>
+    <p class="bad">Not aligned yet.</p>
+    <div class="btnrow">
+      <<button "Return to continue adjustment">><<goto "StarFix: Scope">><</button>>
+    </div>
+  <</if>>
+</div>
+
+
+
+:: StarFix: HOU Seed {"position":"900,800","size":"100,100"}
+\:: StarFix: HOU Seed
+<<set $sf_seed = ("TASK-" + random(1000,9999))>>
+<div class="ui-card">
+  <h3>Task Code (Tell the Astronaut):</h3>
+  <p class="good"><b><<print $sf_seed>></b></p>
+  <div class="btnrow">
+    <<button "Open the console">>
+      <<set $sf_stage = 1>>
+      <<goto "StarFix: Houston">>
+    <</button>>
+  </div>
+  <p class="hint">Astronaut should enter this code on their side.</p>
+</div>
+
+
+
+
+:: StarFix: Houston {"position":"1025,800","size":"100,100"}
+\:: StarFix: Houston
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+
+<div class="ui-card">
+  <b>Mission Code:</b> <<print $sf_seed>>
+  　<b>Stage:</b> <<print $sf_stage>> / <<print $sf_totalStages>>
+</div>
+
+<div id="sf_svg_hou" class="ui-card">Rendering constellation...</div>
+
+<div class="ui-card">
+  <p><b>Constellations to be seen (Answer View)</b>: Rendered above.</p>
+  <p><b>Recommended heading angle:</b> <span class="good"><<print _rec>>°</span> (Read out to the astronaut)</p>
+
+  <<if $sf_stage >= $sf_totalStages>>
+    <p class="good">The astronaut should have completed all stages.</p>
+    <div class="btnrow">
+      <<button "End Mission">><<goto "OPEN MANUAL">><</button>>
+      <<button "Restart Mission">>
+        <<set $sf_stage = 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+    </div>
+  <<else>>
+    <div class="btnrow">
+      <<button "Next Stage (Click after astronaut passes)">>
+        <<set $sf_stage += 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+      <<button "Redraw">><<goto "StarFix: Houston">><</button>>
+    </div>
+  <</if>>
+</div>
+
+<script>
+(function(){
+  const v = (SugarCube.State?.variables || State.variables);
+  const pts = genConstellation(v.sf_seed, v.sf_stage);
+  const rec = recommendAngle(pts);
+  const ptsAns = rotatePts(pts, rec);   // Show the view at the “correct answer” angle
+  renderConstellationSVG("sf_svg_hou", ptsAns);
+})();
+</script>
+
+
+
+:: StarFix: Scope {"position":"1150,800","size":"100,100"}
+\:: StarFix: Scope
+<<include "Timer">>
+<<if typeof $sf_stage === 'undefined'>><<set $sf_stage = 1>><</if>>
+<<if typeof $sf_current === 'undefined'>><<set $sf_current = 0>><</if>>
+
+<div class="ui-card">
+  <b>Task Code:</b> <<print $sf_seed>>　<b>Flight segment:</b> <<print $sf_stage>>
+</div>
+
+<div id="sf_svg_scope" class="ui-card">Loading telescope view…</div>
+
+<div class="ui-card">
+  <b>Current angle:</b> <span id="curAngle"><<print $sf_current>>°</span>
+  <div class="btnrow">
+    <<button "⟲ -10°">>
+      <<set $sf_current -= 10>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟲ -5°">>
+      <<set $sf_current -= 5>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟲ -1°">>
+      <<set $sf_current -= 1>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +1°">>
+      <<set $sf_current += 1>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +5°">>
+      <<set $sf_current += 5>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+
+    <<button "⟳ +10°">>
+      <<set $sf_current += 10>>
+      <<replace "#curAngle">><<print $sf_current>>°<</replace>>
+      <<script>>
+        const v = SugarCube.State.variables;
+        const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+        renderConstellationSVG("sf_svg_scope", ptsRot);
+      <</script>>
+    <</button>>
+  </div>
+
+  <div class="btnrow">
+    <<button "Check Alignment">><<goto "StarFix: Check">><</button>>
+    <<button "Redraw">><<goto "StarFix: Scope">><</button>>
+  </div>
+  <p class="hint">Coordinate with the Flight Controller’s recommended heading/shape description, then check.</p>
+</div>
+
+<script>
+(function(){
+  const v = SugarCube.State.variables;
+  const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+  renderConstellationSVG("sf_svg_scope", ptsRot);
+})();
+</script>
+
+
+
+:: Start Game {"position":"250,600","size":"100,100"}
+<center><h1 id="big-warning">WARNING!!!</h1></center>
+<center><h3 class="small-warning">THIS GAME IS NOT MEANT TO BE PLAYED WITH A SINGLE PERSON.</h3></center>
+<center><h3 class="small-warning">YOU ARE REQUIRED TO HAVE TWO PLAYERS IN SEPERATE DEVICES TO PLAY THIS GAME.</h3></center>
+
+<center>But of course, you could ignore this warning, I can't stop you.</center>
+
+<center>[[Proceed]]</center>
+
+
+:: StoryInit {"position":"100,1000","size":"100,100"}
+<<set $seconds to 10000>>
+<<set $manualSeconds to random(100,300)>>
+<<set $fullWater to random(60,100)>>
+<<set $lowWater to random(30,40)>>
+
+<<set $input1 to 952>>
+<<set $input2 to 670>>
+<<set $input3 to 1042>>
+<<set $input4 to 829>>
+
+<<set $satellite1 to false>>
+<<set $satellite2 to false>>
+<<set $satellite3 to false>>
+<<set $satellite4 to false>>
+
+\:: StoryInit
+<<set $sf_totalStages = 3>>  /* 想改成几段就改这里 */
+
+
+:: Timer {"position":"100,750","size":"100,100"}
+<!-- This sample code was take from Twine SugarCube: Timed Passage with modifications-->
+
+<span id="countdown">The spacecraft will explode in $seconds seconds.</span>
+<<silently>>
+    <<repeat 1s>>
+        <<set $seconds to $seconds - 1>>
+        <<if $seconds gt 0>>
+            <<replace "#countdown">>The spacecraft will explode in $seconds seconds.<</replace>>
+        <<else>>
+			<<replace "#countdown">><</replace>>
+			<<goto "Game Over">>
+			<<stop>>
+        <</if>>
+    <</repeat>>
+<</silently>>
+
+
+:: Toilet Puzzle {"position":"1500,200","size":"100,100"}
+<<silently>><<set _arrayCodes = ["1A", "4C", "7D", "5B"]>>
+<<set _code = _arrayCodes.random()>>
+
+<<if _code == "1A">>
+	<<set _correct = "Fix Sensor">>
+<<elseif _code == "4C">>
+	<<set _correct = "Fix Pump">>
+<<elseif _code == "7D">>
+	<<set _correct = "Fix Leakage">>
+<<elseif _code == "5B">>
+	<<set _correct = "No Fix">>
+<</if>>
+<</silently>>
+<<include "Timer">>
+<center>DORMITORY TOILET REPAIR</center>
+<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>The error code that the toilet is displaying is</center>
+<center><h1 id="big-warning"><<=_code>></h1></center>
+<<if _correct == "Fix Sensor">>
+	<center>[[Fix Sensor|Victory Screen]]</center>
+	<center>[[Fix Leakage|Game Over]]</center>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif _correct == "Fix Leakage">>
+	<center>[[Fix Sensor|Game Over]]</center>
+	<center>[[Fix Leakage|Victory Screen]]</center>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif _correct == "Fix Pump">>
+	<center>[[Fix Sensor|Game Over]]</center>
+	<center>[[Fix Leakage|Game Over]]</center>
+	<center>[[Fix Pump|Victory Screen]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif _correct == "No Fix">>
+	<center>[[Fix Sensor|Game Over]]</center>
+	<center>[[Fix Leakage|Game Over]]</center>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[No Fix|Victory Screen]]</center>
+<</if>>
+
+
+:: Toilet Repair {"position":"775,1100","size":"100,100"}
+''TOILET REPAIR''
+//Also known as "space toilets" or "zero gravity toilets," it uses airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft//
+
+//Do I need to explain why astronauts would need to have a toilet in their spacecraft?//
+
+//If the toilet is malfunctioning, it could be due to three reasons
+* Pumping Issue
+* Sensor Issue
+* Leaking Issue
+
+//Please ask your astronaut for the error code. 
+//NOTE: CASE SENSITIVE 
+Enter Code:<<textbox "$code" "" "Toilet Repair Result">>
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Toilet Repair Result {"position":"775,1200","size":"100,100"}
+<<if $code == "4C">>
+There is a pumping issue in the toilet.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "1A">>
+There is a sensor issue in the toilet.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "7D">>
+There is a leaking issue in the toilet.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "5B">>
+There is no issue with the toilet.
+But your astronaut still need to select "No Fix".
+[[BACK|OPEN MANUAL]]
+<<else>>
+This is an invalid code.
+Ask your astronaut to double check.
+[[BACK|OPEN MANUAL]]
+<</if>>
+
+
+:: Victory Screen {"position":"300,400","size":"100,100"}
+<center><h1 id="win-text">YOU WIN!!!</h1></center>
+
+<center>Your spacecraft is now in stable conditions and you should celebrate with your flight controller</center>
+<center>And if you are playing solo, well I don't know what to say. Congrats?</center>
+
+<center>But something is over there, something bright.</center>
+
+<center>[[Back to Menu]]</center>
+
+
+:: Water Recycling Machine Puzzle 1/2 {"position":"1500,325","size":"100,100"}
+<<silently>>
+<<set $leftArrayCodes = ["7B", "2T", "9A", "3C","4G"]>>
+<<set $rightArrayCodes = ["9Z", "1A"]>>
+<<set $leftCode = $leftArrayCodes.random()>>
+<<set $rightCode = $rightArrayCodes.random()>>
+
+<<if _leftCode == "7B">>
+	<<set $leftCorrect = "Fix Pump">>
+<<elseif $leftCode == "2T">>
+	<<set $leftCorrect = "Fix Filter">>
+<<elseif $leftCode == "9A">>
+	<<set $leftCorrect = "Fix SD Card">>
+<<elseif $leftCode == "3C">>
+	<<set $leftCorrect = "Fix Sensor">>
+<<elseif $leftCode == "4G">>
+	<<set $leftCorrect = "No Fix">>
+<</if>>
+
+<<if $rightCode == "9Z">>
+	<<set $rightCorrect = "No Refill">>
+<<elseif$leftCode == "1A">>
+	<<set $rightCorrect = "Request Refill">>
+<</if>>
+<</silently>>
+
+<<include "Timer">>
+<center>MESS ROOM</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+
+<center>The error code that the water recycling machine is displaying is</center>
+<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
+<<if $leftCorrect == "Fix Pump">>
+	<center>[[Fix Pump|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[Fix Filter|Game Over]]</center>
+	<center>[[Fix SD|Game Over]]</center>
+    <center>[[Fix Sensor|Game Over]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif $leftCorrect == "Fix Filter">>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[Fix Filter|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[Fix SD|Game Over]]</center>
+    <center>[[Fix Sensor|Game Over]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif $leftCorrect == "Fix SD Card">>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[Fix Filter|Game Over]]</center>
+	<center>[[Fix SD|Water Recycling Machine Puzzle 2/2]]</center>
+    <center>[[Fix Sensor|Game Over]]</center>
+	<center>[[No Fix|Game Over]]</center>
+    
+<<elseif $leftCorrect == "Fix Sensor">>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[Fix Filter|Game Over]]</center>
+	<center>[[Fix SD|Game Over]]</center>
+    <center>[[Fix Sensor|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[No Fix|Game Over]]</center>
+
+<<elseif $leftCorrect == "No Fix">>
+	<center>[[Fix Pump|Game Over]]</center>
+	<center>[[Fix Filter|Game Over]]</center>
+	<center>[[Fix SD|Game Over]]</center>
+    <center>[[Fix Sensor|Game Over]]</center>
+	<center>[[No Fix|Water Recycling Machine Puzzle 2/2]]</center>
+<</if>>
+
+
+:: Water Recycling Machine Puzzle 2/2 {"position":"1375,325","size":"100,100"}
+<<silently>>
+<<if $rightCode == "9Z">>
+	<<set $rightCorrect = "No Refill">>
+<<elseif $rightCode == "1A">>
+	<<set $rightCorrect = "Request Refill">>
+<</if>>
+<</silently>>
+
+<<include "Timer">>
+<center>MESS ROOM</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>The error code that the water recycling machine is displaying is</center>
+<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
+
+<<if $rightCorrect == "No Refill">>
+	<center>[[No Refill|Victory Screen]]</center>
+	<center>[[Request Resupply|Game Over]]</center>
+
+<<elseif $rightCorrect == "Request Refill">>
+	<center>[[No Refill|Game Over]]</center>
+	<center>[[Request Resupply|Victory Screen]]</center>
+<</if>>
+
+
+:: Water Recycling Machine Repair {"position":"900,1100","size":"100,100"}
+''WATER RECYCLING MACHINE REPAIR''
+//The Water Recycling Machine is our spacecraft is vital for our astronauts for hydration, hygiene, research, food rehydration, and more. Additionally, it is one of the most powerful water filtration system that can filter wastewater sources, like urine or sweat, into drinkable, (and also the most purest), water for our astronauts to survive.//
+
+//In 2023, NASA reported that the ISS were able to recycled 98 percent of their wastewater, a major enginnering achivement that helps reducing the needs of continuous resupply missions to transport water.//
+
+//And no, our astronauts aren't drinking urine in space//
+
+//NOTE: Enter only the FIRST TWO characters of the code into the textbox below.
+//The first two characters revals the malfunction error. The rest of the code tells if water needs to be refilled.
+
+//If the water recycling machine is malfunctioning, it could be due to four reasons
+* Pumping Issue
+* Filtration Issue
+* SD Card Issue
+* Sensor Issue
+
+//It's important to check if the water recycling machine have enough water.
+* More than 50%, no need for water resupply mission
+* Less than 50%, time to start a water resupply mission
+
+//Please ask your astronaut for the error code.
+//NOTE: CASE SENSITIVE
+Enter Code:<<textbox "$code" "" "Water Recycling Machine Result">>
+
+[[BACK|OPEN MANUAL]]
+<<include 'Manual Timer'>>
+
+
+:: Water Recycling Machine Result {"position":"900,1200","size":"100,100"}
+<<if $code == "7B">>
+There is a pumping issue in the water recycling system.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "2T">>
+There is a filtration issue in the water recycling system.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "9A">>
+There is a SD Card issue in the water recycling system.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "3C">>
+There is a sensor issue in the water recycling system.
+Ask your astronaut to fix it.
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "4G">>
+There is no issue with the water recycling system.
+But your astronaut still need to select "No Fix".
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "9Z">>
+It's displaying $fullWater %
+There is no need to refill the water recycling system
+But your astronaut still need to select "No Refill".
+[[BACK|OPEN MANUAL]]
+<<elseif$code == "1A">>
+It's displaying $lowWater %
+There is a need to refill the water recycling system
+Ask your astronaut to request a resupply mission.
+[[BACK|OPEN MANUAL]]
+<<else>>
+This is an invalid code.
+Ask your astronaut to double check.
+[[BACK|OPEN MANUAL]]
+<</if>>
+
+
+:: StoryScript [script]
+Config.history.controls = false;
+	/* ==== StarFix: seeded constellation module ==== */
+/* 1) 固定种子随机 */
+window.seedRand = function(seed){
+  let h=1779033703^seed.length;
+  for (let i=0;i<seed.length;i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 3432918353);
+    h = (h<<13)|(h>>>19);
+  }
+  return function(){
+    h = Math.imul(h ^ (h>>>16), 2246822507);
+    h = Math.imul(h ^ (h>>>13), 3266489909);
+    h = (h ^ (h>>>16)) >>> 0;
+    return h / 4294967296;
+  };
+};
+
+/* 2) 基于 seed + stage 生成“星座”点列（简单折线） */
+window.genConstellation = function(seed, stage){
+  const rng = seedRand(seed + "|" + stage);
+  const n = 5 + Math.floor(rng()*3); // 5~7 个点
+  const pts = [];
+  for(let i=0;i<n;i++){
+    pts.push({ x: Math.floor(rng()*80 - 40), y: Math.floor(rng()*80 - 40) });
+  }
+  pts.sort((a,b)=>a.x-b.x);
+  return pts;
+};
+
+/* 3) 推荐角度（将平均朝向调回水平） */
+window.recommendAngle = function(pts){
+  if(!pts || !pts.length) return 0;
+  const angs = [];
+  for(let i=1;i<pts.length;i++){
+    const dx = pts[i].x - pts[i-1].x;
+    const dy = pts[i].y - pts[i-1].y;
+    angs.push(Math.atan2(dy, dx));
+  }
+  const avg = angs.reduce((a,b)=>a+b,0)/angs.length;
+  return Math.round(-avg * 180/Math.PI);
+};
+
+/* 4) 旋转点列 */
+window.rotatePts = function(pts, deg){
+  const rad = deg * Math.PI/180;
+  const cos = Math.cos(rad), sin = Math.sin(rad);
+  return pts.map(p => ({
+    x: Math.round(p.x*cos - p.y*sin),
+    y: Math.round(p.x*sin + p.y*cos)
+  }));
+};
+
+/* 5) 渲染为 SVG */
+window.renderConstellationSVG = function(containerId, pts, opts = {}){
+  const scale = opts.scale ?? 3;
+  const w = 300, h = 300, cx = Math.round(w/2), cy = Math.round(h/2);
+  const toPath = (arr)=>arr.map((p,i)=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return (i===0?`M ${X} ${Y}`:`L ${X} ${Y}`);
+  }).join(" ");
+  const stars = (arr)=>arr.map(p=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return `<circle cx="${X}" cy="${Y}" r="2"></circle>`;
+  }).join("");
+  const path = toPath(pts);
+  const svg = `
+    <svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="0" y="0" width="${w}" height="${h}" class="sky-bg"></rect>
+      <g><path d="${path}" class="star-link" fill="none"></path>${stars(pts)}</g>
+      <circle cx="${cx}" cy="${cy}" r="4" class="reticle"></circle>
+    </svg>`;
+  const el = document.getElementById(containerId);
+  if(el){ el.innerHTML = svg; }
+};
+
+// 让 State 在任何 SugarCube 2 环境都可用
+(function(){
+  if (typeof window.State === 'undefined' && window.SugarCube && SugarCube.State) {
+    window.State = SugarCube.State;
+  }
+})();
+
+
+:: StoryStylesheet [stylesheet]
+#menu-saves, #menu-restart {
+	display: none;
+}
+
+#menu-core {
+	display: none;
+}
+
+#menu-item-saves, #menu-item-restart {
+	display: none;
+}
+
+#begin-button a {
+  	font-size: 20px;
+  	font-weight: bold;
+	color: red;
+}
+
+#big-warning {
+	color: yellow;
+}
+
+#lose-text {
+	color: red;
+}
+
+#win-text {
+	color: lime;
+}
+
+#success-text, #win-text {
+	color: lime;
+}
+
+#warning-text {
+ 	color: orange; 
+}
+
+.small-warning {
+  	margin: 0px;
+	padding: 1px;
+  	line-height: 20%;
+}
+
+a.yellow-link {
+    color: yellow;
+}
+
+/* ==== StarFix styles ==== */
+.sky-bg { fill: #0b1020; }
+.star-link { stroke: #7fd0ff; stroke-width: 2; }
+svg circle { fill: #fff; }
+.reticle { fill: none; stroke: #ffd54a; stroke-width: 1.5; }
+.ui-card { border: 1px solid #2b2f45; border-radius: 10px; padding: 12px; margin: 10px 0; background: #121422; }
+.btnrow button { margin-right: 6px; margin-bottom: 6px; }
+.hint { color: #9ad; }
+.bad { color: #f88; }
+.good { color: #9f9; }
