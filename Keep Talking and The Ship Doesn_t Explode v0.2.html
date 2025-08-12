@@ -696,8 +696,7 @@ Ask your astronaut to double check.
 
 //And no, our astronauts aren&#39;t drinking urine in space//
 
-//NOTE: Enter only the FIRST TWO characters of the code into the textbox below.
-//The first two characters revals the malfunction error. The rest of the code tells if water needs to be refilled.
+//NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two characters will tell if water needs to be refilled.
 
 //If the water recycling machine is malfunctioning, it could be due to four reasons
 * Pumping Issue
@@ -751,27 +750,32 @@ Ask your astronaut to double check.
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Satellite Realignment" tags="" position="400,1100" size="100,100">&#39;&#39;SATELLITE REALIGNMENT&#39;&#39;
 //Satellites are one of the most important spacecrafts in our daily lives. From naviagation, communication, and water forcasting in our applications, and scientific research like climate change and our Solar System. Satellites also have thrusters in order to maintain orbit.//
 
-
 // This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes. 
+
+// INSTRUCTIONS:
 
 // In order to adjust the satellites, an astronaut will have to change the satellites&#39; altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
 
+// If the altitude text says &quot;Incorrect&quot;, adjustment will be needed. Otherwise, if it says &quot;Nominal&quot;, then the altitude is correct.
+
 // Below are the correct altitudes for the four satellites:
 
-SATELLITE 1 - 
-SATELLITE 2 -
-SATELLITE 3 -
-SATELLITE 4 -
+SATELLITE 1 - &lt;span id=&quot;satval1&quot;&gt;610 km&lt;/span&gt;
+SATELLITE 2 - &lt;span id=&quot;satval2&quot;&gt;772 km&lt;/span&gt;
+SATELLITE 3 - &lt;span id=&quot;satval3&quot;&gt;599 km&lt;/span&gt;
+SATELLITE 4 - &lt;span id=&quot;satval4&quot;&gt;1178 km&lt;/span&gt;
+
+// Relay the above information to your astronaut. 
 
 [[BACK|OPEN MANUAL]]
 &lt;&lt;include &#39;Manual Timer&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Satellite Adjustment" tags="" position="2000,725" size="100,100">// Satellite Minigame!
 
 // Fix the altitudes of the satellites according to the manual.
 
-[[SATELLITE 1]]
-[[SATELLITE 2]]
-[[SATELLITE 3]]
-[[SATELLITE 4]]
+[[SATELLITE Alpha]]
+[[SATELLITE Beta]]
+[[SATELLITE Gamma]]
+[[SATELLITE Delta]]
 
 &lt;&lt;if $satellite1 is true and $satellite2 is true and $satellite3 is true and $satellite4 is true&gt;&gt;
     &lt;span id=&quot;success-text&quot;&gt;All satellites have been restored to their proper altitudes!&lt;/span&gt;
@@ -779,17 +783,15 @@ SATELLITE 4 -
     &lt;span id=&quot;warning-text&quot;&gt;The satellites are misaligned!&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[BACK|Command Center]]</tw-passagedata><tw-passagedata pid="40" name="SATELLITE 1" tags="" position="1825,975" size="100,100">
-&lt;center&gt;&lt;h1&gt;Satellite 1&lt;/h1&gt;&lt;/center&gt;
+[[BACK|Command Center]]</tw-passagedata><tw-passagedata pid="40" name="SATELLITE Alpha" tags="" position="1825,975" size="100,100">
+&lt;center&gt;&lt;h1&gt;Satellite Alpha&lt;/h1&gt;&lt;/center&gt;
 
 &lt;center&gt;&lt;h2 id=&quot;altitude&quot;&gt;Current Altitude: $input1 km&lt;/h2&gt;&lt;/center&gt;
 
-Move this satellite to the correct altitude! (610 km)
-
 &lt;&lt;if $satellite1&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s1&quot;&gt;Nominal&lt;/span&gt;
+    &lt;span class=&quot;status-text1&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s1&quot;&gt;Nominal&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s1&quot;&gt;Incorrect&lt;/span&gt;
+    &lt;span class=&quot;status-text2&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s1&quot;&gt;Incorrect&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;textbox &quot;$input1&quot; &quot;&quot; autofocus&gt;&gt;&lt;&lt;button &quot;Move Satellite&quot;&gt;&gt;
@@ -805,17 +807,15 @@ Move this satellite to the correct altitude! (610 km)
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="41" name="SATELLITE 2" tags="" position="1950,975" size="100,100">
-&lt;center&gt;&lt;h1&gt;Satellite 2&lt;/h1&gt;&lt;/center&gt;
+[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="41" name="SATELLITE Beta" tags="" position="1950,975" size="100,100">
+&lt;center&gt;&lt;h1&gt;Satellite Beta&lt;/h1&gt;&lt;/center&gt;
 
 &lt;center&gt;&lt;h2 id=&quot;altitude&quot;&gt;Current Altitude: $input2 km&lt;/h2&gt;&lt;/center&gt;
 
-Move this satellite to the correct altitude! (772 km)
-
 &lt;&lt;if $satellite2&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s2&quot;&gt;Nominal&lt;/span&gt;
+    &lt;span class=&quot;status-text1&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s2&quot;&gt;Nominal&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s2&quot;&gt;Incorrect&lt;/span&gt;
+    &lt;span class=&quot;status-text2&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s2&quot;&gt;Incorrect&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;textbox &quot;$input2&quot; &quot;&quot; autofocus&gt;&gt;&lt;&lt;button &quot;Move Satellite&quot;&gt;&gt;
@@ -831,17 +831,15 @@ Move this satellite to the correct altitude! (772 km)
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="42" name="SATELLITE 3" tags="" position="2075,975" size="100,100">
-&lt;center&gt;&lt;h1&gt;Satellite 3&lt;/h1&gt;&lt;/center&gt;
+[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="42" name="SATELLITE Gamma" tags="" position="2075,975" size="100,100">
+&lt;center&gt;&lt;h1&gt;Satellite Gamma&lt;/h1&gt;&lt;/center&gt;
 
 &lt;center&gt;&lt;h2 id=&quot;altitude&quot;&gt;Current Altitude: $input3 km&lt;/h2&gt;&lt;/center&gt;
 
-Move this satellite to the correct altitude! (599 km)
-
 &lt;&lt;if $satellite3&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s3&quot;&gt;Nominal&lt;/span&gt;
+    &lt;span class=&quot;status-text1&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s3&quot;&gt;Nominal&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s3&quot;&gt;Incorrect&lt;/span&gt;
+    &lt;span class=&quot;status-text2&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s3&quot;&gt;Incorrect&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;textbox &quot;$input3&quot; &quot;&quot; autofocus&gt;&gt;&lt;&lt;button &quot;Move Satellite&quot;&gt;&gt;
@@ -857,17 +855,15 @@ Move this satellite to the correct altitude! (599 km)
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="43" name="SATELLITE 4" tags="" position="2200,975" size="100,100">
-&lt;center&gt;&lt;h1&gt;Satellite 4&lt;/h1&gt;&lt;/center&gt;
+[[BACK|Satellite Adjustment]]</tw-passagedata><tw-passagedata pid="43" name="SATELLITE Delta" tags="" position="2200,975" size="100,100">
+&lt;center&gt;&lt;h1&gt;Satellite Delta&lt;/h1&gt;&lt;/center&gt;
 
 &lt;center&gt;&lt;h2 id=&quot;altitude&quot;&gt;Current Altitude: $input4 km&lt;/h2&gt;&lt;/center&gt;
 
-Move this satellite to the correct altitude! (1178 km)
-
 &lt;&lt;if $satellite4&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s4&quot;&gt;Nominal&lt;/span&gt;
+    &lt;span class=&quot;status-text1&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s4&quot;&gt;Nominal&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
-    &lt;span class=&quot;status-text&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s4&quot;&gt;Incorrect&lt;/span&gt;
+    &lt;span class=&quot;status-text2&quot;&gt;Satellite Altitude: &lt;/span&gt;&lt;span id=&quot;s4&quot;&gt;Incorrect&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;textbox &quot;$input4&quot; &quot;&quot; autofocus&gt;&gt;&lt;&lt;button &quot;Move Satellite&quot;&gt;&gt;

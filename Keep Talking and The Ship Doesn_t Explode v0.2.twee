@@ -344,18 +344,16 @@ Computer Failure Puzzle
 [[RIGHT ANSWER|Victory Screen]]
 
 
-:: SATELLITE 1 {"position":"1825,975","size":"100,100"}
+:: SATELLITE Alpha {"position":"1825,975","size":"100,100"}
 
-<center><h1>Satellite 1</h1></center>
+<center><h1>Satellite Alpha</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input1 km</h2></center>
 
-Move this satellite to the correct altitude! (610 km)
-
 <<if $satellite1>>
-    <span class="status-text">Satellite Altitude: </span><span id="s1">Nominal</span>
+    <span class="status-text1">Satellite Altitude: </span><span id="s1">Nominal</span>
     <<else>>
-    <span class="status-text">Satellite Altitude: </span><span id="s1">Incorrect</span>
+    <span class="status-text2">Satellite Altitude: </span><span id="s1">Incorrect</span>
 <</if>>
 
 <<textbox "$input1" "" autofocus>><<button "Move Satellite">>
@@ -374,18 +372,16 @@ Move this satellite to the correct altitude! (610 km)
 [[BACK|Satellite Adjustment]]
 
 
-:: SATELLITE 2 {"position":"1950,975","size":"100,100"}
+:: SATELLITE Beta {"position":"1950,975","size":"100,100"}
 
-<center><h1>Satellite 2</h1></center>
+<center><h1>Satellite Beta</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input2 km</h2></center>
 
-Move this satellite to the correct altitude! (772 km)
-
 <<if $satellite2>>
-    <span class="status-text">Satellite Altitude: </span><span id="s2">Nominal</span>
+    <span class="status-text1">Satellite Altitude: </span><span id="s2">Nominal</span>
     <<else>>
-    <span class="status-text">Satellite Altitude: </span><span id="s2">Incorrect</span>
+    <span class="status-text2">Satellite Altitude: </span><span id="s2">Incorrect</span>
 <</if>>
 
 <<textbox "$input2" "" autofocus>><<button "Move Satellite">>
@@ -404,48 +400,16 @@ Move this satellite to the correct altitude! (772 km)
 [[BACK|Satellite Adjustment]]
 
 
-:: SATELLITE 3 {"position":"2075,975","size":"100,100"}
+:: SATELLITE Delta {"position":"2200,975","size":"100,100"}
 
-<center><h1>Satellite 3</h1></center>
-
-<center><h2 id="altitude">Current Altitude: $input3 km</h2></center>
-
-Move this satellite to the correct altitude! (599 km)
-
-<<if $satellite3>>
-    <span class="status-text">Satellite Altitude: </span><span id="s3">Nominal</span>
-    <<else>>
-    <span class="status-text">Satellite Altitude: </span><span id="s3">Incorrect</span>
-<</if>>
-
-<<textbox "$input3" "" autofocus>><<button "Move Satellite">>
-    <<replace "#altitude">>Current Altitude: $input3 km<</replace>>
-	<<if ["599"].includes($input3.toLowerCase())>>
-    	<<replace "#s3">>Nominal<</replace>>
-		<<set $status3 to true>>
-        <<set $satellite3 to true>>
-	<<else>>
-    	<<replace "#s3">>Incorrect<</replace>>
-		<<set $status3 to false>>
-        <<set $satellite3 to false>>
-    <</if>>
-<</button>>
-
-[[BACK|Satellite Adjustment]]
-
-
-:: SATELLITE 4 {"position":"2200,975","size":"100,100"}
-
-<center><h1>Satellite 4</h1></center>
+<center><h1>Satellite Delta</h1></center>
 
 <center><h2 id="altitude">Current Altitude: $input4 km</h2></center>
 
-Move this satellite to the correct altitude! (1178 km)
-
 <<if $satellite4>>
-    <span class="status-text">Satellite Altitude: </span><span id="s4">Nominal</span>
+    <span class="status-text1">Satellite Altitude: </span><span id="s4">Nominal</span>
     <<else>>
-    <span class="status-text">Satellite Altitude: </span><span id="s4">Incorrect</span>
+    <span class="status-text2">Satellite Altitude: </span><span id="s4">Incorrect</span>
 <</if>>
 
 <<textbox "$input4" "" autofocus>><<button "Move Satellite">>
@@ -464,15 +428,43 @@ Move this satellite to the correct altitude! (1178 km)
 [[BACK|Satellite Adjustment]]
 
 
+:: SATELLITE Gamma {"position":"2075,975","size":"100,100"}
+
+<center><h1>Satellite Gamma</h1></center>
+
+<center><h2 id="altitude">Current Altitude: $input3 km</h2></center>
+
+<<if $satellite3>>
+    <span class="status-text1">Satellite Altitude: </span><span id="s3">Nominal</span>
+    <<else>>
+    <span class="status-text2">Satellite Altitude: </span><span id="s3">Incorrect</span>
+<</if>>
+
+<<textbox "$input3" "" autofocus>><<button "Move Satellite">>
+    <<replace "#altitude">>Current Altitude: $input3 km<</replace>>
+	<<if ["599"].includes($input3.toLowerCase())>>
+    	<<replace "#s3">>Nominal<</replace>>
+		<<set $status3 to true>>
+        <<set $satellite3 to true>>
+	<<else>>
+    	<<replace "#s3">>Incorrect<</replace>>
+		<<set $status3 to false>>
+        <<set $satellite3 to false>>
+    <</if>>
+<</button>>
+
+[[BACK|Satellite Adjustment]]
+
+
 :: Satellite Adjustment {"position":"2000,725","size":"100,100"}
 // Satellite Minigame!
 
 // Fix the altitudes of the satellites according to the manual.
 
-[[SATELLITE 1]]
-[[SATELLITE 2]]
-[[SATELLITE 3]]
-[[SATELLITE 4]]
+[[SATELLITE Alpha]]
+[[SATELLITE Beta]]
+[[SATELLITE Gamma]]
+[[SATELLITE Delta]]
 
 <<if $satellite1 is true and $satellite2 is true and $satellite3 is true and $satellite4 is true>>
     <span id="success-text">All satellites have been restored to their proper altitudes!</span>
@@ -487,17 +479,22 @@ Move this satellite to the correct altitude! (1178 km)
 ''SATELLITE REALIGNMENT''
 //Satellites are one of the most important spacecrafts in our daily lives. From naviagation, communication, and water forcasting in our applications, and scientific research like climate change and our Solar System. Satellites also have thrusters in order to maintain orbit.//
 
-
 // This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes. 
+
+// INSTRUCTIONS:
 
 // In order to adjust the satellites, an astronaut will have to change the satellites' altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
 
+// If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct.
+
 // Below are the correct altitudes for the four satellites:
 
-SATELLITE 1 - 
-SATELLITE 2 -
-SATELLITE 3 -
-SATELLITE 4 -
+SATELLITE 1 - <span id="satval1">610 km</span>
+SATELLITE 2 - <span id="satval2">772 km</span>
+SATELLITE 3 - <span id="satval3">599 km</span>
+SATELLITE 4 - <span id="satval4">1178 km</span>
+
+// Relay the above information to your astronaut. 
 
 [[BACK|OPEN MANUAL]]
 <<include 'Manual Timer'>>
@@ -985,8 +982,7 @@ Ask your astronaut to double check.
 
 //And no, our astronauts aren't drinking urine in space//
 
-//NOTE: Enter only the FIRST TWO characters of the code into the textbox below.
-//The first two characters revals the malfunction error. The rest of the code tells if water needs to be refilled.
+//NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two characters will tell if water needs to be refilled.
 
 //If the water recycling machine is malfunctioning, it could be due to four reasons
 * Pumping Issue
