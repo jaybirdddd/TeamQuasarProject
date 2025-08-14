@@ -550,11 +550,6 @@ Below are the interfaces for the four satellites this spacecraft has access to. 
 
 Satellite hash: $sat_hash_hex
 
-$correct1
-$correct2
-$correct3
-$correct4
-
 [[SATELLITE Alpha]]
 [[SATELLITE Beta]]
 [[SATELLITE Gamma]]
