@@ -55,7 +55,7 @@ You got it? [Insert Confirmation Symbol/Text]
 <center>[[Meeting Room]]</center>
 
 
-:: Astronaut Incorrect Screen {"position":"1500,200","size":"100,100"}
+:: Astronaut Incorrect Screen {"position":"1000,400","size":"100,100"}
 <<silently>><<set $strikes to $strikes - 1>><</silently>>
 <<include "Timer">>
 <<include "Strikes">>
@@ -67,11 +67,14 @@ You got it? [Insert Confirmation Symbol/Text]
 
 <center>
   <<timed 3s>>
-  <<if $backToPuzzle == "Plumbing Puzzle">>
-    <<goto "Plumbing Puzzle">>
+  <<if $backToPuzzle == "Toilet Puzzle">>
+    <<goto "Toilet Puzzle">>
     
-<<elseif $backToPuzzle == "Water Puzzle">>
-    <<goto "Water Puzzle">>
+<<elseif $backToPuzzle == "Water Puzzle1">>
+    <<goto "Water Recycling Machine Puzzle 1/2">>
+    
+<<elseif $backToPuzzle == "Water Puzzle2">>
+    <<goto "Water Recycling Machine Puzzle 2/2">>
     
 <<elseif $backToPuzzle == "Satellite Puzzle">>
     <<goto "Satellite Adjustment">>
@@ -267,45 +270,6 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <</silently>>
 
 
-:: Dispense Water {"position":"1300,350","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>MESS ROOM</center>
-<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
-
-<<if $waterTemp == "Ambient">>
-	<<if $dispErrs.includes("ReplacePump")>>
-		<center>Nothing happened...</center>
-	<<elseif $dispErrs.includes("ReplaceFans")>>
-		<center>Ahh, that's hot!</center>
-	<<else>>
-		<center>Yep. That's room temperature water, alright.</center>
-    <</if>>
-<</if>>
-
-<<if $waterTemp == "Hot">>
-	<<if $dispErrs.includes("ReplacePump")>>
-		<center>Nothing happened...</center>
-	<<elseif $dispErrs.includes("NoHeat") and !$dispErrs.includes("ReplaceFans")>>
-		<center>Strange, it feels ambient...</center>
-	<<else>>
-			<center>The water seems pretty hot to me.</center>
-	<</if>>
-<</if>>
- 
-<center>[[Dispense Ambient|Dispense Water][$waterTemp = "Ambient"]]</center>
-<center>[[Dispense Hot|Dispense Water][$waterTemp = "Hot"]]</center>
-<center>[[Return to Inspecting|Inspect Dispenser]]</center>
-
-
-:: Dispenser Complete {"position":"1525,475","size":"100,100"}
-<<set $waterComplete to true>>
-<<set $dispErrs.deleteAll($tempPanel)>>
-
-<center>[[All Errors Resolved|Mess Hall]]</center>
-
-
 :: Dorm Toilet {"position":"1850,325","size":"100,100"}
 <<nobr>><<silently>><<if $toiletComplete is true>><<set $completedPuzzles to $completedPuzzles + 1>><</if>><</silently>>
 <<include "Gameplay Rules">>
@@ -314,7 +278,7 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
 <table style="width: 100%;">
   <tr> <td style="text-align: center;">[[Dormitory]]</td> </tr> </table> 
-<<if $toiletComplete is false>><a class="yellow-link" data-passage="Plumbing Puzzle"> Inspect Toilet</a><</if>>
+<<if $toiletComplete is false>><a class="yellow-link" data-passage="Toilet Puzzle"> Check Toilet Repair</a><</if>>
 
 <<if $toiletComplete is true>><span id="completed-text">Completed Toilet Repair!</span><<unset $toiletComplete>><</if>><<endnobr>>
 
@@ -432,71 +396,6 @@ Give the Astronaut your hash: <<print $gameCode>>
 <<endnobr>>
 
 
-:: Inspect Dispenser {"position":"1425,350","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>MESS ROOM</center>
-<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
-
-<<set $waterTemp = " ">>
-<center>[[Dispense Ambient|Dispense Water][$waterTemp = "Ambient"]]</center>
-<center>[[Dispense Hot|Dispense Water][$waterTemp = "Hot"]]</center>
-
-<<if $panel.includes("FlipSwitch")>>
-	<center>[Switch Position:] 		OFF</center>
-<<else>>
-	<center>[Switch Position:] 		ON</center>
-<</if>>
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Power Satus:] 		NEGATIVE</center>
-<<else>>
-	<center>[Power Satus:] 		POSITIVE</center>
-<</if>>
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Filter Satus:] 		NEGATIVE</center>
-<<else>>
-	<center>[Filter Satus:] 		POSITIVE</center>
-<</if>>
- 
- <center>[[Return to Dispenser|Water Puzzle]]</center>
-
-
-:: Inspect Panel {"position":"1700,300","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>DORMITORY TOILET REPAIR</center>
-<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
-
-<center>Pump Sensor:</center>
-<<if $panel.includes("ResetController") or $panel.includes("ReplacePumpSensor")>>
-	<center>[Power:] 		NEGATIVE</center>
-<<else>>
-	<center>[Power:] 		POSITIVE</center>
-<</if>>
-<<if $panel.includes("ReplacePump") or $panel.includes("ReplacePumpSensor")>>
-	<center>[Load:] 		NEGATIVE</center>
-<<else>>
-	<center>[Load:] 		POSITIVE</center>
-<</if>>
-<<if $panel.includes("ReplacePumpSensor") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Voltage:] 		NEGATIVE</center>
-<<else>>
-	<center>[Voltage:] 		POSITIVE</center>
-<</if>>
-
-<center>Conductivity Sensor: <<=$conductivity>></center>
-
-<<if $panel.includes("ReplaceControllerCard") or $panel.includes("ResetController")>>
-	<center>Controller: 		OFFLINE</center>
-<<else>>
-	<center>Controller: 		ONLINE</center>
-<</if>>
- 
- <center>[[Return|Plumbing Puzzle]]</center>
-
-
 :: Life Support {"position":"1700,450","size":"100,100"}
 <<nobr>><<include "Gameplay Rules">>
 <center>LIFE SUPPORT</center>
@@ -568,7 +467,7 @@ You got it?
     <td style="text-align: center;">[[Air Lock]]</td>
   </tr>
 </table>
-<<if $waterComplete is false>><img src="https://png.pngtree.com/png-vector/20190319/ourmid/pngtree-vector-water-recycle-icon-png-image_845702.jpg" width="30" height="30"  alt="Placeholder Title Image" /><a class="yellow-link" data-passage="Water Puzzle">Check Potable Water Dispenser</a><</if>>
+<<if $waterComplete is false>><img src="https://png.pngtree.com/png-vector/20190319/ourmid/pngtree-vector-water-recycle-icon-png-image_845702.jpg" width="30" height="30"  alt="Placeholder Title Image" /><a class="yellow-link" data-passage="Water Recycling Machine Puzzle 1/2">Check Water Recovery Repair</a><</if>>
 <<if $waterComplete is true>><span id="completed-text">Completed Water Recycling Machine Repair!</span><<unset $waterComplete>><</if>><<endnobr>>
 
 
@@ -627,61 +526,6 @@ Oxygen leaks can happen if the vacuum jumper hose malfunctioned that show signs 
 <<include 'Manual Timer'>>
 
 
-:: Plumbing Complete {"position":"1850,75","size":"100,100"}
-<<set $toiletComplete to true>>
-<<set $panel.deleteAll($tempPanel)>>
-
-<center>[[All Errors Resolved|Dorm Toilet]]</center>
-
-
-:: Plumbing Puzzle {"position":"1700,175","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>DORMITORY TOILET REPAIR</center>
-<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
-<<set $panel.deleteAll($tempPanel)>>
-
-<center>[[Inspect Equipment|Inspect Panel]]</center>
-<<if $panel.includes("ReplacePump")>>
-	<center>[[Fix Pump|Plumbing Puzzle][$tempPanel = "ReplacePump"]]</center>
-<<else>>
-
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-<</if>>
-<<if $panel.includes("ReplacePumpSensor")>>
-	<center>[[Replace Pump Sensor|Plumbing Puzzle][$tempPanel = "ReplacePumpSensor"]]</center>
-<<else>>
-	<center>[[Replace Pump Sensor|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $panel.includes("ReplaceConductivitySensor")>>
-	<center>[[Replace Conductivity Sensor|Plumbing Puzzle][$tempPanel = "ReplaceConductivitySensor"]]</center>
-<<else>>
-	<center>[[Replace Conductivity Sensor|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $panel.includes("ResetController")>>
-	<center>[[Press Reset Button|Plumbing Puzzle][$tempPanel = "ResetController"]]</center>
-<<else>>
-	<center>[[Press Reset Button|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $panel.includes("ReplaceControllerCard")>>
-	<center>[[Replace Controller Card|Plumbing Puzzle][$tempPanel = "ReplaceControllerCard"]]</center>
-<<else>>
-	<center>[[Replace Controller Card|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $panel.length == 0>>
-	<center>[[Replace Panel Cover|Plumbing Complete]]</center>
-<<else>>
-	<center>[[Replace Panel Cover|Dorm Toilet]]</center>
-<</if>>
-
-<<set $backToPuzzle to "Plumbing Puzzle">>
-
-
 :: Proceed {"position":"400,600","size":"100,100"}
 <center>This is a placeholder text to talk about the lore of the game.</center>
 <center>I don't know the story, but I heard that it will be insanely epic.</center>
@@ -706,7 +550,7 @@ Radiation shielding can be fixed either from the inside or the outside.
 <<include 'Manual Timer'>>
 
 
-:: Random Puzzle {"position":"800,100","size":"100,100"}
+:: Random Puzzle {"position":"1700,100","size":"100,100"}
 <<include "Timer">>
 
 Computer Failure Puzzle
@@ -1465,32 +1309,55 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 <<set $satelliteComplete to false>>
 <<set $computerComplete to false>>
 
-<!--Plumbing Puzzle-->
-<<silently>><<set $arrayCodes = 
-["ResetController", "ReplacePump", "ReplacePumpSensor", "ReplaceControllerCard", "ReplaceConductivitySensor"]>>
-<<set $panel = [$arrayCodes[Math.floor($rng()*$arrayCodes.length)]]>>
-<<set $tempPanel = $arrayCodes[Math.floor($rng()*$arrayCodes.length)]>>
-<<if !$panel.includes($tempPanel)>>
- 	<<set $panel.push($tempPanel)>>
-<</if>>
-<<set $tempPanel = "">>
+<!--Toilet Puzzle-->
+<<silently>><<set $arrayCodes = ["1A", "4C", "7D", "5B"]>>
+<<set $code = $arrayCodes[Math.floor($rng()*$arrayCodes.length)]>>
 
-<<set $conductivity to Math.floor($rng()*800 + 1)>>
-<<if $panel.includes("ReplaceConductivitySensor")>>
-	<<set $conductivity to Math.floor($rng()*8000 + 800)>>
+<<if $code == "1A">>
+	<<set $correct = "Fix Sensor">>
+<<elseif $code == "4C">>
+	<<set $correct = "Fix Pump">>
+<<elseif $code == "7D">>
+	<<set $correct = "Fix Leakage">>
+<<elseif $code == "5B">>
+	<<set $correct = "No Fix">>
 <</if>>
 <</silently>>
 
 <!--Water Puzzle-->
 <<silently>>
-<<set $dispenserCodes = ["ReplaceFilter", "ReplacePump", "FlipSwitch", "ReplaceControllerCard", "ReplaceFans", "NoHeat"]>>
-<<set $dispErrs = [$dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]]>>
-<<set $tempDisp = $dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]>>
-<<if !$dispErrs.includes($tempDisp)>>
- 	<<set $dispErrs.push($tempDisp)>>
+<<set $leftArrayCodes = ["7B", "2T", "9A", "3C","4G"]>>
+<<set $rightArrayCodes = ["9Z", "1A"]>>
+<<set $leftCode = $leftArrayCodes[Math.floor($rng()*$leftArrayCodes.length)]>>
+<<set $rightCode = $rightArrayCodes[Math.floor($rng()*$rightArrayCodes.length)]>>
+
+<<if $leftCode == "7B">>
+	<<set $leftCorrect = "Fix Pump">>
+<<elseif $leftCode == "2T">>
+	<<set $leftCorrect = "Fix Filter">>
+<<elseif $leftCode == "9A">>
+	<<set $leftCorrect = "Fix SD Card">>
+<<elseif $leftCode == "3C">>
+	<<set $leftCorrect = "Fix Sensor">>
+<<elseif $leftCode == "4G">>
+	<<set $leftCorrect = "No Fix">>
 <</if>>
-<<set $tempDisp = "">>
+
+<<if $rightCode == "9Z">>
+	<<set $rightCorrect = "No Refill">>
+<<elseif$leftCode == "1A">>
+	<<set $rightCorrect = "Request Refill">>
+<</if>>
 <</silently>>
+
+<<silently>>
+<<if $rightCode == "9Z">>
+	<<set $rightCorrect = "No Refill">>
+<<elseif $rightCode == "1A">>
+	<<set $rightCorrect = "Request Refill">>
+<</if>>
+<</silently>>
+
 
 <<set $victoryPassage to "Victory Screen">>
 <<set $gameOverPassage to "Game Over">>
@@ -1521,6 +1388,7 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 <<set $computerRandIdx to random(0,3)>>
 
 <<set $computerCodesArr = ["HOUSTON", "ORLANDO", "BARSTOW", "HAMPTON"]>>
+
 <<set $houstonArr = ["SUOTNHO", "OHTONUS", "UTHSONO"]>>
 <<set $orlandoArr = ["LODONRA", "ADOORLN", "DRALONO"]>>
 <<set $barstowArr = ["SOBTAWR", "ARTSWOB", "RTAOWBS"]>>
@@ -1530,12 +1398,12 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 <<set $orlandoMaskedArr = ["\\* R * * N D *", "\\* * L * N D *", "\\* R * A * D *", "\\* * L * N D *"]>>
 <<set $barstowMaskedArr = ["\\* * R * T O *", "\\* A * * T O *", "\\* A * * T O *", "\\* * R S T * *"]>>
 <<set $hamptonMaskedArr = ["\\* A M P * O *", "\\* * M P T * *", "\\* A M * T O *", "\\* * * P T O *"]>>
-*/
+
 <<set $ahouston = $houstonArr.random()>>
 <<set $aorlando = $orlandoArr.random()>>
 <<set $abarstow = $barstowArr.random()>>
 <<set $ahampton = $hamptonArr.random()>>
-/*
+
 <<set $mhouston = $houstonMaskedArr.random()>>
 <<set $morlando = $orlandoMaskedArr.random()>>
 <<set $mbarstow = $barstowMaskedArr.random()>>
@@ -1577,6 +1445,44 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
         <</if>>
     <</repeat>>
  <!-- This sample code was take from Twine SugarCube: Timed Passage with modifications--><</silently>>
+
+
+:: Toilet Puzzle {"position":"1350,250","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>DORMITORY TOILET REPAIR</center>
+<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>The error code that the toilet is displaying is</center>
+<center><h1 id="big-warning"><<=$code>></h1></center>
+<<if $correct == "Fix Sensor">>
+	<center>[[Fix Sensor|Dorm Toilet]]</center>
+	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+
+<<elseif $correct == "Fix Leakage">>
+	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Leakage|Dorm Toilet]]</center>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+
+<<elseif $correct == "Fix Pump">>
+	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Pump|Dorm Toilet]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+
+<<elseif $correct == "No Fix">>
+	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Dorm Toilet]]</center>
+<</if>>
+
+<<set $backToPuzzle to "Toilet Puzzle">>
+<<set $toiletComplete to true>>
 
 
 :: Toilet Repair {"position":"1250,1100","size":"100,100"}
@@ -1654,53 +1560,77 @@ $completedPuzzles / $numOfPuzzles puzzles completed<<silently>><<if $completedPu
 <center>[[Back to Menu]]</center>
 
 
-:: Water Puzzle {"position":"1575,350","size":"100,100"}
+:: Water Recycling Machine Puzzle 1/2 {"position":"1350,400","size":"100,100"}
 <<include "Timer">>
 <<include "Strikes">>
 <<silently>><<include "Victory Check">><</silently>>
 <center>MESS ROOM</center>
 <center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
-<<set $dispErrs.deleteAll($tempDisp)>>
 
-<center>[[Inspect Dispenser|Inspect Dispenser]]</center>
+<center>The error code that the water recycling machine is displaying is</center>
+<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
+<<if $leftCorrect == "Fix Pump">>
+	<center>[[Fix Pump|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
+    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
 
-<<if $dispErrs.includes("FlipSwitch")>>
-	<center>[[Flip Switch|Water Puzzle][$tempDisp = "FlipSwitch"]]</center>
-<<else>>
-	<center>[[Flip Switch|Astronaut Incorrect Screen]]</center>
+<<elseif $leftCorrect == "Fix Filter">>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Filter|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
+    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+
+<<elseif $leftCorrect == "Fix SD Card">>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix SD|Water Recycling Machine Puzzle 2/2]]</center>
+    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+    
+<<elseif $leftCorrect == "Fix Sensor">>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
+    <center>[[Fix Sensor|Water Recycling Machine Puzzle 2/2]]</center>
+	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+
+<<elseif $leftCorrect == "No Fix">>
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
+	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
+    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
+	<center>[[No Fix|Water Recycling Machine Puzzle 2/2]]</center>
 <</if>>
 
-<<if $dispErrs.includes("ReplaceFilter")>>
-	<center>[[Replace Filter|Water Puzzle][$tempDisp = "ReplaceFilter"]]</center>
-<<else>>
-	<center>[[Replace Filter|Astronaut Incorrect Screen]]</center>
+<<set $backToPuzzle to "Water Puzzle1">>
+
+
+:: Water Recycling Machine Puzzle 2/2 {"position":"1200,400","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>MESS ROOM</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>The error code that the water recycling machine is displaying is</center>
+<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
+
+<<if $rightCorrect == "No Refill">>
+	<center>[[No Refill|Mess Hall]]</center>
+	<center>[[Request Resupply|Astronaut Incorrect Screen]]</center>
+
+<<elseif $rightCorrect == "Request Refill">>
+	<center>[[No Refill|Astronaut Incorrect Screen]]</center>
+	<center>[[Request Resupply|Mess Hall]]</center>
 <</if>>
 
-<<if $dispErrs.includes("ReplacePump")>>
-	<center>[[Replace Pump|Water Puzzle][$tempDisp = "ReplacePump"]]</center>
-<<else>>
-	<center>[[Replace Pump|Astronaut Incorrect Screen]]</center>
-<</if>>
+<<set $backToPuzzle to "Water Puzzle2">>
 
-<<if $dispErrs.includes("ReplaceControllerCard")>>
-	<center>[[Replace Controller Card|Water Puzzle][$tempDisp = "ReplaceControllerCard"]]</center>
-<<else>>
-	<center>[[Replace Controller Card|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $dispErrs.includes("ReplaceFans")>>
-	<center>[[Replace Fans|Water Puzzle][$tempDisp = "ReplaceFans"]]</center>
-<<else>>
-	<center>[[Replace Fans|Astronaut Incorrect Screen]]</center>
-<</if>>
-
-<<if $dispErrs.length == 0>>
-	<center>[[Leave Dispenser Alone|Dispenser Complete]]</center>
-<<else>>
-	<center>[[Leave Dispenser Alone|Mess Hall]]</center>
-<</if>>
-
-<<set $backToPuzzle to "Water Puzzle">>
+<!--To check if the puzzle is completed-->
+<<set $waterComplete to true>>
 
 
 :: Water Recycling Machine Repair {"position":"1400,1100","size":"100,100"}
@@ -1878,14 +1808,16 @@ window.setSatellites = function (seedHex) {
 }
 
 //Function to randomize letter placement
-window.generateCoveredWord = function(word, numBlanks, seedHex) {
-  const seed = parseInt(seedHex, 16);
-  const rng1 = seedRand(String(seed));
+window.generateCoveredWord = function(word, numBlanks, seed) {
+ const rng1 = seedRand(String(seed));
  let arrWord = Array.from(word);
   for(let i = 0; i < numBlanks;i++) {
   	let rand = Math.floor(rng1()*arrWord.length);
     while(arrWord[rand] == '*') {
-      rand = Math.floor(rng1()*arrWord.length);
+      rand++;
+      if(rand == arrWord.length) {
+      	rand = 0; 
+      }
     }
     arrWord[rand] = '*';
   }
