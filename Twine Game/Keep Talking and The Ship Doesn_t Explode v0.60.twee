@@ -1,10 +1,10 @@
 :: StoryTitle
-Keep Talking and The Ship Doesn_t Explode v0.40
+Keep Talking and The Ship Doesn_t Explode v0.60
 
 
 :: StoryData
 {
-  "ifid": "26707158-3609-4AB7-9F63-6FC214FB02C7",
+  "ifid": "ed9b2ae0-b3b3-41d9-9ca2-21032edaf548",
   "format": "SugarCube",
   "format-version": "2.37.3",
   "start": "Back to Menu",
@@ -12,7 +12,7 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 }
 
 
-:: ASTRONAUT {"position":"1400,800","size":"100,100"}
+:: ASTRONAUT {"position":"875,550","size":"100,100"}
 <center>WELCOME ASTRONAUT</center>
 
 <center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
@@ -21,7 +21,7 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 <center>Every incorrect action may cause the countdown timer to deduct a couple of seconds. </center>
 <center>NOTE!!!</center><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center>
 
-<center>[[BEGIN MISSION|Meeting Room]]</center>
+<center>[[BEGIN MISSION|Enter Code]]</center>
 <center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
 
 
@@ -38,19 +38,24 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 </table>
 
 
-:: Antenna Repair {"position":"850,1100","size":"100,100"}
-''ANTENNA REPAIR''
-//Antennas in spacecrafts are crucial to transmit and communicate with flight controllers to send and receive important data and valuable information. 
+:: Antenna Repair {"position":"300,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">ANTENNA REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Antennas in spacecrafts are crucial to transmit and communicate with flight controllers to send and receive important data and valuable information
 
-//Antenna will be in need of repair if its damaged, broken, or facing limited or delayed communications.//
-
-//Antenna repairs will require spacewalk and may cause death//
-
-[[BACK|OPEN MANUAL]]
+Antenna will be in need of repair if its damaged, broken, or facing limited or delayed communications. Antenna repairs will require spacewalks<center><h1 id="computer-green">--------------------------------------------------</h1></center></span></div><div class="ui-card">
+<<button[[BACK|OPEN MANUAL]]>><</button>>
+</div>
 <<include 'Manual Timer'>>
 
 
-:: Astronaut Incorrect Screen {"position":"1000,400","size":"100,100"}
+:: Astronaut Confirm {"position":"1400,800","size":"100,100"}
+<<silently>>
+<<include "StoryInit">>
+<</silently>>
+You got it? [Insert Confirmation Symbol/Text]
+<center>[[Meeting Room]]</center>
+
+
+:: Astronaut Incorrect Screen {"position":"1500,200","size":"100,100"}
 <<silently>><<set $strikes to $strikes - 1>><</silently>>
 <<include "Timer">>
 <<include "Strikes">>
@@ -62,14 +67,11 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 
 <center>
   <<timed 3s>>
-  <<if $backToPuzzle == "Toilet Puzzle">>
-    <<goto "Toilet Puzzle">>
+  <<if $backToPuzzle == "Plumbing Puzzle">>
+    <<goto "Plumbing Puzzle">>
     
-<<elseif $backToPuzzle == "Water Puzzle1">>
-    <<goto "Water Recycling Machine Puzzle 1/2">>
-    
-<<elseif $backToPuzzle == "Water Puzzle2">>
-    <<goto "Water Recycling Machine Puzzle 2/2">>
+<<elseif $backToPuzzle == "Water Puzzle">>
+    <<goto "Water Puzzle">>
     
 <<elseif $backToPuzzle == "Satellite Puzzle">>
     <<goto "Satellite Adjustment">>
@@ -79,8 +81,6 @@ Keep Talking and The Ship Doesn_t Explode v0.40
     
 <</if>>
 <</timed>></center>
-
-
 
 
 :: BEGIN MISSION {"position":"525,600","size":"100,100"}
@@ -97,9 +97,6 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 <center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg/1024px-The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
 
 <center>[[Start Game]]</center>
-<<silently>>
-<<include "StoryInit">>
-<</silently>>
 
 
 :: Command Center {"position":"2000,600","size":"100,100"}
@@ -122,22 +119,33 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 <<if $computerComplete is true>><span id="completed-text">Completed Computer Reboot!</span><</if>>
 
 
-:: Computer Failure {"position":"700,1100","size":"100,100"}
-''COMPUTER FAILURE''
-//Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew.
+:: Computer Failure {"position":"450,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">COMPUTER FAILURE</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew
 
-//Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation.//
+Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|OPEN MANUAL]]>><</button>></td>
+    <td style="text-align: right;"><<button[[Instructions|Computer Failure Instructions]]>><</button>></td></tr></table></div>
+<<include 'Manual Timer'>>
 
-//Below are the answers for the astronaut to reboot the computer to negate the computer failure
 
-//Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
+:: Computer Failure Instructions {"position":"450,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">The bottom are the answers for the astronaut to reboot the computer to negate the computer failure
 
+Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
+</span>
 *<span id="warning-text">$ahouston</span>
 *<span id="warning-text">$aorlando</span>
 *<span id="warning-text">$abarstow</span>
 *<span id="warning-text">$ahampton</span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td><<button [[BACK|Computer Failure]]>><</button>></td>
+    <td style="text-align: center;"><<button[[COMPLETE|OPEN MANUAL]]>><</button>></td></tr></table></div>
 
-[[BACK|OPEN MANUAL]]
 <<include 'Manual Timer'>>
 <<silently>>
 <<timed 7s>>
@@ -151,7 +159,6 @@ Keep Talking and The Ship Doesn_t Explode v0.40
 <</silently>>
 
 
-
 :: Computer Rebooting {"position":"2100,450","size":"100,100"}
 <<include "Gameplay Rules">>
 
@@ -162,6 +169,7 @@ Enter the correct code to fully restart the computer. You must provide detailed 
 //NOTE: DO NOT SPACE OUT THE CODE
 //WARNING: INCORRECTLY ENTERING THE CODE WILL RESULT IN A GAME OVER
 <div class="ui-card">
+/*
 <<if $computerCorrect == "HOUSTON">>
 	<center><h1 id="win-text"><<=$mhouston>></h1></center>
 <<elseif $computerCorrect == "ORLANDO">>
@@ -171,7 +179,8 @@ Enter the correct code to fully restart the computer. You must provide detailed 
 <<elseif $computerCorrect == "HAMPTON">>
 	<center><h1 id="win-text"><<=$mhampton>></h1></center>
 <</if>>
-
+*/
+<center><h1 id="win-text"><<=$hiddenSolution>></h1></center>
 Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
 <<if $computerFailureUserInput == $computerCorrect>>
 	<<goto "Command Center">>
@@ -185,64 +194,119 @@ Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
 [[BACK|Command Center]]
 
 
-
 :: Controller Error Screen {"position":"400,825","size":"100,100"}
-<<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Toilet Repair', 'Radiation Shield Failure')>>
+<div class="ui-card">
+<<set $room_choice to random(1,5)>>
+<<if $room_choice is 1>>
+  <<set _psg to 'Solar Panel Repairs'>>
+  <<elseif $room_choice is 2>>
+  <<set _psg to 'Computer Failure'>>
+  <<elseif $room_choice is 3>>
+  <<set _psg to 'Antenna Repair'>>
+  <<elseif $room_choice is 4>>
+  <<set _psg to 'Toilet Repair'>>
+  <<elseif $room_choice is 5>>
+  <<set _psg to 'Oxygen Leak'>>
+<</if>>
+/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Toilet Repair', 'Oxygen Leak')>> */
 
-<center>
+<center><div class="ui-card"><span id="computer-amber">
   RESTARTING COMPUTER<br>
   PLEASE BE EXTREMELY PATIENT<br>
   WE WILL "TRY" TO REMEMBER WHERE YOU LEFT OFF<br><br>
-  </center>
-
+  </span></div></center>
 <center>
-  <<timed 3s>><<link 'Turn on Computer'>>
-    <<goto _psg>>
-  <</link>>
-<</timed>></center>
+<<timed 3s>>
+  <div class="ui-card">
+    <<button "Turn On Computer">>
+      <<goto _psg>>
+    <</button>>
+  </div>
+<</timed>></center></div>
 <<set $manualSeconds to random(100,150)>>
 
 
-:: Correct Altitudes Screen {"position":"400,1250","size":"100,100"}
-<<= setSatellites($sat_seed)>>
+:: Correct Altitudes Screen {"position":"725,1375","size":"100,100"}
+<silently><<= setSatellites($sat_seed)>></silently>
+<div class="ui-card"><center><h1 id="computer-amber">SATELLITE REALIGNMENT INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">Below are the correct altitudes for the four satellites
 
-// Below are the correct altitudes for the four satellites:
+ If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct
+<div class="ui-card"><span id="computer-green">Relay the bottom information to your astronaut
+SATELLITE Alpha - <span id="satval1">$correct1 km</span>
+SATELLITE Beta - <span id="satval2">$correct2 km</span>
+SATELLITE Gamma - <span id="satval3">$correct3 km</span>
+SATELLITE Delta - <span id="satval4">$correct4 km</span></span>
+</div></span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td><<button [[BACK|Satellite Realignment Instructions]]>><</button>></td>
+    <td style="text-align: center;"><<button[[Complete|OPEN MANUAL]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
-SATELLITE 1 - <span id="satval1">$correct1 km</span>
-SATELLITE 2 - <span id="satval2">$correct2 km</span>
-SATELLITE 3 - <span id="satval3">$correct3 km</span>
-SATELLITE 4 - <span id="satval4">$correct4 km</span>
 
-// Relay the above information to your astronaut. 
+:: Correct Computer Code {"position":"450,1375","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">The bottom are the answers for the astronaut to reboot the computer to negate the computer failure
 
-[[BACK|Satellite Realignment]]
-
-
-:: Correct Computer Code {"position":"700,1250","size":"100,100"}
-''COMPUTER FAILURE''
-//Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew.
-
-//Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation.//
-
-//Below are the answers for the astronaut to reboot the computer to negate the computer failure
-
-//Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
-
+Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
+</span>
 *<span id="completed-text">HOUSTON</span>
 *<span id="completed-text">ORLANDO</span>
 *<span id="completed-text">BARSTOW</span>
 *<span id="completed-text">HAMPTON</span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td>DISABLED</td>
+    <td style="text-align: center;">DISABLED</td></tr></table></div>
 
-BACK BUTTON DISABLED
 <<include 'Manual Timer'>>
 <<silently>>
-<<timed 0.35s>>
-    <<goto "Computer Failure">>
+<<timed 0.25s>>
+    <<goto "Computer Failure Instructions">>
 <</timed>>
 <</silently>>
 
 
-:: Dorm Toilet {"position":"1850,325","size":"100,100"}
+:: Dispense Water {"position":"1300,350","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>MESS ROOM</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<<if $waterTemp == "Ambient">>
+	<<if $dispErrs.includes("ReplacePump")>>
+		<center>Nothing happened...</center>
+	<<elseif $dispErrs.includes("ReplaceFans")>>
+		<center>Ahh, that's hot!</center>
+	<<else>>
+		<center>Yep. That's room temperature water, alright.</center>
+    <</if>>
+<</if>>
+
+<<if $waterTemp == "Hot">>
+	<<if $dispErrs.includes("ReplacePump")>>
+		<center>Nothing happened...</center>
+	<<elseif $dispErrs.includes("NoHeat") and !$dispErrs.includes("ReplaceFans")>>
+		<center>Strange, it feels ambient...</center>
+	<<else>>
+			<center>The water seems pretty hot to me.</center>
+	<</if>>
+<</if>>
+ 
+<center>[[Dispense Ambient|Dispense Water][$waterTemp = "Ambient"]]</center>
+<center>[[Dispense Hot|Dispense Water][$waterTemp = "Hot"]]</center>
+<center>[[Return to Inspecting|Inspect Dispenser]]</center>
+
+
+:: Dispenser Complete {"position":"1525,475","size":"100,100"}
+<<set $waterComplete to true>>
+<<set $dispErrs.deleteAll($tempPanel)>>
+
+<center>[[All Errors Resolved|Mess Hall]]</center>
+
+
+:: Dorm Toilet {"position":"1975,150","size":"100,100"}
 <<nobr>><<silently>><<if $toiletComplete is true>><<set $completedPuzzles to $completedPuzzles + 1>><</if>><</silently>>
 <<include "Gameplay Rules">>
 <center>DORMITORY TOILET</center>
@@ -250,12 +314,12 @@ BACK BUTTON DISABLED
 https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
 <table style="width: 100%;">
   <tr> <td style="text-align: center;">[[Dormitory]]</td> </tr> </table> 
-<<if $toiletComplete is false>><a class="yellow-link" data-passage="Toilet Puzzle"> Check Toilet Repair</a><</if>>
+<<if $toiletComplete is false>><a class="yellow-link" data-passage="Plumbing Puzzle"> Inspect Toilet</a><</if>>
 
 <<if $toiletComplete is true>><span id="completed-text">Completed Toilet Repair!</span><<unset $toiletComplete>><</if>><<endnobr>>
 
 
-:: Dormitory {"position":"1850,450","size":"100,100"}
+:: Dormitory {"position":"1975,425","size":"100,100"}
 <<nobr>><<include "Gameplay Rules">>
 <<silently>><<include "Victory Check">><</silently>>
 <center>DORMITORY</center>
@@ -284,24 +348,36 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
 </table>
 
 
+:: Enter Code {"position":"1250,775","size":"100,100"}
+PLEASE ENTER THE GAME CODE BELOW! Your Mission Control will have it!
+<<textbox "$gameCode" "" "Insert Code">><<button "Enter">>
+	<<goto "Astronaut Confirm">>
+<</button>>
 
-:: FIX FROM INSIDE {"position":"1275,1350","size":"100,100"}
+
+:: FIX FROM INSIDE {"position":"775,1900","size":"100,100"}
 // (instructions on how to fix from the inside)
 
-<<print either("hub", "ble")>>
+<<set $code_choice to random(1,2)>>
+<<if $code_choice is 1>>
+  <<print "hub">>
+  <<elseif $code_choice is 2>>
+  <<print "ble">>
+<</if>>
+/* <<print either("hub", "ble")>> */
 
 [[BACK|Radiation Shield Failure]]
 <<include 'Manual Timer'>>
 
 
-:: FIX FROM OUTSIDE {"position":"1325,1225","size":"100,100"}
+:: FIX FROM OUTSIDE {"position":"700,1775","size":"100,100"}
 // (instructions on how to fix on the outside, likely requires spacewalk)
 
 [[BACK|Radiation Shield Failure]]
 <<include 'Manual Timer'>>
 
 
-:: FLIGHT CONTROLLER {"position":"650,700","size":"100,100"}
+:: FLIGHT CONTROLLER {"position":"675,700","size":"100,100"}
 <center>WELCOME FLIGHT CONTROLLER</center>
 <center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
 <center>The only way to fix the spacecraft is to provide directions for your astronaut to solve these problems</center>
@@ -310,7 +386,7 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
 <center>NOTE!!!</center><center>MAKE SURE YOUR ASTRONAUT IS READY TO START THE GAME</center>
 
 
-<center>[[OPEN MANUAL]]</center>
+<center>[[OPEN MANUAL|Get Code]]</center>
 <center>[[WAIT I HATE MY JOB, GO BACK|BEGIN MISSION]]</center>
 
 
@@ -327,6 +403,14 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
 :: Gameplay Rules {"position":"50,1425","size":"100,100"}
 <<include "Timer">><<include "Strikes">>
 <<include "Victory Check">>
+
+
+:: Get Code {"position":"850,700","size":"100,100"}
+<<set $gameCode to 
+(Math.floor(Math.random() * 0x10000000).toString(16).toUpperCase())>>
+Give the Astronaut your hash: <<print $gameCode>>
+
+<center>[[Continue|Manual Confirm]]</center>
 
 
 :: Hallway {"position":"1500,600","size":"100,100"}
@@ -348,7 +432,72 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
 <<endnobr>>
 
 
-:: Life Support {"position":"1700,450","size":"100,100"}
+:: Inspect Dispenser {"position":"1425,350","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>MESS ROOM</center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<<set $waterTemp = " ">>
+<center>[[Dispense Ambient|Dispense Water][$waterTemp = "Ambient"]]</center>
+<center>[[Dispense Hot|Dispense Water][$waterTemp = "Hot"]]</center>
+
+<<if $panel.includes("FlipSwitch")>>
+	<center>[Switch Position:] 		OFF</center>
+<<else>>
+	<center>[Switch Position:] 		ON</center>
+<</if>>
+<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Power Satus:] 		NEGATIVE</center>
+<<else>>
+	<center>[Power Satus:] 		POSITIVE</center>
+<</if>>
+<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Filter Satus:] 		NEGATIVE</center>
+<<else>>
+	<center>[Filter Satus:] 		POSITIVE</center>
+<</if>>
+ 
+ <center>[[Return to Dispenser|Water Puzzle]]</center>
+
+
+:: Inspect Panel {"position":"1650,225","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>DORMITORY TOILET REPAIR</center>
+<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>Pump Sensor:</center>
+<<if $panel.includes("ResetController") or $panel.includes("ReplacePumpSensor")>>
+	<center>[Power:] 		NEGATIVE</center>
+<<else>>
+	<center>[Power:] 		POSITIVE</center>
+<</if>>
+<<if $panel.includes("ReplacePump") or $panel.includes("ReplacePumpSensor")>>
+	<center>[Load:] 		NEGATIVE</center>
+<<else>>
+	<center>[Load:] 		POSITIVE</center>
+<</if>>
+<<if $panel.includes("ReplacePumpSensor") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Voltage:] 		NEGATIVE</center>
+<<else>>
+	<center>[Voltage:] 		POSITIVE</center>
+<</if>>
+
+<center>Conductivity Sensor: <<=$conductivity>></center>
+
+<<if $panel.includes("ReplaceControllerCard") or $panel.includes("ResetController")>>
+	<center>Controller: 		OFFLINE</center>
+<<else>>
+	<center>Controller: 		ONLINE</center>
+<</if>>
+ 
+ <center>[[Return|Plumbing Puzzle]]</center>
+
+
+:: Life Support {"position":"1675,450","size":"100,100"}
 <<nobr>><<include "Gameplay Rules">>
 <center>LIFE SUPPORT</center>
 <center><img src="https://img.freepik.com/premium-photo/hospital-room-featuring-bed-range-essential-medical-equipment-scifi-medical-room-space-vessel-ai-generated_538213-38852.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
@@ -363,7 +512,16 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
   <tr>
     <td style="text-align: right;">[[Mess Hall]]</td>
   </tr>
+    [[Oxygen Leak (Astronaut)|Oxy: Astronaut]]
 </table><<endnobr>>
+
+
+:: Manual Confirm {"position":"1050,750","size":"100,100"}
+<<silently>>
+<<include "StoryInit">>
+<</silently>>
+You got it?
+<center>[[OPEN MANUAL]]</center>
 
 
 :: Manual Timer {"position":"50,1100","size":"100,100"}
@@ -380,6 +538,7 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
 
 
 :: Meeting Room {"position":"1700,600","size":"100,100"}
+<<run playBGM("meeting","audio/meetingBGM.mp3")>>
 <<include "Gameplay Rules">>
 <center>MEETING ROOM</center>
 <center><img src="https://static01.nyt.com/images/2020/10/30/science/00SCI-OUTTHERE-SCENES12/00SCI-OUTTHERE-SCENES12-mediumSquareAt3X.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
@@ -411,50 +570,197 @@ https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="50
     <td style="text-align: center;">[[Air Lock]]</td>
   </tr>
 </table>
-<<if $waterComplete is false>><img src="https://png.pngtree.com/png-vector/20190319/ourmid/pngtree-vector-water-recycle-icon-png-image_845702.jpg" width="30" height="30"  alt="Placeholder Title Image" /><a class="yellow-link" data-passage="Water Recycling Machine Puzzle 1/2">Check Water Recovery Repair</a><</if>>
+<<if $waterComplete is false>><img src="https://png.pngtree.com/png-vector/20190319/ourmid/pngtree-vector-water-recycle-icon-png-image_845702.jpg" width="30" height="30"  alt="Placeholder Title Image" /><a class="yellow-link" data-passage="Water Puzzle">Check Potable Water Dispenser</a><</if>>
 <<if $waterComplete is true>><span id="completed-text">Completed Water Recycling Machine Repair!</span><<unset $waterComplete>><</if>><<endnobr>>
 
 
-:: OPEN MANUAL {"position":"650,825","size":"100,100"}
-CHECKLIST:
+:: OPEN MANUAL {"position":"800,900","size":"100,100"}
+<<run playBGM("meeting","audio/meetingBGM.mp3")>>
+<div class="ui-card">
+<center><span id="computer-amber"><strong><u>CHECKLIST</u></strong></span></center><span id="computer-amber">
 * Satellite Adjustment (Located in Command Center in far right)
 * Toilet Repair	(Located in Dormitory in upper ship)
 * Water Recycling Repair (Located in Mess Hall)
 * StarFix (Stars Constellation) Realignment (Located in Command Center in far right)
 * Computer Failure (Located in Command Center in far right)
-TABLE OF CONTENTS
+</span></div><div class="ui-card">
+<center><span id="computer-white"><strong><u>TABLE OF CONTENTS</u></strong>
 
-[[Antenna Repair]]   		<!-- COMING SOON?-->
+<<button[[Antenna Repair]]>><</button>>
 
-[[Computer Failure]]    	<!-- COMING SOON?-->
+<<button[[Computer Failure]]>><</button>>
+
+<<button[[Oxygen Leak]]>><</button>>
+
+<<button[[Satellite Realignment]]>><</button>>
+<div style="text-align: right;"><<button[[Next|OPEN MANUAL 2/2]]>><</button>></div></span></center><<include 'Manual Timer'>>
+
+
+:: OPEN MANUAL 2/2 {"position":"1000,900","size":"100,100"}
+<div class="ui-card">
+<center><span id="computer-amber"><strong><u>CHECKLIST</u></strong></span></center><span id="computer-amber">
+* Satellite Adjustment (Located in Command Center in far right)
+* Toilet Repair	(Located in Dormitory in upper ship)
+* Water Recycling Repair (Located in Mess Hall)
+* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)
+* Computer Failure (Located in Command Center in far right)
+</span></div><div class="ui-card">
+<center><span id="computer-white"><strong><u>TABLE OF CONTENTS</u></strong>
+
+<<button[[Solar Panel Repairs]]>><</button>>
+
+<<button[[StarFix|StarFix: HOU Seed]]>><</button>>
+
+<<button[[Toilet Repair]]>><</button>>
+
+<<button[[Water Recycling Machine Repair]]>><</button>>
+<div style="text-align: left;"><<button[[Back|OPEN MANUAL]]>><</button>></div></span></center><<include 'Manual Timer'>>
+
+
+:: Oxy: Astronaut {"position":"1825,300","size":"100,100"}
+\:: Oxy: Astronaut
+<<run OXY_initScenario()>>
+
+<div class="oxy-card">
+  <b>Leak hint:</b> <span id="oxy-leak-tip">...</span>
+</div>
+
+<div class="oxy-card">
+  <div class="oxy-row"><b>Pressure:</b> <span id="oxy-pressure-num">--%</span></div>
+  <div class="oxy-gauge"><span id="oxy-gauge-bar"></span></div>
+  <div id="oxy-status" class="hint oxy-row">Adjust valves to stop the leak.</div>
+</div>
+
+<div class="oxy-card">
+  <b>Valves</b>
+  <div class="oxy-row">
+    <button id="v-Red"    class="valve" onclick="OXY_toggleValve('Red')">Red</button>
+    <button id="v-Blue"   class="valve" onclick="OXY_toggleValve('Blue')">Blue</button>
+    <button id="v-Yellow" class="valve" onclick="OXY_toggleValve('Yellow')">Yellow</button>
+    <button id="v-Green"  class="valve" onclick="OXY_toggleValve('Green')">Green</button>
+  </div>
+  <div class="oxy-row hint">Report the pressure and leak hint to Flight Controller.</div>
+  [[Life Support]]
+</div>
+
+<<script>>OXY_render();<</script>>
+
+<<if $oxy_sealed>>
+  <div class="oxy-card"><span class="good">Leak sealed! You can move on.</span></div>
+<</if>>
+<<if $oxy_failed>>
+  <div class="oxy-card"><span class="bad">Oxygen depleted. Try again.</span></div>
+[[Life Support]]
+
+<</if>>
+
+
+
+:: Oxy: Controller Manual {"position":"625,1275","size":"100,100"}
+\:: Oxy: Controller Manual
+<div class="oxy-card"><h3>Oxygen Leak – Flight Controller Manual</h3>
+<p>When the astronaut reports the leak hint and current pressure, apply the rules below and instruct valve operations.</p></div>
+
+<div class="oxy-card">
+  <h4>Valve roles</h4>
+  <ul>
+    <li><b>Red Valve</b> – Emergency cut-off (main line)</li>
+    <li><b>Blue Valve</b> – Keep O₂ circulation</li>
+    <li><b>Yellow Valve</b> – Aux relief</li>
+    <li><b>Green Valve</b> – Regenerator line</li>
+  </ul>
+</div>
+
+<div class="oxy-card">
+  <h4>Base rules (by leak location)</h4>
+  <ul>
+    <li>Leak on <b>Green Pipe</b> → Close <b>Red</b>, keep <b>Blue</b> open.</li>
+    <li>Leak on <b>Blue Pipe</b> → Open <b>Yellow</b>, close <b>Green</b>.</li>
+    <li>Leak on <b>Red Pipe</b> → Close <b>Blue</b>, open <b>Yellow</b>.</li>
+    <li>Leak on <b>Yellow Pipe</b> → Keep <b>Red</b> open, close <b>Green</b>.</li>
+  </ul>
+  <h4>Pressure corrections</h4>
+  <ul>
+    <li>If pressure <b>&lt; 80%</b> → additionally <b>close Yellow</b>.</li>
+    <li>If pressure <b>&lt; 50%</b> → <b>close all valves</b> and prepare manual O₂.</li>
+  </ul>
+  <p class="hint">Priority when multiple leaks are suspected: Green &gt; Red &gt; Blue &gt; Yellow.</p>
+</div>
+
+<div class="oxy-card">
+  <b>Example</b>: Astronaut reports 72% and “bubbles near Green pipe” → Close Red, keep Blue open; because 72% &lt; 80%, also close Yellow.
+</div>
 
 [[Oxygen Leak]]
 
-[[Radiation Shield Failure]]
 
-[[Satellite Realignment]]
+:: Oxygen Leak {"position":"600,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">OXYGEN LEAK REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Oxygen is vital in any existing spacecraft for your crew, using machines like oxygen generators, pressurized oxygen tanks, or oxygen candles to produce oxygen
 
-[[Solar Panel Repairs]]		<!-- COMING SOON?-->
+Solar panels and a water recycling machine are also required to power the oxygen machines, in order to conduct electrolysis to make hydrogen and oxygen out of water
 
-[[StarFix（Flight Controller）|StarFix: HOU Seed]]
+Oxygen leaks can happen if the vacuum jumper hose malfunctioned that show signs of small tears that will require replacements, limited amount of electricity to power the oxygen machine, or the oxygen machine malfunctioned</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
 
-[[Toilet Repair]] 
-
-[[Water Recycling Machine Repair]] 
-
+<<button [[BACK|OPEN MANUAL]]>><</button>>
+[[Oxygen Leak – Manual|Oxy: Controller Manual]]
+</div>
 <<include 'Manual Timer'>>
 
 
-:: Oxygen Leak {"position":"250,1100","size":"100,100"}
-''OXYGEN LEAK REPAIR''
-//Oxygen is vital in any existing spacecraft for your crew, using machines like oxygen generators, pressurized oxygen tanks, or oxygen candles to produce oxygen//
-//Solar panels and a water recycling machine are also required to power the oxygen machines, in order to conduct electrolysis to make hydrogen and oxygen out of water.//
+:: Plumbing Complete {"position":"1975,0","size":"100,100"}
+<<set $toiletComplete to true>>
+<<set $panel.deleteAll($tempPanel)>>
 
-//Oxygen leaks can happen if the vacuume jumper hose malfunctioned that show signs of small tears that will require replacements, limited amount of electricity to power the oxygen machine, or the oxygen machine malfunctioned.//
+<center>[[All Errors Resolved|Dorm Toilet]]</center>
 
-[[BACK|OPEN MANUAL]]
 
-<<include 'Manual Timer'>>
+:: Plumbing Puzzle {"position":"1625,75","size":"100,100"}
+<<include "Timer">>
+<<include "Strikes">>
+<<silently>><<include "Victory Check">><</silently>>
+<center>DORMITORY TOILET REPAIR</center>
+<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $panel.deleteAll($tempPanel)>>
+
+<center>[[Inspect Equipment|Inspect Panel]]</center>
+<<if $panel.includes("ReplacePump")>>
+	<center>[[Fix Pump|Plumbing Puzzle][$tempPanel = "ReplacePump"]]</center>
+<<else>>
+
+	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
+<</if>>
+<<if $panel.includes("ReplacePumpSensor")>>
+	<center>[[Replace Pump Sensor|Plumbing Puzzle][$tempPanel = "ReplacePumpSensor"]]</center>
+<<else>>
+	<center>[[Replace Pump Sensor|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $panel.includes("ReplaceConductivitySensor")>>
+	<center>[[Replace Conductivity Sensor|Plumbing Puzzle][$tempPanel = "ReplaceConductivitySensor"]]</center>
+<<else>>
+	<center>[[Replace Conductivity Sensor|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $panel.includes("ResetController")>>
+	<center>[[Press Reset Button|Plumbing Puzzle][$tempPanel = "ResetController"]]</center>
+<<else>>
+	<center>[[Press Reset Button|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $panel.includes("ReplaceControllerCard")>>
+	<center>[[Replace Controller Card|Plumbing Puzzle][$tempPanel = "ReplaceControllerCard"]]</center>
+<<else>>
+	<center>[[Replace Controller Card|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $panel.length == 0>>
+	<center>[[Replace Panel Cover|Plumbing Complete]]</center>
+<<else>>
+	<center>[[Replace Panel Cover|Dorm Toilet]]</center>
+<</if>>
+
+<<set $backToPuzzle to "Plumbing Puzzle">>
 
 
 :: Proceed {"position":"400,600","size":"100,100"}
@@ -467,7 +773,7 @@ TABLE OF CONTENTS
 <center><span id="begin-button">[[BEGIN MISSION]]</span></center>
 
 
-:: Radiation Shield Failure {"position":"1300,1100","size":"100,100"}
+:: Radiation Shield Failure {"position":"750,1600","size":"100,100"}
 //Radiation shielding is important for keeping a space station safe from solar radiation. This radiation can seriously damage a ship and its components, so thin aluminum coating is required to keep all systems stable and running.
 
 Other materials can be used such as water or plastic. NASA uses a hybrid carbon/metal fabric to shield their space stations and other spacecraft. 
@@ -477,11 +783,11 @@ Radiation shielding can be fixed either from the inside or the outside.
 [[FIX FROM INSIDE]]
 [[FIX FROM OUTSIDE]]
 
-[[BACK|OPEN MANUAL]]
+
 <<include 'Manual Timer'>>
 
 
-:: Random Puzzle {"position":"1700,100","size":"100,100"}
+:: Random Puzzle {"position":"800,100","size":"100,100"}
 <<include "Timer">>
 
 Computer Failure Puzzle
@@ -639,38 +945,61 @@ Satellite hash: $sat_hash_hex
 <<set $backToPuzzle to "Satellite Puzzle">>
 
 
-:: Satellite Realignment {"position":"400,1100","size":"100,100"}
-"SATELLITE REALIGNMENT"
-//Satellites are one of the most important spacecrafts in our daily lives. From naviagation, communication, and weather forecasting in our applications, and scientific research like climate change and our Solar System. Satellites also have thrusters in order to maintain orbit.//
+:: Satellite Realignment {"position":"750,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">SATELLITE REALIGNMENT</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center>
+<span id="computer-green">Satellites are one of the most important spacecrafts in our daily lives. From naviagation, communication, and weather forecasting in our applications, and scientific research like climate change and our Solar System. Satellites also have thrusters in order to maintain orbit
 
-// This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes. 
+This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes</span><center><h1 id="computer-green">--------------------------------------------------</h1></center>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|OPEN MANUAL]]>><</button>></td>
+    <td style="text-align: right;"><<button[[Instructions|Satellite Realignment Instructions]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
-// INSTRUCTIONS:
 
-// In order to adjust the satellites, an astronaut will have to change the satellites' altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
+:: Satellite Realignment Instructions {"position":"800,1225","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">SATELLITE REALIGNMENT INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center>
+<span id="computer-amber">In order to adjust the satellites, an astronaut will have to change the satellites' altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
 
-// If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct.
-
-PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
+ If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct.</span>
+</div><div class="ui-card">
+<span id="computer-white">PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it! </span>
 <<textbox "$sat_seed" "" "Correct Altitudes Screen">><<button "Enter">>
 	<<goto "Correct Altitudes Screen">>
 <</button>>
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|Satellite Realignment]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
-[[BACK|OPEN MANUAL]]
+
+:: Solar Panel Repairs {"position":"950,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">SOLAR PANEL REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Most spacecraft operating in the Inner Solar System rely on solar panels to generate energy from sunlight. This energy is essential for the crew to carry out critical tasks like communication with the flight controllers, and maintain a livable environment on board, like producing oxygen
+
+Solar panels can be damaged by improper retraction, collisions with large space debris, or prolonged exposure to space radiation. Solar panel repairs will require spacewalk</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+
+<<button [[BACK|OPEN MANUAL 2/2]]>><</button>>
+</div>
 <<include 'Manual Timer'>>
 
 
-:: Solar Panel Repairs {"position":"550,1100","size":"100,100"}
-''SOLAR PANEL REPAIR''
-//Most spacecraft operating in the Inner Solar System rely on solar panels to generate energy from sunlight. This energy is essential for the crew to carry out critical tasks like communication with the flight controllers, and maintain a livable environment on board, like producing oxygen.//
+:: StarFix Instructions {"position":"1100,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">STAR CONSTELLATIONS INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+You will be providing correct angle coordination to your astronaut for them to complete this puzzle. Ensure the astronaut is ready to enter the task code on their console
 
-//Solar panels can be damaged by improper retraction, collisions with large space debris, or prolonged exposure to space radiation.//
-
-//Solar panel repairs will require spacewalk and may cause death//
-
-
-
-[[BACK|OPEN MANUAL]]
+NOTE: THIS PUZZLE WILL REQUIRE SCROLLING</span>
+<<set $sf_seed = ("TASK-" + random(1000,9999))>>
+<div class="ui-card"><h3>Task Code:<p class="good"><b><<print $sf_seed>></b></p></h3>
+  <div class="btnrow">
+    <<button "Open the console">>
+      <<set $sf_stage = 1>>
+      <<goto "StarFix: Houston">>
+    <</button>>
+  </div>
+</div><table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|StarFix: HOU Seed]]>><</button>></td></tr></table></div>
 <<include 'Manual Timer'>>
 
 
@@ -732,31 +1061,21 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 </div>
 
 
+:: StarFix: HOU Seed {"position":"1100,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">STAR CONSTELLATIONS</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Throughout history, humanity had use the constellation of stars, also known as celestial navigation, to navigate our planet. Star constellations normally depicting its connections as animals, inanimate objects, or mythological characters to understand where to navigate in the night sky. As of 2025, the International Astronomical Union recognizes 88 constellations
 
-:: StarFix: HOU Seed {"position":"1475,1100","size":"100,100"}
-''STAR CONSTELLATIONS''
-//Throughout history, humanity had use the constellation of stars, also known as celestial navigation, to navigate our planet. Star constellations normally depicting its connections as animals, inanimate objects, or mythological characters to understand where to navigate in the night sky. As of 2025, the International Astronomical Union recognizes 88 constellations//
-
-//Even though we have Global Positioning System (GPS) to navigate, we still use star constellations for any celestial events that are happening. For example, a meteor shower will appear near the constellation Orion the Hunter//
-
-<<set $sf_seed = ("TASK-" + random(1000,9999))>>
-<div class="ui-card">
-  <h3>Task Code (Tell the Astronaut):</h3>
-  <p class="good"><b><<print $sf_seed>></b></p>
-  <div class="btnrow">
-    <<button "Open the console">>
-      <<set $sf_stage = 1>>
-      <<goto "StarFix: Houston">>
-    <</button>>
-  </div>
-  <p class="hint">Astronaut should enter this code on their side.</p>
-</div>
-
-[[BACK|OPEN MANUAL]]
+Even though we have Global Positioning System (GPS) to navigate, we still use star constellations for any celestial events that are happening. For example, a meteor shower will appear near the constellation Orion the Hunter</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|OPEN MANUAL 2/2]]>><</button>></td>
+    <td style="text-align: right;"><<button[[Instructions|StarFix Instructions]]>><</button>></td></tr></table></div>
 <<include 'Manual Timer'>>
 
 
-:: StarFix: Houston {"position":"1600,1100","size":"100,100"}
+:: StarFix: Houston {"position":"1100,1400","size":"100,100"}
 <<set _pts = genConstellation($sf_seed, $sf_stage)>>
 <<set _rec = recommendAngle(_pts)>>
 
@@ -843,9 +1162,6 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
   addQuadrants('sf_svg_hou');
 })();
 </script>
-
-
-
 
 
 :: StarFix: Scope {"position":"2275,600","size":"100,100"}
@@ -1202,9 +1518,6 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 </script>
 
 
-
-
-
 :: Start Game {"position":"250,600","size":"100,100"}
 <center><h1 id="big-warning">WARNING!!!</h1></center>
 <center><h3 class="small-warning">THIS GAME IS NOT MEANT TO BE PLAYED WITH A SINGLE PERSON.</h3></center>
@@ -1216,10 +1529,11 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 
 
 :: StoryInit {"position":"50,1300","size":"100,100"}
+<<set $rng to seedRand(String($gameCode))>>
 <<set $seconds to 10000>>
-<<set $manualSeconds to random(100,150)>>
-<<set $fullWater to random(60,100)>>
-<<set $lowWater to random(30,40)>>
+<<set $manualSeconds to Math.floor($rng()*50 + 100)>>
+<<set $fullWater to Math.floor($rng()*40 + 60)>>
+<<set $lowWater to Math.floor($rng()*10 + 30)>>
 <<set $strikes to 3>>
 
 <!--To check if the puzzle is completed-->
@@ -1232,55 +1546,32 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 <<set $satelliteComplete to false>>
 <<set $computerComplete to false>>
 
-<!--Toilet Puzzle-->
-<<silently>><<set $arrayCodes = ["1A", "4C", "7D", "5B"]>>
-<<set $code = $arrayCodes.random()>>
+<!--Plumbing Puzzle-->
+<<silently>><<set $arrayCodes = 
+["ResetController", "ReplacePump", "ReplacePumpSensor", "ReplaceControllerCard", "ReplaceConductivitySensor"]>>
+<<set $panel = [$arrayCodes[Math.floor($rng()*$arrayCodes.length)]]>>
+<<set $tempPanel = $arrayCodes[Math.floor($rng()*$arrayCodes.length)]>>
+<<if !$panel.includes($tempPanel)>>
+ 	<<set $panel.push($tempPanel)>>
+<</if>>
+<<set $tempPanel = "">>
 
-<<if $code == "1A">>
-	<<set $correct = "Fix Sensor">>
-<<elseif $code == "4C">>
-	<<set $correct = "Fix Pump">>
-<<elseif $code == "7D">>
-	<<set $correct = "Fix Leakage">>
-<<elseif $code == "5B">>
-	<<set $correct = "No Fix">>
+<<set $conductivity to Math.floor($rng()*800 + 1)>>
+<<if $panel.includes("ReplaceConductivitySensor")>>
+	<<set $conductivity to Math.floor($rng()*8000 + 800)>>
 <</if>>
 <</silently>>
 
 <!--Water Puzzle-->
 <<silently>>
-<<set $leftArrayCodes = ["7B", "2T", "9A", "3C","4G"]>>
-<<set $rightArrayCodes = ["9Z", "1A"]>>
-<<set $leftCode = $leftArrayCodes.random()>>
-<<set $rightCode = $rightArrayCodes.random()>>
-
-<<if $leftCode == "7B">>
-	<<set $leftCorrect = "Fix Pump">>
-<<elseif $leftCode == "2T">>
-	<<set $leftCorrect = "Fix Filter">>
-<<elseif $leftCode == "9A">>
-	<<set $leftCorrect = "Fix SD Card">>
-<<elseif $leftCode == "3C">>
-	<<set $leftCorrect = "Fix Sensor">>
-<<elseif $leftCode == "4G">>
-	<<set $leftCorrect = "No Fix">>
+<<set $dispenserCodes = ["ReplaceFilter", "ReplacePump", "FlipSwitch", "ReplaceControllerCard", "ReplaceFans", "NoHeat"]>>
+<<set $dispErrs = [$dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]]>>
+<<set $tempDisp = $dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]>>
+<<if !$dispErrs.includes($tempDisp)>>
+ 	<<set $dispErrs.push($tempDisp)>>
 <</if>>
-
-<<if $rightCode == "9Z">>
-	<<set $rightCorrect = "No Refill">>
-<<elseif$leftCode == "1A">>
-	<<set $rightCorrect = "Request Refill">>
-<</if>>
+<<set $tempDisp = "">>
 <</silently>>
-
-<<silently>>
-<<if $rightCode == "9Z">>
-	<<set $rightCorrect = "No Refill">>
-<<elseif $rightCode == "1A">>
-	<<set $rightCorrect = "Request Refill">>
-<</if>>
-<</silently>>
-
 
 <<set $victoryPassage to "Victory Screen">>
 <<set $gameOverPassage to "Game Over">>
@@ -1292,7 +1583,7 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 <<set $input3 to random(300, 1400)>>
 <<set $input4 to random(300, 1400)>>
 
-<<set $rng to seedRand($sat_hash)>>
+<<set $rng to seedRand(String($sat_hash))>>
 
 <<set $correct1 to Math.floor($rng()*1100 + 300)>>
 <<set $correct2 to Math.floor($rng()*1100 + 300)>>
@@ -1315,24 +1606,26 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 <<set $orlandoArr = ["LODONRA", "ADOORLN", "DRALONO"]>>
 <<set $barstowArr = ["SOBTAWR", "ARTSWOB", "RTAOWBS"]>>
 <<set $hamptonArr = ["ANTHPOM", "NOAMHPT", "OMPNHTA"]>>
-
+/*
 <<set $houstonMaskedArr = ["\\* * U * T O *", "\\* * U * T O *", "\\* O * * T O * ", "\\* * * S T O *"]>>
 <<set $orlandoMaskedArr = ["\\* R * * N D *", "\\* * L * N D *", "\\* R * A * D *", "\\* * L * N D *"]>>
 <<set $barstowMaskedArr = ["\\* * R * T O *", "\\* A * * T O *", "\\* A * * T O *", "\\* * R S T * *"]>>
 <<set $hamptonMaskedArr = ["\\* A M P * O *", "\\* * M P T * *", "\\* A M * T O *", "\\* * * P T O *"]>>
-
+*/
 <<set $ahouston = $houstonArr.random()>>
 <<set $aorlando = $orlandoArr.random()>>
 <<set $abarstow = $barstowArr.random()>>
 <<set $ahampton = $hamptonArr.random()>>
-
+/*
 <<set $mhouston = $houstonMaskedArr.random()>>
 <<set $morlando = $orlandoMaskedArr.random()>>
 <<set $mbarstow = $barstowMaskedArr.random()>>
 <<set $mhampton = $hamptonMaskedArr.random()>>
-
+*/
 <<set $computerCorrect = $computerCodesArr[$computerRandIdx]>>
-
+<<set $hiddenSolution = $computerCorrect>>
+<<set $hiddenSolution = generateCoveredWord($hiddenSolution, 4, $gameCode)>>
+/*
 <<if $computerCorrect == "HOUSTON">>
 <center><pre><<print $mhouston>></pre></center>
 <<elseif $computerCorrect == "ORLANDO">>
@@ -1342,6 +1635,7 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
 <<elseif $computerCorrect == "HAMPTON">>
 <center><pre><<print $mhampton>></pre></center>
 <</if>>
+*/
 
 
 
@@ -1366,87 +1660,64 @@ PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it!
  <!-- This sample code was take from Twine SugarCube: Timed Passage with modifications--><</silently>>
 
 
-:: Toilet Puzzle {"position":"1350,250","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>DORMITORY TOILET REPAIR</center>
-<center><img src="https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+:: Toilet Repair {"position":"1250,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">TOILET REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Also known as "space toilets" or "zero gravity toilets," it uses airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft
 
-<center>The error code that the toilet is displaying is</center>
-<center><h1 id="big-warning"><<=$code>></h1></center>
-<<if $correct == "Fix Sensor">>
-	<center>[[Fix Sensor|Dorm Toilet]]</center>
-	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-
-<<elseif $correct == "Fix Leakage">>
-	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Leakage|Dorm Toilet]]</center>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-
-<<elseif $correct == "Fix Pump">>
-	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Pump|Dorm Toilet]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-
-<<elseif $correct == "No Fix">>
-	<center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Leakage|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Dorm Toilet]]</center>
-<</if>>
-
-<<set $backToPuzzle to "Toilet Puzzle">>
-<<set $toiletComplete to true>>
+Do I need to explain why astronauts would need to have a toilet in their spacecraft?
+</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|OPEN MANUAL 2/2]]>><</button>></td>
+    <td style="text-align: right;"><<button[[Instructions|Toilet Repair Instructions]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
 
-:: Toilet Repair {"position":"1000,1100","size":"100,100"}
-''TOILET REPAIR''
-//Also known as "space toilets" or "zero gravity toilets," it uses airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft//
-
-//Do I need to explain why astronauts would need to have a toilet in their spacecraft?//
-
-//If the toilet is malfunctioning, it could be due to three reasons
+:: Toilet Repair Instructions {"position":"1250,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">TOILET REPAIR INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+If the toilet is malfunctioning, it could be due to three reasons
 * Pumping Issue
 * Sensor Issue
 * Leaking Issue
-
-//Please ask your astronaut for the error code. 
-//NOTE: CASE SENSITIVE 
-Enter Code:<<textbox "$code" "" "Toilet Repair Result">><<button "Enter">>
+</span></div>
+<div class="ui-card"><span id="computer-white">Please ask your astronaut for the error code. 
+NOTE: CASE SENSITIVE </span>
+<<textbox "$code" "" "Toilet Repair Result">><<button "Enter">>
 	<<goto "Toilet Repair Result">>
-<</button>>
-
-[[BACK|OPEN MANUAL]]
+<</button>><table style="width: 70%;">
+  <tr>
+    <td><<button [[BACK|Toilet Repair]]>><</button>></td>
+    <td style="text-align: center;"><<button[[Complete|OPEN MANUAL 2/2]]>><</button>></td></tr></table></div>
 <<include 'Manual Timer'>>
 
 
-:: Toilet Repair Result {"position":"1000,1225","size":"100,100"}
-<<if $code == "4C">>
+:: Toilet Repair Result {"position":"1250,1400","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">TOILET REPAIR INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+If the toilet is malfunctioning, it could be due to three reasons
+* Pumping Issue
+* Sensor Issue
+* Leaking Issue
+</span></div><span id="computer-amber">
+<div class="ui-card"><span id="computer-white"><<if $code == "4C">>
 There is a pumping issue in the toilet.
 Ask your astronaut to fix it.
-[[BACK|Toilet Repair]]
 <<elseif$code == "1A">>
 There is a sensor issue in the toilet.
 Ask your astronaut to fix it.
-[[BACK|Toilet Repair]]
 <<elseif$code == "7D">>
 There is a leaking issue in the toilet.
 Ask your astronaut to fix it.
-[[BACK|Toilet Repair]]
 <<elseif$code == "5B">>
 There is no issue with the toilet.
 But your astronaut still need to select "No Fix".
-[[BACK|Toilet Repair]]
 <<else>>
 This is an invalid code.
 Ask your astronaut to double check.
-[[BACK|Toilet Repair]]
-<</if>>
+<</if>></span>
+<table style="width: 70%;">
+  <tr>
+    <td><<button [[BACK|Toilet Repair]]>><</button>></td>
+    <td style="text-align: center;"><<button[[Complete|OPEN MANUAL 2/2]]>><</button>></td></tr></table></div>
+<<include 'Manual Timer'>>
 
 
 :: Victory Check {"position":"150,1300","size":"100,100"}
@@ -1464,154 +1735,128 @@ $completedPuzzles / $numOfPuzzles puzzles completed<<silently>><<if $completedPu
 <center>[[Back to Menu]]</center>
 
 
-:: Water Recycling Machine Puzzle 1/2 {"position":"1350,400","size":"100,100"}
+:: Water Puzzle {"position":"1575,350","size":"100,100"}
 <<include "Timer">>
 <<include "Strikes">>
 <<silently>><<include "Victory Check">><</silently>>
 <center>MESS ROOM</center>
 <center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempDisp)>>
 
-<center>The error code that the water recycling machine is displaying is</center>
-<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
-<<if $leftCorrect == "Fix Pump">>
-	<center>[[Fix Pump|Water Recycling Machine Puzzle 2/2]]</center>
-	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
-    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
+<center>[[Inspect Dispenser|Inspect Dispenser]]</center>
 
-<<elseif $leftCorrect == "Fix Filter">>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Filter|Water Recycling Machine Puzzle 2/2]]</center>
-	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
-    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-
-<<elseif $leftCorrect == "Fix SD Card">>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix SD|Water Recycling Machine Puzzle 2/2]]</center>
-    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-    
-<<elseif $leftCorrect == "Fix Sensor">>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
-    <center>[[Fix Sensor|Water Recycling Machine Puzzle 2/2]]</center>
-	<center>[[No Fix|Astronaut Incorrect Screen]]</center>
-
-<<elseif $leftCorrect == "No Fix">>
-	<center>[[Fix Pump|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix Filter|Astronaut Incorrect Screen]]</center>
-	<center>[[Fix SD|Astronaut Incorrect Screen]]</center>
-    <center>[[Fix Sensor|Astronaut Incorrect Screen]]</center>
-	<center>[[No Fix|Water Recycling Machine Puzzle 2/2]]</center>
+<<if $dispErrs.includes("FlipSwitch")>>
+	<center>[[Flip Switch|Water Puzzle][$tempDisp = "FlipSwitch"]]</center>
+<<else>>
+	<center>[[Flip Switch|Astronaut Incorrect Screen]]</center>
 <</if>>
 
-<<set $backToPuzzle to "Water Puzzle1">>
-
-
-:: Water Recycling Machine Puzzle 2/2 {"position":"1200,400","size":"100,100"}
-<<include "Timer">>
-<<include "Strikes">>
-<<silently>><<include "Victory Check">><</silently>>
-<center>MESS ROOM</center>
-<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
-
-<center>The error code that the water recycling machine is displaying is</center>
-<center><h1 id="big-warning"><<=$leftCode + $rightCode>></h1></center>
-
-<<if $rightCorrect == "No Refill">>
-	<center>[[No Refill|Mess Hall]]</center>
-	<center>[[Request Resupply|Astronaut Incorrect Screen]]</center>
-
-<<elseif $rightCorrect == "Request Refill">>
-	<center>[[No Refill|Astronaut Incorrect Screen]]</center>
-	<center>[[Request Resupply|Mess Hall]]</center>
+<<if $dispErrs.includes("ReplaceFilter")>>
+	<center>[[Replace Filter|Water Puzzle][$tempDisp = "ReplaceFilter"]]</center>
+<<else>>
+	<center>[[Replace Filter|Astronaut Incorrect Screen]]</center>
 <</if>>
 
-<<set $backToPuzzle to "Water Puzzle2">>
+<<if $dispErrs.includes("ReplacePump")>>
+	<center>[[Replace Pump|Water Puzzle][$tempDisp = "ReplacePump"]]</center>
+<<else>>
+	<center>[[Replace Pump|Astronaut Incorrect Screen]]</center>
+<</if>>
 
-<!--To check if the puzzle is completed-->
-<<set $waterComplete to true>>
+<<if $dispErrs.includes("ReplaceControllerCard")>>
+	<center>[[Replace Controller Card|Water Puzzle][$tempDisp = "ReplaceControllerCard"]]</center>
+<<else>>
+	<center>[[Replace Controller Card|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $dispErrs.includes("ReplaceFans")>>
+	<center>[[Replace Fans|Water Puzzle][$tempDisp = "ReplaceFans"]]</center>
+<<else>>
+	<center>[[Replace Fans|Astronaut Incorrect Screen]]</center>
+<</if>>
+
+<<if $dispErrs.length == 0>>
+	<center>[[Leave Dispenser Alone|Dispenser Complete]]</center>
+<<else>>
+	<center>[[Leave Dispenser Alone|Mess Hall]]</center>
+<</if>>
+
+<<set $backToPuzzle to "Water Puzzle">>
 
 
-:: Water Recycling Machine Repair {"position":"1150,1100","size":"100,100"}
-''WATER RECYCLING MACHINE REPAIR''
-//The Water Recycling Machine is our spacecraft is vital for our astronauts for hydration, hygiene, research, food rehydration, and more. Additionally, it is one of the most powerful water filtration system that can filter wastewater sources, like urine or sweat, into drinkable, (and also the most purest), water for our astronauts to survive.//
+:: Water Recycling Machine Repair {"position":"1400,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">WATER RECYCLING MACHINE REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+The Water Recycling Machine is our spacecraft is vital for our astronauts for hydration, hygiene, research, food rehydration, and more. Additionally, it is one of the most powerful water filtration system that can filter wastewater sources, like urine or sweat, into drinkable, (and also the most purest), water for our astronauts to survive
 
-//In 2023, NASA reported that the ISS were able to recycled 98 percent of their wastewater, a major enginnering achivement that helps reducing the needs of continuous resupply missions to transport water.//
+In 2023, NASA reported that the ISS were able to recycled 98 percent of their wastewater, a major enginnering achivement that helps reducing the needs of continuous resupply missions to transport water
 
-//And no, our astronauts aren't drinking urine in space//
+And no, our astronauts aren't drinking urine in space
+</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><<button [[BACK|OPEN MANUAL 2/2]]>><</button>></td>
+    <td style="text-align: right;"><<button[[Instructions|Water Repair Instructions]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
-//NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below
-//The first two characters revals the malfunction error. The last two code will tells if water needs to be refilled.
 
-//If the water recycling machine is malfunctioning, it could be due to four reasons
+:: Water Recycling Machine Result {"position":"1475,1475","size":"100,100"}
+<div class="ui-card"><center><h2 id="computer-amber">WATER RECYCLING MACHINE REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"><span class="text-14px">NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two code will tells if water needs to be refilled
+If the water recycling machine is malfunctioning, it could be due to four reasons
 * Pumping Issue
 * Filtration Issue
 * SD Card Issue
 * Sensor Issue
-
-//It's important to check if the water recycling machine have enough water.
+It's important to check if the water recycling machine have enough water
 * More than 50%, no need for water resupply mission
 * Less than 50%, time to start a water resupply mission
-
-//Please ask your astronaut for the error code.
-//NOTE: CASE SENSITIVE
-Enter Code:<<textbox "$code" "" "Water Recycling Machine Result">><<button "Enter">>
-	<<goto "Water Recycling Machine Result">>
-<</button>>
-
-
-
-[[BACK|OPEN MANUAL]]
-<<include 'Manual Timer'>>
-
-
-:: Water Recycling Machine Result {"position":"1150,1225","size":"100,100"}
-<<if $code == "7B">>
-There is a pumping issue in the water recycling system.
+</span></span></div><div class="ui-card"><span id="computer-white">
+<span id="computer-white"><<if $code == "7B">>There is a pumping issue in the water recycling system.
 Ask your astronaut to fix it.
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "2T">>
-There is a filtration issue in the water recycling system.
+<<elseif$code == "2T">>There is a filtration issue in the water recycling system.
 Ask your astronaut to fix it.
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "9A">>
-There is a SD Card issue in the water recycling system.
+<<elseif$code == "9A">>There is a SD Card issue in the water recycling system.
 Ask your astronaut to fix it.
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "3C">>
-There is a sensor issue in the water recycling system.
+<<elseif$code == "3C">>There is a sensor issue in the water recycling system.
 Ask your astronaut to fix it.
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "4G">>
-There is no issue with the water recycling system.
+<<elseif$code == "4G">>There is no issue with the water recycling system.
 But your astronaut still need to select "No Fix".
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "9Z">>
-It's displaying $fullWater %
+<<elseif$code == "9Z">>It's displaying $fullWater %
 There is no need to refill the water recycling system
 But your astronaut still need to select "No Refill".
-[[BACK|Water Recycling Machine Repair]]
-<<elseif$code == "1A">>
-It's displaying $lowWater %
+<<elseif$code == "1A">>It's displaying $lowWater %
 There is a need to refill the water recycling system
 Ask your astronaut to request a resupply mission.
-[[BACK|Water Recycling Machine Repair]]
-<<else>>
-This is an invalid code.
+<<else>>This is an invalid code.
 Ask your astronaut to double check.
-[[BACK|Water Recycling Machine Repair]]
-<</if>>
+<</if>></span><table style="width: 70%;">
+  <tr><td><<button [[BACK|Water Repair Instructions]]>><</button>></td>
+    <td style="text-align: center;"><<button[[Complete|OPEN MANUAL 2/2]]>><</button>></td></tr></table></span></div><<include 'Manual Timer'>>
+
+
+:: Water Repair Instructions {"position":"1500,1300","size":"100,100"}
+<div class="ui-card"><center><h2 id="computer-amber">WATER RECYCLING MACHINE REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"><span class="text-14px">NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two code will tells if water needs to be refilled
+If the water recycling machine is malfunctioning, it could be due to four reasons
+* Pumping Issue
+* Filtration Issue
+* SD Card Issue
+* Sensor Issue
+It's important to check if the water recycling machine have enough water
+* More than 50%, no need for water resupply mission
+* Less than 50%, time to start a water resupply mission
+</span></span></div><div class="ui-card"><span id="computer-white">Please ask your astronaut for the error code.
+NOTE: CASE SENSITIVE
+Enter Code:<<textbox "$code" "" "Water Recycling Machine Result">><<button "Enter">>
+	<<goto "Water Recycling Machine Result">>
+<</button>></span>
+<table style="width: 70%;">
+  <tr>
+    <td><<button [[BACK|Toilet Repair]]>><</button>></td>
+    <td style="text-align: center;"><<button[[Complete|OPEN MANUAL 2/2]]>><</button>></td></tr></table></div><<include 'Manual Timer'>>
 
 
 :: StoryScript [script]
 Config.history.controls = false;
-	/* ==== StarFix: seeded constellation module ==== */
-/* 1) 固定种子随机 */
+
+/* ==== StarFix core ==== */
 window.seedRand = function(seed){
   let h=1779033703^seed.length;
   for (let i=0;i<seed.length;i++) {
@@ -1626,10 +1871,9 @@ window.seedRand = function(seed){
   };
 };
 
-/* 2) 基于 seed + stage 生成“星座”点列（简单折线） */
 window.genConstellation = function(seed, stage){
   const rng = seedRand(seed + "|" + stage);
-  const n = 5 + Math.floor(rng()*3); // 5~7 个点
+  const n = 5 + Math.floor(rng()*3);
   const pts = [];
   for(let i=0;i<n;i++){
     pts.push({ x: Math.floor(rng()*80 - 40), y: Math.floor(rng()*80 - 40) });
@@ -1638,7 +1882,6 @@ window.genConstellation = function(seed, stage){
   return pts;
 };
 
-/* 3) 推荐角度（将平均朝向调回水平） */
 window.recommendAngle = function(pts){
   if(!pts || !pts.length) return 0;
   const angs = [];
@@ -1651,7 +1894,6 @@ window.recommendAngle = function(pts){
   return Math.round(-avg * 180/Math.PI);
 };
 
-/* 4) 旋转点列 */
 window.rotatePts = function(pts, deg){
   const rad = deg * Math.PI/180;
   const cos = Math.cos(rad), sin = Math.sin(rad);
@@ -1661,7 +1903,6 @@ window.rotatePts = function(pts, deg){
   }));
 };
 
-/* 5) 渲染为 SVG */
 window.renderConstellationSVG = function(containerId, pts, opts = {}){
   const scale = opts.scale ?? 3;
   const w = 300, h = 300, cx = Math.round(w/2), cy = Math.round(h/2);
@@ -1684,16 +1925,14 @@ window.renderConstellationSVG = function(containerId, pts, opts = {}){
   if(el){ el.innerHTML = svg; }
 };
 
-// 让 State 在任何 SugarCube 2 环境都可用
+// expose SugarCube.State as State if needed
 (function(){
   if (typeof window.State === 'undefined' && window.SugarCube && SugarCube.State) {
     window.State = SugarCube.State;
   }
 })();
 
-
-// satellite puzzle (using richard's generator!)
-
+// satellite puzzle helpers
 let sat_hash = Math.floor(Math.random() * 10000000);
 State.variables.sat_hash = sat_hash;
 let sat_hash_hex = sat_hash.toString(16).toUpperCase();
@@ -1701,12 +1940,166 @@ State.variables.sat_hash_hex = sat_hash_hex;
 
 window.setSatellites = function (seedHex) {
   const seed = parseInt(seedHex, 16);
-  const rng = seedRand(seed);
-  State.variables.correct1 = Math.floor(rng()*1100 + 300);
-  State.variables.correct2 = Math.floor(rng()*1100 + 300);
-  State.variables.correct3 = Math.floor(rng()*1100 + 300);
-  State.variables.correct4 = Math.floor(rng()*1100 + 300);
+  const rng1 = seedRand(String(seed));
+  State.variables.correct1 = Math.floor(rng1()*1100 + 300);
+  State.variables.correct2 = Math.floor(rng1()*1100 + 300);
+  State.variables.correct3 = Math.floor(rng1()*1100 + 300);
+  State.variables.correct4 = Math.floor(rng1()*1100 + 300);
+};
+
+//Function to randomize letter placement
+window.generateCoveredWord = function(word, numBlanks, seedHex) {
+  const seed = parseInt(seedHex, 16);
+  const rng1 = seedRand(String(seed));
+ let arrWord = Array.from(word);
+  for(let i = 0; i < numBlanks;i++) {
+  	let rand = Math.floor(rng1()*arrWord.length);
+    while(arrWord[rand] == '*') {
+      rand = Math.floor(rng1()*arrWord.length);
+    }
+    arrWord[rand] = '*';
+  }
+  let blockedWord = arrWord.join('');
+  blockedWord = "\\" + blockedWord;
+  return blockedWord;
 }
+
+// ------- Simple BGM Manager -------
+window._bgm = new Audio();
+window._bgm.loop = true;
+window._bgm.volume = 0.5;
+
+(function () {
+  function unlockOnce() {
+    window._bgm.play().catch(function() {});
+    document.removeEventListener('pointerdown', unlockOnce);
+    document.removeEventListener('keydown', unlockOnce);
+  }
+  document.addEventListener('pointerdown', unlockOnce);
+  document.addEventListener('keydown', unlockOnce);
+})();
+
+window.playBGM = function (id, src) {
+  try {
+    var abs = new URL(src, location.href).href;
+    if (window._bgm.src !== abs) {
+      window._bgm.pause();
+      window._bgm.src = abs;
+      window._bgm.load();
+    }
+    window._bgm.play().catch(function(e){
+      console.warn('Autoplay blocked, click once to enable sound.', e);
+    });
+    window.currentBGMId = id;
+  } catch (e) {
+    console.error('playBGM error:', e);
+  }
+};
+
+window.stopBGM = function () {
+  window._bgm.pause();
+  window._bgm.currentTime = 0;
+};
+
+// ========= Oxygen Leak core =========
+(function(){
+  const V = () => SugarCube.State.variables;
+
+  window.OXY_initScenario = function() {
+    const v = V();
+    v.oxy_pressure = Math.floor(Math.random()*21) + 70;
+    const pipes = ['Green','Blue','Red','Yellow'];
+    v.oxy_leak = pipes[Math.floor(Math.random()*pipes.length)];
+    v.oxy_valves = { Red:true, Blue:true, Yellow:true, Green:true };
+    v.oxy_sealed = false; v.oxy_failed = false; v.oxy_okTicks = 0;
+    OXY_stopLoop(); OXY_startLoop();
+    setTimeout(OXY_render, 0);
+  };
+
+  window.OXY_expected = function() {
+    const v = V();
+    const exp = { Red:true, Blue:true, Yellow:true, Green:true };
+    switch (v.oxy_leak) {
+      case 'Green':  exp.Red=false;  exp.Blue=true;  break;
+      case 'Blue':   exp.Yellow=true;exp.Green=false;break;
+      case 'Red':    exp.Blue=false; exp.Yellow=true;break;
+      case 'Yellow': exp.Red=true;   exp.Green=false;break;
+    }
+    if (v.oxy_pressure < 80) exp.Yellow = false;
+    if (v.oxy_pressure < 50) { exp.Red=false; exp.Blue=false; exp.Yellow=false; exp.Green=false; }
+    return exp;
+  };
+
+  window.OXY_isCorrect = function() {
+    const v = V(), exp = OXY_expected(), valves = v.oxy_valves;
+    for (const k in exp) if (valves[k] !== exp[k]) return false;
+    return true;
+  };
+
+  window.OXY_tick = function() {
+    const v = V();
+    if (v.oxy_failed || v.oxy_sealed) return;
+    const correct = OXY_isCorrect();
+
+    if (correct) {
+      v.oxy_pressure = Math.min(100, v.oxy_pressure + 1);
+      v.oxy_okTicks = (v.oxy_okTicks||0) + 1;
+    } else {
+      const exp = OXY_expected();
+      let bad = 0;
+      for (const k in exp) if (v.oxy_valves[k] !== exp[k]) bad++;
+      const drop = 1 + bad;
+      v.oxy_pressure = Math.max(0, v.oxy_pressure - drop);
+      v.oxy_okTicks = 0;
+    }
+
+    if (v.oxy_pressure <= 0) { v.oxy_failed = true; OXY_stopLoop(); }
+    if (v.oxy_okTicks >= 3) { v.oxy_sealed = true; OXY_stopLoop(); }
+    OXY_render();
+  };
+
+  window.OXY_startLoop = function(){
+    OXY_stopLoop();
+    window._oxyTimer = setInterval(OXY_tick, 1000);
+    OXY_tick();
+  };
+
+  window.OXY_stopLoop = function(){
+    if (window._oxyTimer) { clearInterval(window._oxyTimer); window._oxyTimer = null; }
+  };
+
+  window.OXY_toggleValve = function(color){
+    const v = V();
+    v.oxy_valves[color] = !v.oxy_valves[color];
+    OXY_render();
+  };
+
+  window.OXY_render = function(){
+    const v = V();
+    const num = document.getElementById('oxy-pressure-num');
+    const bar = document.getElementById('oxy-gauge-bar');
+    if (num) num.textContent = (v.oxy_pressure|0) + '%';
+    if (bar) bar.style.width = Math.max(0, Math.min(100, v.oxy_pressure)) + '%';
+
+    ['Red','Blue','Yellow','Green'].forEach(c=>{
+      const b = document.getElementById('v-'+c);
+      if (b) {
+        const open = v.oxy_valves[c];
+        b.textContent = c + ': ' + (open ? 'OPEN' : 'CLOSED');
+        b.className = 'valve ' + (open ? 'open' : 'closed');
+      }
+    });
+
+    const tip = document.getElementById('oxy-leak-tip');
+    if (tip) tip.textContent = 'Bubbles observed near ' + v.oxy_leak + ' pipe.';
+    const st = document.getElementById('oxy-status');
+    if (st) {
+      if (v.oxy_failed) st.innerHTML = '<span class="bad">❌ Oxygen depleted. Mission failed.</span>';
+      else if (v.oxy_sealed) st.innerHTML = '<span class="good">✅ Leak sealed! Pressure stabilizing.</span>';
+      else st.textContent = 'Adjust valves to stop the leak.';
+    }
+  };
+})();
 
 :: StoryStylesheet [stylesheet]
 #menu-saves, #menu-restart {
@@ -1761,6 +2154,22 @@ a.yellow-link {
     color: palegreen;
 }
 
+#computer-green {
+    color: #33FF33;
+}
+
+#computer-amber {
+    color: #FFB000;
+}
+
+#computer-white {
+    color: #C9C7AF;
+}
+
+.text-14px{
+  font-size: 14px;
+}
+
 /* ==== StarFix styles ==== */
 .sky-bg { fill: #0b1020; }
 .star-link { stroke: #7fd0ff; stroke-width: 2; }
@@ -1771,3 +2180,13 @@ svg circle { fill: #fff; }
 .hint { color: #9ad; }
 .bad { color: #f88; }
 .good { color: #9f9; }
+
+/* Oxygen Leak UI */
+.oxy-card { border: 1px solid #2b2f45; border-radius: 10px; padding: 12px; margin: 10px 0; background: #0d1322; }
+.oxy-row { margin: 8px 0; }
+.oxy-gauge { height: 14px; background: #223; border-radius: 7px; overflow: hidden; }
+.oxy-gauge > span { display:block; height:100%; background:#51d06a; width:0%; transition: width .25s linear; }
+
+.valve { display:inline-block; margin: 6px 6px 0 0; padding: 6px 10px; border-radius: 6px; border:1px solid #445; cursor:pointer; user-select:none; }
+.valve.open  { background:#1f3; color:#000; }
+.valve.closed{ background:#933; color:#fff; }
