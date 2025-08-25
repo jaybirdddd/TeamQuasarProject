@@ -298,7 +298,7 @@ Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
   <<elseif $room_choice is 5>>
   <<set _psg to 'Oxygen Leak'>>
 <</if>></silently>
-/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Toilet Repair', 'Oxygen Leak')>> */ 
+/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Plumbing Problems', 'Water Dispenser Repair', 'Oxygen Leak')>> */ 
 <center><div class="ui-card"><span id="computer-amber">
   RESTARTING COMPUTER<br>
   PLEASE BE EXTREMELY PATIENT<br>
