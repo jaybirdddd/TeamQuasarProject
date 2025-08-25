@@ -585,17 +585,17 @@ Give the Astronaut your hash: <<print $gameCode>>
 <center>[[Dispense Ambient|Dispense Water][$waterTemp = "Ambient"]]</center>
 <center>[[Dispense Hot|Dispense Water][$waterTemp = "Hot"]]</center>
 
-<<if $panel.includes("FlipSwitch")>>
+<<if $dispErrs.includes("FlipSwitch")>>
 	<center>[Switch Position:] 		OFF</center>
 <<else>>
 	<center>[Switch Position:] 		ON</center>
 <</if>>
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
 	<center>[Power Status:] 		NEGATIVE</center>
 <<else>>
 	<center>[Power Status:] 		POSITIVE</center>
 <</if>>
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
 	<center>[Filter Status:] 		NEGATIVE</center>
 <<else>>
 	<center>[Filter Status:] 		POSITIVE</center>
