@@ -2114,7 +2114,7 @@ In 2023, NASA reported that the ISS was able to recycle 98 percent of their wast
 	<center>[[Replace Fans|Astronaut Incorrect Screen]]</center>
 <</if>>
 
-<<if $dispErrs.length == 0>>
+<<if $dispErrs.length == 0 or $dispErrs.includes("NoHeat")>>
 	<center>[[Leave Dispenser Alone|Dispenser Complete]]</center>
 <<else>>
 	<center>[[Leave Dispenser Alone|Mess Hall]]</center>
