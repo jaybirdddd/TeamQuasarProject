@@ -951,21 +951,22 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 &lt;center&gt;&lt;strong&gt;&lt;u&gt;MESS ROOM&lt;/u&gt;&lt;/strong&gt;&lt;/center&gt;
 &lt;center&gt;&lt;span id=&quot;lose-text&quot;&gt;NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE&lt;/span&gt;&lt;/center&gt;
 &lt;center&gt;&lt;img src=&quot;https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&amp;fidelity=grand&quot; width=&quot;550&quot; height=&quot;400&quot; alt=&quot;Placeholder Title Image&quot; /&gt;&lt;/center&gt;
+&lt;&lt;set $dispErrs.deleteAll($tempPanel)&gt;&gt;
 
 &lt;div class=&quot;satellite-panel&quot;&gt;
-&lt;&lt;if $panel.includes(&quot;FlipSwitch&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;)&gt;&gt;
 	&lt;center&gt;[Switch Position:] &lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Switch Position:] &lt;span id=&quot;computer-green&quot;&gt;ON&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $panel.includes(&quot;FlipSwitch&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
 	&lt;center&gt;[Power Status:] &lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Power Status:] &lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $panel.includes(&quot;ReplaceFilter&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;ReplaceFilter&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
 	&lt;center&gt;[Filter Status:] &lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Filter Status:] &lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
@@ -1000,8 +1001,7 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 
 &lt;div class=&quot;astro-button-left&quot;&gt;&lt;&lt;button &quot;Finished Testing&quot;&gt;&gt;&lt;&lt;goto &quot;Water Puzzle&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;&lt;endnobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="17" name="Dispenser Complete" tags="" position="1325,450" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;div class=&quot;satellite-panel&quot;&gt;&lt;&lt;include &quot;Gameplay Rules&quot;&gt;&gt;&lt;/div&gt;
+&lt;&lt;endnobr&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="Dispenser Complete" tags="" position="1325,450" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;div class=&quot;satellite-panel&quot;&gt;&lt;&lt;include &quot;Gameplay Rules&quot;&gt;&gt;&lt;/div&gt;
     &lt;&lt;set $waterComplete to true&gt;&gt;
 	&lt;&lt;set $dispErrs.deleteAll($tempPanel)&gt;&gt;
     &lt;div class=&quot;astro-button-right&quot;&gt;&lt;center&gt;&lt;&lt;button[[All Errors Resolved|Mess Hall]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/center&gt;&lt;/div&gt;
@@ -1135,19 +1135,20 @@ Give the Astronaut your hash: &lt;&lt;print $gameCode&gt;&gt;
 &lt;center&gt;&lt;strong&gt;&lt;u&gt;MESS ROOM&lt;/u&gt;&lt;/strong&gt;&lt;/center&gt;
 &lt;center&gt;&lt;span id=&quot;lose-text&quot;&gt;NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE&lt;/span&gt;&lt;/center&gt;
 &lt;center&gt;&lt;img src=&quot;https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&amp;fidelity=grand&quot; width=&quot;500&quot; height=&quot;400&quot; alt=&quot;Placeholder Title Image&quot; /&gt;&lt;/center&gt;
+&lt;&lt;set $dispErrs.deleteAll($tempPanel)&gt;&gt;
 
 &lt;div class=&quot;satellite-panel&quot;&gt;
-&lt;&lt;if $panel.includes(&quot;FlipSwitch&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;)&gt;&gt;
 	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/div&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-green&quot;&gt;ON&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if $panel.includes(&quot;FlipSwitch&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;) or $dispErrs.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
 	&lt;center&gt;[Power Status:] 		&lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Power Status:] 		&lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if $panel.includes(&quot;ReplaceFilter&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+&lt;&lt;if $dispErrs.includes(&quot;ReplaceFilter&quot;) or $dispErrs.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
 	&lt;center&gt;[Filter Status:] 		&lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Filter Status:] 		&lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
@@ -1171,6 +1172,7 @@ Give the Astronaut your hash: &lt;&lt;print $gameCode&gt;&gt;
 &lt;center&gt;&lt;strong&gt;&lt;u&gt;DORMITORY TOILET REPAIR&lt;/u&gt;&lt;/strong&gt;&lt;/center&gt;
 &lt;center&gt;&lt;span id=&quot;lose-text&quot;&gt;NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE&lt;/span&gt;&lt;/center&gt;
 &lt;center&gt;&lt;img src=&quot;https://i.imgur.com/SXgJleS.png&quot; width=&quot;500&quot; height=&quot;400&quot; alt=&quot;Placeholder Title Image&quot; /&gt;&lt;/center&gt;
+&lt;&lt;set $panel.deleteAll($tempPanel)&gt;&gt;
 
 &lt;center&gt;Pump Sensor&lt;/center&gt;
 &lt;div class=&quot;satellite-panel&quot;&gt;
@@ -2432,37 +2434,38 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/repeat&gt;&gt;
  &lt;!-- This sample code was take from Twine SugarCube: Timed Passage with modifications--&gt;&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="Toilet Repair Instructions" tags="" position="750,1250" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;center&gt;&lt;h1 id=&quot;computer-amber&quot;&gt;ORBITAL PLUMBING INSTRUCTIONS&lt;/h1&gt;&lt;/center&gt;&lt;center&gt;&lt;h1 id=&quot;computer-amber&quot;&gt;--------------------------------------------------&lt;/h1&gt;&lt;/center&gt;&lt;span id=&quot;computer-amber&quot;&gt;
-Problems with orbital plumbing can be caused by several factors, including:
+Problems with orbital plumbing can be caused by several factors, including:&lt;span id=&quot;computer-green&quot;&gt;
 * Controller Card Issues
 * Pump Issues
 * Sensor Issues
 * System Configuration issues
-Have your astronaut inspect the equipment and relay any information given by the system. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+&lt;/span&gt;
+Have your astronaut inspect the equipment and relay any information given by the system. Errors with certain components &lt;span id=&quot;computer-green&quot;&gt;may be the result of several issues&lt;/span&gt;, so ensure the statuses of other components are taken into account as well, &lt;span id=&quot;computer-green&quot;&gt;even after repair&lt;/span&gt;.
 &lt;div class=&quot;ui-card&quot;&gt;Pump Sensor Power
 *The Power Status represents whether or not the pump sensor is properly functioning.
-*Issues with the Pump Sensor&#39;s Power Status may be caused by a faulty sensor.
-*Reconfiguring the system may be necessary if no other issues exist with the pump&#39;s sensor by using the Reset Button.
+*Issues with the Pump Sensor&#39;s &lt;span id=&quot;computer-green&quot;&gt;Power Status&lt;/span&gt; may be caused by a &lt;span id=&quot;computer-green&quot;&gt;faulty sensor&lt;/span&gt;.
+*Reconfiguring the system may be necessary &lt;span id=&quot;computer-green&quot;&gt;if no other issues exist with the pump&#39;s sensor&lt;/span&gt; by &lt;span id=&quot;computer-green&quot;&gt;using the Reset Button&lt;/span&gt;.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Pump Sensor Load
-*The Load Status detects if the pump is maintaining the required water pressure.
-*A negative load status could signify the need for a replacement pump.
-*Issues with the Load Status may also derive from a faulty sensor.
+*The &lt;span id=&quot;computer-green&quot;&gt;Load Status&lt;/span&gt; detects if the pump is maintaining the required water pressure.
+*A &lt;span id=&quot;computer-green&quot;&gt;negative&lt;/span&gt; load status could signify the need for a &lt;span id=&quot;computer-green&quot;&gt;replacement pump&lt;/span&gt;.
+*&lt;span id=&quot;computer-green&quot;&gt;Alongside other sensor issues&lt;/span&gt;, problems with the Load Status may also derive from a &lt;span id=&quot;computer-green&quot;&gt;faulty sensor&lt;/span&gt;.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Pump Sensor Voltage
-*The Voltage Status monitors if the pump assembly is currently recieving the right amount of power.
-*While this could mean electrical issues exist, this may simply be the result of a faulty Pump Sensor.
-*If several other components fail to recieve proper power, this may instead be the result of a faulty Controller Card.
+*The &lt;span id=&quot;computer-green&quot;&gt;Voltage Status&lt;/span&gt; monitors if the pump assembly is currently recieving the right amount of power.
+*While this could mean electrical issues exist, this may simply be the result of a &lt;span id=&quot;computer-green&quot;&gt;faulty Pump Sensor&lt;/span&gt;.
+*&lt;span id=&quot;computer-green&quot;&gt;If several components fail to recieve proper power&lt;/span&gt;, this may instead be the result of a &lt;span id=&quot;computer-green&quot;&gt;faulty Controller Card&lt;/span&gt;.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Conductivity Readings
-*Pure water sin&#39;t conductive, therefore, any conductivity represents impurities in the water.
-*For most of the US, drinking water ranges from 50 to 1500 µS/cm. For the purposes of our ship, the conductivity readings will not exceed 800 µS/cm.
-*If the readings exceed this level of conductivity, this likely signifies a faulty Conductivity Sensor
-*This may also be an issue of insufficient power being given to the device, signifying a Controller Card issue.
+*Pure water isn&#39;t conductive, therefore, any conductivity represents impurities in the water.
+*For most of the US, drinking water ranges from 50 to 1500 µS/cm. For the purposes of our ship, the &lt;span id=&quot;computer-green&quot;&gt;conductivity readings will not exceed 800 µS/cm&lt;/span&gt;.
+*If the readings &lt;span id=&quot;computer-green&quot;&gt;exceed this level of conductivity&lt;/span&gt;, this likely signifies a &lt;span id=&quot;computer-green&quot;&gt;faulty Conductivity Sensor&lt;/span&gt;
+*This may also be an issue of &lt;span id=&quot;computer-green&quot;&gt;insufficient power&lt;/span&gt; being given to the device instead, signifying a &lt;span id=&quot;computer-green&quot;&gt;Controller Card issue&lt;/span&gt;.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Controller Card Output
-*The light on the Controller Card displays whether or not the card is functioning properly, connecting together several components of the assembly.
-*If the light is off, the system may need to be reconfigured using the Reset Button, as components like the Pump Sensor may not work as intended.
-*If the light is off and several components have issues recieving electrical power, the Controller Card is faulty and needs to be replaced.
+*The light on the &lt;span id=&quot;computer-green&quot;&gt;Controller Card&lt;/span&gt; displays whether or not the card is functioning properly, connecting together several components of the assembly.
+*If the light is &lt;span id=&quot;computer-green&quot;&gt;off&lt;/span&gt;, the system may need to be reconfigured using the &lt;span id=&quot;computer-green&quot;&gt;Reset Button&lt;/span&gt;, as components like the &lt;span id=&quot;computer-green&quot;&gt;Pump Sensor may not work&lt;/span&gt; as intended.
+*If the light is &lt;span id=&quot;computer-green&quot;&gt;off and several components have issues recieving electrical power&lt;/span&gt;, the &lt;span id=&quot;computer-green&quot;&gt;Controller Card is faulty&lt;/span&gt; and needs to be replaced.
 &lt;/div&gt;
 
 &lt;div class=&quot;ui-card&quot;&gt;&lt;span id=&quot;computer-white&quot;&gt; &lt;/span&gt;&lt;div class=&quot;button-completed&quot;&gt;
@@ -2598,32 +2601,33 @@ In 2023, NASA reported that the ISS was able to recycle 98 percent of their wast
                     		&lt;&lt;goto &quot;Astronaut Incorrect Screen&quot;&gt;&gt;
                      &lt;&lt;/button&gt;&gt;&lt;/div&gt;
 		&lt;&lt;/if&gt;&gt; --&gt;
-&lt;/silently&gt;</tw-passagedata><tw-passagedata pid="72" name="Water Recycling Machine Result" tags="" position="1400,1600" size="100,100"></tw-passagedata><tw-passagedata pid="73" name="Water Repair Instructions" tags="" position="1525,1275" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;center&gt;&lt;h2 id=&quot;computer-amber&quot;&gt;POTABLE WATER DISPENSER REPAIR INSTRUCTIONS&lt;/h2&gt;&lt;/center&gt;&lt;center&gt;&lt;h1 id=&quot;computer-amber&quot;&gt;--------------------------------------------------&lt;/h1&gt;&lt;/center&gt;&lt;span id=&quot;computer-amber&quot;&gt; If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:
+&lt;/silently&gt;</tw-passagedata><tw-passagedata pid="72" name="Water Recycling Machine Result" tags="" position="1400,1600" size="100,100"></tw-passagedata><tw-passagedata pid="73" name="Water Repair Instructions" tags="" position="1525,1275" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;center&gt;&lt;h2 id=&quot;computer-amber&quot;&gt;POTABLE WATER DISPENSER REPAIR INSTRUCTIONS&lt;/h2&gt;&lt;/center&gt;&lt;center&gt;&lt;h1 id=&quot;computer-amber&quot;&gt;--------------------------------------------------&lt;/h1&gt;&lt;/center&gt;&lt;span id=&quot;computer-amber&quot;&gt; If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:&lt;span id=&quot;computer-green&quot;&gt;
 * Controller Card Issues
 * Cooling Issues
 * Filtration Issues
 * Pumping Issues
 * Sensor Issues
 * Human Error
-Have your astronaut inspect the equipment and relay any information given by the system. Additionally, ask your astronaut to dispense water to check for quality. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+&lt;/span&gt;
+Have your astronaut inspect the equipment and relay any information given by the system. Additionally, &lt;span id=&quot;computer-green&quot;&gt;ask your astronaut to dispense water&lt;/span&gt; to check for quality. Errors with certain components &lt;span id=&quot;computer-green&quot;&gt;may be the result of several issues&lt;/span&gt;, so ensure the statuses of other components are taken into account as well, &lt;span id=&quot;computer-green&quot;&gt;even after repair&lt;/span&gt;.
 &lt;div class=&quot;ui-card&quot;&gt;Power Status
-*The Power Status represents whether or not the system is properly recieving DC power to fuel its processes.
-*After confirming the device is powered on, if the Power Status of the device is negative, the issue may stem from a malfunctioning Controller Card. 
+*The &lt;span id=&quot;computer-green&quot;&gt;Power Status&lt;/span&gt; represents whether or not the system is properly recieving DC power to fuel its processes.
+*After confirming the device is &lt;span id=&quot;computer-green&quot;&gt;powered on&lt;/span&gt;, if the Power Status of the device is &lt;span id=&quot;computer-green&quot;&gt;negative&lt;/span&gt;, the issue may stem from a &lt;span id=&quot;computer-green&quot;&gt;malfunctioning Controller Card&lt;/span&gt;. 
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Filter Status
-*The Filter Status represents the device&#39;s ability to filter iodine from water.
-*A negative Filter Status typically signifies a need for a new filter replacement.
-*Issues powering the filter may also cause a filter error.
+*The &lt;span id=&quot;computer-green&quot;&gt;Filter Status&lt;/span&gt; represents the device&#39;s ability to filter iodine from water.
+*A &lt;span id=&quot;computer-green&quot;&gt;negative&lt;/span&gt; Filter Status typically signifies a need for a &lt;span id=&quot;computer-green&quot;&gt;new filter replacement&lt;/span&gt;.
+*&lt;span id=&quot;computer-green&quot;&gt;Issues powering the filter&lt;/span&gt; may also cause a filter error.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Dispensing Water:
-*A pump system draws water through the potable water dispenser.
-*A failure in the pump system could result in improper flow.
+*A &lt;span id=&quot;computer-green&quot;&gt;pump system&lt;/span&gt; draws water through the potable water dispenser.
+*A &lt;span id=&quot;computer-green&quot;&gt;failure in the pump system&lt;/span&gt; could result in &lt;span id=&quot;computer-green&quot;&gt;improper flow&lt;/span&gt;.
 &lt;/div&gt;
 &lt;div class=&quot;ui-card&quot;&gt;Maintaining Internal Temperature:
-*Proper cooling must be maintainted within the unit, with the unit&#39;s inlet and outlet fans providing airflow to cool down its components.
-*Issues with the fans could result in improper cooling of the dispenser&#39;s equipment and may result in elevated water temperatures.
+*Proper cooling must be maintainted within the unit, with the unit&#39;s &lt;span id=&quot;computer-green&quot;&gt;inlet and outlet fans&lt;/span&gt; providing airflow to cool down its components.
+*Issues with the fans could result in &lt;span id=&quot;computer-green&quot;&gt;improper cooling&lt;/span&gt; of the dispenser&#39;s equipment and may result in &lt;span id=&quot;computer-green&quot;&gt;elevated water temperatures&lt;/span&gt;.
 *A heater within the unit allows for hot water to be dispensed for various needs.
-*The heating assembly can supply two (2) liters of hot water every 30 minutes. Beyond this, the heater will need time to continue providing hot water. This is not an issue.
+*The heating assembly can supply two (2) liters of hot water every 30 minutes. &lt;span id=&quot;computer-green&quot;&gt;Beyond this, the heater will need time&lt;/span&gt; to continue providing hot water. &lt;span id=&quot;computer-green&quot;&gt;This is not an issue&lt;/span&gt;.
 &lt;/div&gt;
 
 &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;ui-card&quot;&gt;&lt;span id=&quot;computer-white&quot;&gt;&lt;/span&gt;

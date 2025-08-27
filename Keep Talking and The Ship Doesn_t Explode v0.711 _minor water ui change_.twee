@@ -375,21 +375,22 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <center><strong><u>MESS ROOM</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="550" height="400" alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempPanel)>>
 
 <div class="satellite-panel">
-<<if $panel.includes("FlipSwitch")>>
+<<if $dispErrs.includes("FlipSwitch")>>
 	<center>[Switch Position:] <span id="computer-amber">OFF</span></center>
 <<else>>
 	<center>[Switch Position:] <span id="computer-green">ON</span></center>
 <</if>>
 
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
 	<center>[Power Status:] <span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Power Status:] <span id="computer-green">POSITIVE</span></center>
 <</if>>
 
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
 	<center>[Filter Status:] <span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Filter Status:] <span id="computer-green">POSITIVE</span></center>
@@ -425,7 +426,6 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <div class="astro-button-left"><<button "Finished Testing">><<goto "Water Puzzle">><</button>></div>
 </div>
 <<endnobr>>
-
 
 
 :: Dispenser Complete {"position":"1325,450","size":"100,100"}
@@ -615,19 +615,20 @@ Give the Astronaut your hash: <<print $gameCode>>
 <center><strong><u>MESS ROOM</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempPanel)>>
 
 <div class="satellite-panel">
-<<if $panel.includes("FlipSwitch")>>
+<<if $dispErrs.includes("FlipSwitch")>>
 	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></div></center>
 <<else>>
 	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
 <</if>>
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("FlipSwitch") or $dispErrs.includes("ReplaceControllerCard")>>
 	<center>[Power Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Power Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("ReplaceFilter") or $dispErrs.includes("ReplaceControllerCard")>>
 	<center>[Filter Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Filter Status:] 		<span id="computer-green">POSITIVE</span></center>
@@ -655,6 +656,7 @@ Give the Astronaut your hash: <<print $gameCode>>
 <center><strong><u>DORMITORY TOILET REPAIR</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/SXgJleS.png" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $panel.deleteAll($tempPanel)>>
 
 <center>Pump Sensor</center>
 <div class="satellite-panel">
@@ -2052,37 +2054,38 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 
 :: Toilet Repair Instructions {"position":"750,1250","size":"100,100"}
 <div class="ui-card"><center><h1 id="computer-amber">ORBITAL PLUMBING INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
-Problems with orbital plumbing can be caused by several factors, including:
+Problems with orbital plumbing can be caused by several factors, including:<span id="computer-green">
 * Controller Card Issues
 * Pump Issues
 * Sensor Issues
 * System Configuration issues
-Have your astronaut inspect the equipment and relay any information given by the system. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+</span>
+Have your astronaut inspect the equipment and relay any information given by the system. Errors with certain components <span id="computer-green">may be the result of several issues</span>, so ensure the statuses of other components are taken into account as well, <span id="computer-green">even after repair</span>.
 <div class="ui-card">Pump Sensor Power
 *The Power Status represents whether or not the pump sensor is properly functioning.
-*Issues with the Pump Sensor's Power Status may be caused by a faulty sensor.
-*Reconfiguring the system may be necessary if no other issues exist with the pump's sensor by using the Reset Button.
+*Issues with the Pump Sensor's <span id="computer-green">Power Status</span> may be caused by a <span id="computer-green">faulty sensor</span>.
+*Reconfiguring the system may be necessary <span id="computer-green">if no other issues exist with the pump's sensor</span> by <span id="computer-green">using the Reset Button</span>.
 </div>
 <div class="ui-card">Pump Sensor Load
-*The Load Status detects if the pump is maintaining the required water pressure.
-*A negative load status could signify the need for a replacement pump.
-*Issues with the Load Status may also derive from a faulty sensor.
+*The <span id="computer-green">Load Status</span> detects if the pump is maintaining the required water pressure.
+*A <span id="computer-green">negative</span> load status could signify the need for a <span id="computer-green">replacement pump</span>.
+*<span id="computer-green">Alongside other sensor issues</span>, problems with the Load Status may also derive from a <span id="computer-green">faulty sensor</span>.
 </div>
 <div class="ui-card">Pump Sensor Voltage
-*The Voltage Status monitors if the pump assembly is currently recieving the right amount of power.
-*While this could mean electrical issues exist, this may simply be the result of a faulty Pump Sensor.
-*If several other components fail to recieve proper power, this may instead be the result of a faulty Controller Card.
+*The <span id="computer-green">Voltage Status</span> monitors if the pump assembly is currently recieving the right amount of power.
+*While this could mean electrical issues exist, this may simply be the result of a <span id="computer-green">faulty Pump Sensor</span>.
+*<span id="computer-green">If several components fail to recieve proper power</span>, this may instead be the result of a <span id="computer-green">faulty Controller Card</span>.
 </div>
 <div class="ui-card">Conductivity Readings
-*Pure water sin't conductive, therefore, any conductivity represents impurities in the water.
-*For most of the US, drinking water ranges from 50 to 1500 µS/cm. For the purposes of our ship, the conductivity readings will not exceed 800 µS/cm.
-*If the readings exceed this level of conductivity, this likely signifies a faulty Conductivity Sensor
-*This may also be an issue of insufficient power being given to the device, signifying a Controller Card issue.
+*Pure water isn't conductive, therefore, any conductivity represents impurities in the water.
+*For most of the US, drinking water ranges from 50 to 1500 µS/cm. For the purposes of our ship, the <span id="computer-green">conductivity readings will not exceed 800 µS/cm</span>.
+*If the readings <span id="computer-green">exceed this level of conductivity</span>, this likely signifies a <span id="computer-green">faulty Conductivity Sensor</span>
+*This may also be an issue of <span id="computer-green">insufficient power</span> being given to the device instead, signifying a <span id="computer-green">Controller Card issue</span>.
 </div>
 <div class="ui-card">Controller Card Output
-*The light on the Controller Card displays whether or not the card is functioning properly, connecting together several components of the assembly.
-*If the light is off, the system may need to be reconfigured using the Reset Button, as components like the Pump Sensor may not work as intended.
-*If the light is off and several components have issues recieving electrical power, the Controller Card is faulty and needs to be replaced.
+*The light on the <span id="computer-green">Controller Card</span> displays whether or not the card is functioning properly, connecting together several components of the assembly.
+*If the light is <span id="computer-green">off</span>, the system may need to be reconfigured using the <span id="computer-green">Reset Button</span>, as components like the <span id="computer-green">Pump Sensor may not work</span> as intended.
+*If the light is <span id="computer-green">off and several components have issues recieving electrical power</span>, the <span id="computer-green">Controller Card is faulty</span> and needs to be replaced.
 </div>
 
 <div class="ui-card"><span id="computer-white"> </span><div class="button-completed">
@@ -2250,32 +2253,33 @@ In 2023, NASA reported that the ISS was able to recycle 98 percent of their wast
 
 
 :: Water Repair Instructions {"position":"1525,1275","size":"100,100"}
-<div class="ui-card"><center><h2 id="computer-amber">POTABLE WATER DISPENSER REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"> If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:
+<div class="ui-card"><center><h2 id="computer-amber">POTABLE WATER DISPENSER REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"> If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:<span id="computer-green">
 * Controller Card Issues
 * Cooling Issues
 * Filtration Issues
 * Pumping Issues
 * Sensor Issues
 * Human Error
-Have your astronaut inspect the equipment and relay any information given by the system. Additionally, ask your astronaut to dispense water to check for quality. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+</span>
+Have your astronaut inspect the equipment and relay any information given by the system. Additionally, <span id="computer-green">ask your astronaut to dispense water</span> to check for quality. Errors with certain components <span id="computer-green">may be the result of several issues</span>, so ensure the statuses of other components are taken into account as well, <span id="computer-green">even after repair</span>.
 <div class="ui-card">Power Status
-*The Power Status represents whether or not the system is properly recieving DC power to fuel its processes.
-*After confirming the device is powered on, if the Power Status of the device is negative, the issue may stem from a malfunctioning Controller Card. 
+*The <span id="computer-green">Power Status</span> represents whether or not the system is properly recieving DC power to fuel its processes.
+*After confirming the device is <span id="computer-green">powered on</span>, if the Power Status of the device is <span id="computer-green">negative</span>, the issue may stem from a <span id="computer-green">malfunctioning Controller Card</span>. 
 </div>
 <div class="ui-card">Filter Status
-*The Filter Status represents the device's ability to filter iodine from water.
-*A negative Filter Status typically signifies a need for a new filter replacement.
-*Issues powering the filter may also cause a filter error.
+*The <span id="computer-green">Filter Status</span> represents the device's ability to filter iodine from water.
+*A <span id="computer-green">negative</span> Filter Status typically signifies a need for a <span id="computer-green">new filter replacement</span>.
+*<span id="computer-green">Issues powering the filter</span> may also cause a filter error.
 </div>
 <div class="ui-card">Dispensing Water:
-*A pump system draws water through the potable water dispenser.
-*A failure in the pump system could result in improper flow.
+*A <span id="computer-green">pump system</span> draws water through the potable water dispenser.
+*A <span id="computer-green">failure in the pump system</span> could result in <span id="computer-green">improper flow</span>.
 </div>
 <div class="ui-card">Maintaining Internal Temperature:
-*Proper cooling must be maintainted within the unit, with the unit's inlet and outlet fans providing airflow to cool down its components.
-*Issues with the fans could result in improper cooling of the dispenser's equipment and may result in elevated water temperatures.
+*Proper cooling must be maintainted within the unit, with the unit's <span id="computer-green">inlet and outlet fans</span> providing airflow to cool down its components.
+*Issues with the fans could result in <span id="computer-green">improper cooling</span> of the dispenser's equipment and may result in <span id="computer-green">elevated water temperatures</span>.
 *A heater within the unit allows for hot water to be dispensed for various needs.
-*The heating assembly can supply two (2) liters of hot water every 30 minutes. Beyond this, the heater will need time to continue providing hot water. This is not an issue.
+*The heating assembly can supply two (2) liters of hot water every 30 minutes. <span id="computer-green">Beyond this, the heater will need time</span> to continue providing hot water. <span id="computer-green">This is not an issue</span>.
 </div>
 
 </span></div><div class="ui-card"><span id="computer-white"></span>
