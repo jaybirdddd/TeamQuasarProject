@@ -955,21 +955,19 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 
 &lt;div class=&quot;satellite-panel&quot;&gt;
 &lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;)&gt;&gt;
-	&lt;center&gt;[Switch Position:] &lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/center&gt;
+	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
-	&lt;center&gt;[Switch Position:] &lt;span id=&quot;computer-green&quot;&gt;ON&lt;/span&gt;&lt;/center&gt;
+	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-green&quot;&gt;ON&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
-	&lt;center&gt;[Power Status:] &lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
+&lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;) or $dispErrs.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+	&lt;center&gt;[Power Status:] 		&lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
-	&lt;center&gt;[Power Status:] &lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
+	&lt;center&gt;[Power Status:] 		&lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $dispErrs.includes(&quot;ReplaceFilter&quot;) or $panel.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
-	&lt;center&gt;[Filter Status:] &lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
+&lt;&lt;if $dispErrs.includes(&quot;ReplaceFilter&quot;) or $dispErrs.includes(&quot;ReplaceControllerCard&quot;)&gt;&gt;
+	&lt;center&gt;[Filter Status:] 		&lt;span id=&quot;computer-amber&quot;&gt;NEGATIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
-	&lt;center&gt;[Filter Status:] &lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
+	&lt;center&gt;[Filter Status:] 		&lt;span id=&quot;computer-green&quot;&gt;POSITIVE&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $waterTemp == &quot;Ambient&quot;&gt;&gt;
@@ -1139,7 +1137,7 @@ Give the Astronaut your hash: &lt;&lt;print $gameCode&gt;&gt;
 
 &lt;div class=&quot;satellite-panel&quot;&gt;
 &lt;&lt;if $dispErrs.includes(&quot;FlipSwitch&quot;)&gt;&gt;
-	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/div&gt;&lt;/center&gt;
+	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-amber&quot;&gt;OFF&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;center&gt;[Switch Position:] 		&lt;span id=&quot;computer-green&quot;&gt;ON&lt;/span&gt;&lt;/center&gt;
 &lt;&lt;/if&gt;&gt;

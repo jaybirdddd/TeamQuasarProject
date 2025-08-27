@@ -379,21 +379,19 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 
 <div class="satellite-panel">
 <<if $dispErrs.includes("FlipSwitch")>>
-	<center>[Switch Position:] <span id="computer-amber">OFF</span></center>
+	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></center>
 <<else>>
-	<center>[Switch Position:] <span id="computer-green">ON</span></center>
+	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
 <</if>>
-
-<<if $dispErrs.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Power Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<if $dispErrs.includes("FlipSwitch") or $dispErrs.includes("ReplaceControllerCard")>>
+	<center>[Power Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
-	<center>[Power Status:] <span id="computer-green">POSITIVE</span></center>
+	<center>[Power Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
-
-<<if $dispErrs.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Filter Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<if $dispErrs.includes("ReplaceFilter") or $dispErrs.includes("ReplaceControllerCard")>>
+	<center>[Filter Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
-	<center>[Filter Status:] <span id="computer-green">POSITIVE</span></center>
+	<center>[Filter Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
 
 <<if $waterTemp == "Ambient">>
@@ -619,7 +617,7 @@ Give the Astronaut your hash: <<print $gameCode>>
 
 <div class="satellite-panel">
 <<if $dispErrs.includes("FlipSwitch")>>
-	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></div></center>
+	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></center>
 <<else>>
 	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
 <</if>>
