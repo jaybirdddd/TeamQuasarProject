@@ -1,0 +1,2866 @@
+:: StoryTitle
+Keep Talking and The Ship Doesn_t Explode v0.71 (finished water and toilet UI design)
+
+
+:: StoryData
+{
+  "ifid": "881c2f67-ae0d-4dab-aa1d-be91b9c04a42",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Back to Menu",
+  "zoom": 0.6
+}
+
+
+:: ASTRONAUT {"position":"675,525","size":"100,100"}
+<div class="ui-card">
+<center><h2 id="computer-amber"><u>WELCOME ASTRONAUT</u></h2></center>
+
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to ask your flight controller on how to solve these problems</center>
+<center>Your goal is to provide clear communication with your flight controllers to obtain the correct answers to restore your spacecraft into safe conditions</center>
+<center>Every incorrect action will time you out for a few seconds AND will receive a strike. </center>
+<center>If you ran out of time, or that you are on your third strike, your spacecraft will explode (don't ask me why it explodes, it just does) </center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center>
+</div><div class="ui-card">
+<center><div class="astro-button-right"><<button [[BEGIN MISSION|Enter Code]]>><</button>></div></center>
+<center><div class="astro-button-left"><<button [[NVM GO BACK|BEGIN MISSION]]>><</button>></div></center>
+</div>
+
+
+:: Air Lock {"position":"1850,750","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>AIRLOCK ROOM</u></strong></center>
+<center><img src="https://scalar.chapman.edu/scalar/interior-space---a-visual-exploration-of-the-international-space-station-photographs-by-paolo-nespo/media/Quest%20Airlock%20from%20Node1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+     <td><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-up"><<button [[Mess Hall]]>><</button>></div></td>
+     <td style="text-align: right;"><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+  </tr>
+</table></div><<endnobr>>
+
+
+:: Antenna Repair {"position":"300,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">ANTENNA REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Antennas in spacecrafts are crucial to transmit and communicate with flight controllers to send and receive important data and valuable information
+
+Antenna will be in need of repair if its damaged, broken, or facing limited or delayed communications. Antenna repairs will require spacewalks<center><h1 id="computer-green">--------------------------------------------------</h1></center></span></div><div class="ui-card">
+<div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div>
+<<include 'Manual Timer'>>
+
+
+:: Astronaut Confirm {"position":"1400,800","size":"100,100"}
+<div class="ui-card">
+      <<silently>>
+      <<include "StoryInit">>
+      <</silently>>
+      You got it?
+      <center><div class="astro-button-right"><<button [[Begin|Meeting Room]]>><</button>></div></center>
+      <center><div class="astro-button-left"><<button [[Back|Enter Code]]>><</button>></div></center>
+      </div>
+
+
+:: Astronaut Incorrect Screen {"position":"1325,150","size":"100,100"}
+<<silently>><<set $strikes to $strikes - 1>><</silently>>
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+
+<center><h2 id="lose-text">INCORRECT CHOICE</h2></center>
+<center><h3 id="computer-amber">YOU QUICKLY COMMUNICATE WITH YOUR CONTROLLER AGAIN</h3></center>
+
+<center>
+  <<timed 3s>>
+  <<if $backToPuzzle == "Plumbing Puzzle">>
+    <<goto "Plumbing Puzzle">>
+    
+<<elseif $backToPuzzle == "Water Puzzle">>
+    <<goto "Water Puzzle">>
+    
+<<elseif $backToPuzzle == "Satellite Puzzle">>
+    <<goto "Satellite Adjustment">>
+    
+<<elseif $backToPuzzle == "Stars Puzzle">>
+    <<goto "StarFix: ASTR Seed">>
+    
+<</if>>
+<</timed>></center>
+</div>
+
+
+:: BEGIN MISSION {"position":"525,600","size":"100,100"}
+<div class="ui-card">
+<center><h2 id="computer-amber"><u>CHOOSE YOUR ROLE</u></h2></center>
+
+<center><div class="astro-button-right"><<button [[ASTRONAUT]]>><</button>></div></center>
+
+<center><div class="button-completed"><<button [[FLIGHT CONTROLLER]]>><</button>></div></center>
+</div >
+
+
+:: Back to Menu {"position":"100,600","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">KEEP TALKING AND THE SHIP DOESN'T EXPLODE</h1></center>
+<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg/1024px-The_station_pictured_from_the_SpaceX_Crew_Dragon_1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+  <center>
+  <div class="button-completed"><<button [[Start Game]]>><</button>></div>
+  </center>
+  </div>
+
+
+:: Button Prototyping {"position":"225,1600","size":"100,100"}
+Astronaut UI Button Testing
+
+<div class="astro-button-right"><<button "Mess Room">><</button>></div>
+<div class="astro-button-left"><<button "Hallway">><</button>></div>
+<div class="astro-button-up"><<button "Life Support">><</button>></div>
+<div class="astro-button-down"><<button "Air Lock">><</button>></div>
+<div class="astro-button-deadend"><<button "Dead End">><</button>></div>
+
+<div class="astro-button-issue"><<button "!!!StarFix!!!">><</button>></div>
+<div class="astro-button-issue"><<button "!!!Water Dispenser!!!">><</button>></div>
+<div class="astro-button-issue"><<button "!!!Computer!!!">><</button>></div>
+<div class="astro-button-issue"><<button "!!!Satellite!!!">><</button>></div>
+<div class="astro-button-issue"><<button "!!!Oxygen!!!">><</button>></div>
+
+<div class="astro-button-complete">✓StarFix✓</div>
+
+<div class="astro-button-complete">✓Water Dispenser✓</div>
+
+<div class="astro-button-complete">✓Computer✓</div>
+
+<div class="astro-button-complete">✓Satellite✓</div>
+
+<div class="astro-button-complete">✓Oxygen✓</div>
+
+<div class="astro-button-action"><<button "Replace Filter">><</button>></div>
+<div class="astro-button-action"><<button "Replace Controller Card">><</button>></div>
+
+<div class="astro-button-ambient"><<button "Dispense Ambient">><</button>></div>
+
+<div class="astro-button-hot"><<button "Dispense Hot">><</button>></div>
+
+
+<div class="astro-button-return"><<button "Return">><</button>></div>
+
+<div class="astro-button-deadend"><<button "Dead End">><</button>></div>
+
+
+:: Command Center {"position":"2000,600","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div><<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>COMMAND CENTER ROOM</u></strong></center>
+<center><img src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2014/10/space_station_office/15002125-1-eng-GB/Space_Station_office_pillars.jpg" width="500" height="400" alt="Placeholder Title Image" /></center>
+  <table style="width: 100%;">
+    <tr>
+      <td>
+        <div class="astro-button-left">
+          <<button "Mess Hall">>
+            <<goto "Mess Hall">>
+          <</button>>
+        </div>
+      </td>
+      <td style="text-align: center;">
+        <div class="astro-button-deadend">
+          <<button "Dead End">>
+          <</button>>
+        </div>
+      </td>
+      <td style="text-align: right;">
+        <div class="astro-button-deadend">
+          <<button "Dead End">>
+          <</button>>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="satellite-panel">
+  <<if $satelliteComplete is false>>
+    <div class="astro-button-issue">
+      <<button "!!!Satellite!!!">>
+        <<goto "Satellite Adjustment">>
+      <</button>>
+    </div>
+  <</if>>
+  <<if $computerComplete is false>>
+    <div class="astro-button-issue">
+      <<button "!!!Computer!!!">>
+        <<goto "Computer Rebooting">>
+      <</button>>
+    </div>
+  <</if>>
+  <<if $starsComplete is false>>
+    <div class="astro-button-issue">
+      <<button "!!!StarFix!!!">>
+        <<goto "StarFix: ASTR Seed">>
+      <</button>>
+    </div>
+  <</if>>
+  <<if $satelliteComplete is true>>
+    <div class="astro-button-complete">✓Satellite✓</div>
+  <</if>>
+  <<if $starsComplete is true>>
+    <div class="astro-button-complete">✓StarFix✓</div>
+  <</if>>
+  <<if $computerComplete is true>>
+    <div class="astro-button-complete">✓Computer✓</div>
+  <</if>>
+</div></div>
+<</nobr>>
+
+
+:: Computer Failure {"position":"450,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">COMPUTER FAILURE</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Computers in spacecrafts are essentials to perform important tasks for your mission, like navigation, communication, data management, research, and other forms of scientific research and exploration, along with activating oxygen production, carbon dioxide scrubber, and other control systems to create a suitable environment for your crew
+
+Computer failure can be caused by software bugs, damaged electrical equipments, or space radiation</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button [[Back|OPEN MANUAL]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Computer Failure Instructions]]>><</button>></div></td></tr></table></div>
+<<include 'Manual Timer'>>
+
+
+:: Computer Failure Instructions {"position":"450,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">The bottom are the answers for the astronaut to reboot the computer to negate the computer failure
+
+Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
+</span>
+*<span id="warning-text">$ahouston</span>
+*<span id="warning-text">$aorlando</span>
+*<span id="warning-text">$abarstow</span>
+*<span id="warning-text">$ahampton</span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button [[Back|Computer Failure]]>><</button>></div></td>
+    <td style="text-align: center;">
+  <div class="button-completed">
+    <<button "COMPLETE">>
+      <<set $computerComplete = true>>
+      <<goto "OPEN MANUAL">>
+    <</button>>
+  </div>
+</td></tr></table></div>
+
+<<include 'Manual Timer'>>
+<<silently>>
+<<timed 7s>>
+	<<goto "Correct Computer Code">>
+<</if>>
+<</timed>>
+<<set $ahouston = $houstonArr.random()>>
+<<set $aorlando = $orlandoArr.random()>>
+<<set $abarstow = $barstowArr.random()>>
+<<set $ahampton = $hamptonArr.random()>>
+<</silently>>
+
+
+:: Computer Rebooting {"position":"2100,450","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+Enter the correct code to fully restart the computer. You must provide detailed information of what you are seeing to your controller in order for them to give you the answer to restart.
+
+//Please provide the letters you are seeing to the controller. They can NOT reveal the answer to you without it.
+//NOTE: CASE SENSITIVE 
+//NOTE: DO NOT SPACE OUT THE CODE
+//<span id="lose-text">WARNING: INCORRECTLY ENTERING THE CODE WILL RESULT IN A GAME OVER</span>
+<div class="satellite-panel">
+/*
+<<if $computerCorrect == "HOUSTON">>
+	<center><h1 id="win-text"><<=$mhouston>></h1></center>
+<<elseif $computerCorrect == "ORLANDO">>
+	<center><h1 id="win-text"><<=$morlando>></h1></center>
+<<elseif $computerCorrect == "BARSTOW">>
+	<center><h1 id="win-text"><<=$mbarstow>></h1></center>
+<<elseif $computerCorrect == "HAMPTON">>
+	<center><h1 id="win-text"><<=$mhampton>></h1></center>
+<</if>>
+*/
+<center><h1 id="win-text"><<=$hiddenSolution>></h1></center>
+Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
+<<if $computerFailureUserInput == $computerCorrect>>
+	<<goto "Command Center">>
+    <<set $computerComplete to true>>
+    <<set $completedPuzzles to $completedPuzzles + 1>>
+<<else>>
+	<<goto "Game Over">>
+<</if>><</button>>
+</div>
+
+<div class="astro-button-left"><<button [[Back|Command Center]]>><</button>></div>
+</div>
+
+
+:: Controller Error Screen {"position":"400,825","size":"100,100"}
+<div class="ui-card"><silently>
+<<set $room_choice to random(1,5)>>
+<<if $room_choice is 1>>
+  <<set _psg to 'Solar Panel Repairs'>>
+  <<elseif $room_choice is 2>>
+  <<set _psg to 'Computer Failure'>>
+  <<elseif $room_choice is 3>>
+  <<set _psg to 'Antenna Repair'>>
+  <<elseif $room_choice is 4>>
+  <<set _psg to 'Plumbing Problems'>>
+  <<elseif $room_choice is 5>>
+  <<set _psg to 'Oxygen Leak'>>
+   <<else>>
+  <<set _psg to 'Water Dispenser Repair'>>
+<</if>></silently>
+/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Plumbing Problems', 'Water Dispenser Repair', 'Oxygen Leak')>> */ 
+<center><div class="ui-card"><span id="computer-amber">
+  RESTARTING COMPUTER<br>
+  PLEASE BE EXTREMELY PATIENT<br>
+  WE WILL "TRY" TO REMEMBER WHERE YOU LEFT OFF<br><br>
+  </span></div></center>
+<center>
+<<timed 3s>>
+  <div class="ui-card"><div class="button-content">
+    	<center><<button[[Turn On Computer]]>></center></div>
+      	<<goto _psg>>
+        </div>
+    <</button>>
+<</timed>></center></div>
+<<set $manualSeconds to random(100,150)>>
+
+
+:: Correct Altitudes Screen {"position":"925,1375","size":"100,100"}
+<<silently>><<= setSatellites($sat_seed)>><</silently>><div class="ui-card"><center><h1 id="computer-amber">SATELLITE REALIGNMENT INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">Below are the correct altitudes for the four satellites
+
+ If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct
+<div class="ui-card"><span id="computer-green">Relay the bottom information to your astronaut
+SATELLITE Alpha - <span id="satval1">$correct1 km</span>
+SATELLITE Beta - <span id="satval2">$correct2 km</span>
+SATELLITE Gamma - <span id="satval3">$correct3 km</span>
+SATELLITE Delta - <span id="satval4">$correct4 km</span></span>
+</div></span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|Satellite Realignment Instructions]]>><</button>></div></td>
+<td style="text-align: center;">
+  <div class="button-completed">
+    <<button "COMPLETE">>
+      <<set $satelliteComplete = true>>
+      <<goto "OPEN MANUAL">>
+    <</button>>
+  </div>
+</td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: Correct Computer Code {"position":"450,1375","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">The bottom are the answers for the astronaut to reboot the computer to negate the computer failure
+
+Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
+</span>
+*<span id="completed-text">HOUSTON</span>
+*<span id="completed-text">ORLANDO</span>
+*<span id="completed-text">BARSTOW</span>
+*<span id="completed-text">HAMPTON</span>
+</div><div class="ui-card">
+<table style="width: 70%;">
+  <tr>
+    <td>DISABLED</td>
+    <td style="text-align: center;">DISABLED</td></tr></table></div>
+
+<<include 'Manual Timer'>>
+<<silently>>
+<<timed 0.25s>>
+    <<goto "Computer Failure Instructions">>
+<</timed>>
+<</silently>>
+
+
+:: Dispense Water {"position":"1100,300","size":"100,100"}
+<<nobr>>
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>MESS ROOM</u></strong></center>
+<center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
+<center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="550" height="400" alt="Placeholder Title Image" /></center>
+
+<div class="satellite-panel">
+<<if $panel.includes("FlipSwitch")>>
+	<center>[Switch Position:] <span id="computer-amber">OFF</span></center>
+<<else>>
+	<center>[Switch Position:] <span id="computer-green">ON</span></center>
+<</if>>
+
+<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Power Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Power Status:] <span id="computer-green">POSITIVE</span></center>
+<</if>>
+
+<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Filter Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Filter Status:] <span id="computer-green">POSITIVE</span></center>
+<</if>>
+
+<<if $waterTemp == "Ambient">>
+	<<if $dispErrs.includes("ReplacePump")>>
+		<center>Nothing happened...</center>
+	<<elseif $dispErrs.includes("ReplaceFans")>>
+		<center>Ahh, that's hot!</center>
+	<<else>>
+		<center>Yep. That's room temperature water, alright.</center>
+    <</if>>
+<</if>>
+
+<<if $waterTemp == "Hot">>
+	<<if $dispErrs.includes("ReplacePump")>>
+		<center>Nothing happened...</center>
+	<<elseif $dispErrs.includes("NoHeat") and !$dispErrs.includes("ReplaceFans")>>
+		<center>Strange, it feels ambient...</center>
+	<<else>>
+			<center>The water seems pretty hot to me.</center>
+	<</if>>
+<</if>>
+
+</div><table style="width: 50%; margin: 0 auto;">
+  <tr>
+    <td><div class="astro-button-ambient"><<button "Dispense Ambient">><<set $waterTemp = "Ambient">><<goto "Dispense Water">><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-hot"><<button "Dispense Hot">><<set $waterTemp = "Hot">><<goto "Dispense Water">><</button>></div></td>
+  </tr>
+</table>
+
+<div class="astro-button-left"><<button "Finished Testing">><<goto "Water Puzzle">><</button>></div>
+</div>
+<<endnobr>>
+
+
+
+:: Dispenser Complete {"position":"1325,450","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+    <<set $waterComplete to true>>
+	<<set $dispErrs.deleteAll($tempPanel)>>
+    <div class="astro-button-right"><center><<button[[All Errors Resolved|Mess Hall]]>><</button>></center></div>
+    </div>
+
+
+:: Dorm Toilet {"position":"1850,325","size":"100,100"}
+<<silently>><<if $toiletComplete is true>><<set $completedPuzzles to $completedPuzzles + 1>><</if>><</silently>><<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>DORMITORY TOILET</u></strong></center>
+<center><img src="
+https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr><td style="text-align: center;"><div class="astro-button-down"><<button [[Dormitory]]>><</button>></div></td> </tr> </table> <div class="satellite-panel">
+<<if $toiletComplete is false>><div class="astro-button-issue"><<button [[!!!Access Toilet Hardware!!!|Plumbing Puzzle]]>><</button>></div><</if>>
+
+<<if $toiletComplete is true>><div class="astro-button-complete">✓Toilet✓</div><<unset $toiletComplete>><</if>>
+</div></div><<endnobr>>
+
+
+:: Dormitory {"position":"1850,450","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>DORMITORY</u></strong></center>
+<center><img src="
+https://scx2.b-cdn.net/gfx/news/hires/2023/a-good-nights-sleep-in.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 93%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Life Support]]>><</button>></div></td>
+     <td style="text-align: center;"><div class="astro-button-up"><<button [[Dorm Toilet]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+  </tr>
+</table>
+<center><div class="astro-button-down"><<button [[Mess Hall]]>><</button>></div></center></div><<endnobr>>
+
+
+:: Engine {"position":"1325,600","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>ENGINE ROOM</u></strong></center>
+<center><img src="https://cdn2.unrealengine.com/body1-iss-space-explorers-spotlight-1920x1080-cba01dce33fe.jpg?resize=1&w=1920" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Hallway]]>><</button>></div></td>
+  </tr>
+</table>
+</div><<endnobr>>
+
+
+:: Enter Code {"position":"1250,800","size":"100,100"}
+<div class="ui-card">
+PLEASE ENTER THE GAME CODE BELOW! Your Mission Control will have it!
+<<textbox "$gameCode" "" "Insert Code">><<button "Enter">>
+	<<goto "Astronaut Confirm">>
+<</button>>
+
+      <center><div class="astro-button-left"><<button [[Back|ASTRONAUT]]>><</button>></div></center>
+</div>
+
+
+:: FIX FROM INSIDE {"position":"525,2000","size":"100,100"}
+// (instructions on how to fix from the inside)
+
+<<set $code_choice to random(1,2)>>
+<<if $code_choice is 1>>
+  <<print "hub">>
+  <<elseif $code_choice is 2>>
+  <<print "ble">>
+<</if>>
+/* <<print either("hub", "ble")>> */
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FIX FROM OUTSIDE {"position":"450,1875","size":"100,100"}
+// (instructions on how to fix on the outside, likely requires spacewalk)
+
+[[BACK|Radiation Shield Failure]]
+<<include 'Manual Timer'>>
+
+
+:: FLIGHT CONTROLLER {"position":"675,700","size":"100,100"}
+<div class="ui-card">
+<center><h2 id="computer-amber"><u>WELCOME FLIGHT CONTROLLER</u></h2></center>
+
+<center>Your spacecraft is facing numerous malfunctions that is in need of repair</center>
+<center>The only way to fix the spacecraft is to provide directions for your astronaut to solve these problems</center>
+<center>Your goal is to provide clear communication and instructions with your astronaut to restore the spacecraft into safe conditions</center>
+<center>Your manual may randomly restart on their own in different intervals as the game progresses</center>
+<center>When your astronaut completed all of their tasks and receive a victory screen, then you are allow to select the "Finished" button (not in yet)</center>
+<center>NOTE!!!</center><center>MAKE SURE YOUR ASTRONAUT IS READY TO START THE GAME</center></div><div class="ui-card">
+<center><div class="button-right"><<button [[OPEN MANUAL|Get Code]]>><</button>></div></center>
+<center><div class="button-left"><<button [[NVM GO BACK|BEGIN MISSION]]>><</button>></div></center>
+
+
+:: Game Completed Check {"position":"850,1600","size":"100,100"}
+<div class="ui-card">
+
+<center>
+	<h3 id="computer-amber">
+    	<u>BEFORE YOU LEAVE</u>
+     </h3>
+</center>
+<center>
+	<span id="computer-amber">Select one of the options before leaving your 		shift
+    </span>
+</center>
+
+<span id="computer-amber"><div class="button-right">
+	<center><<button[[Astronaut Completed All Tasks|Victory Screen]]>><</button>></center></div>
+<div class="button-left">
+	<center><<button[[Astronaut Exploded with the Ship|Game Over]]>><</button>></center>
+</div>
+
+<div class="button-left">
+<center><<button[[Back|OPEN MANUAL]]>><</button>></center>
+</div>
+</span> 
+
+</div>
+
+
+:: Game Over {"position":"300,200","size":"100,100"}
+<div class="ui-card">
+<center><h1 id="lose-text">Game Over...</h1></center>
+
+<center>Your spacecraft exploded, and if you are the astronaut, you must pretend that you are dead and exploded into a million pieces.
+</center>
+<center>And if you are playing solo, I beg you to please get a homie to play with you, you rule breaker!</center>
+
+<center>But something is over there, something bright...</center>
+<center>This next week of development!</center>
+<center>We haven't found any large bugs on our own, so our plan is to have our designers ramp up playtesting and conducting player interviews, going on the hunt for bugs and bug-level issues over the next two days.</center>
+<center>While this is going on, we intend to have our programmers begin implementing simple settings, as that was a notable bug/issue our playtesters felt needed addressing.</center>
+<center>Finally, on Wednesday, we will begin shifting gears towards fixing the remaining bugs and finalizing any last minute production decisions, as well as compiling the SME interviews we've held throughout the course.</center>
+
+<center>
+  <div class="button-completed"><<button [[Back to Menu]]>><</button>></div>
+  </center>
+</div>
+
+
+:: Gameplay Rules {"position":"50,1425","size":"100,100"}
+<<include "Timer">><<include "Strikes">>
+<<include "Victory Check">>
+
+
+:: Get Code {"position":"850,700","size":"100,100"}
+<div class="ui-card">
+<<set $gameCode to 
+(Math.floor(Math.random() * 0x10000000).toString(16).toUpperCase())>>
+Give the Astronaut your hash: <<print $gameCode>>
+
+<center><div class="button-right"><<button [[Continue|Manual Confirm]]>><</button>></div></center>
+<center><div class="button-left"><<button [[Back|FLIGHT CONTROLLER]]>><</button>></div></center>
+</div>
+
+
+:: Hallway {"position":"1500,600","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>HALLWAY</u></strong></center>
+<center><img src="https://www.nasa.gov/wp-content/uploads/2021/02/sts_98_destiny_on_fd5_feb_11_2001_s98e5113.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Engine]]>><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-deadend"><<button "Dead End">><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Life Support]]>><</button>></div></td>
+  </tr>
+</table>
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Meeting Room]]>><</button>></div></td>
+  </tr>
+</table>
+</div><<endnobr>>
+
+
+:: Inspect Dispenser {"position":"1250,300","size":"100,100"}
+<<nobr>>
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>MESS ROOM</u></strong></center>
+<center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
+<center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<div class="satellite-panel">
+<<if $panel.includes("FlipSwitch")>>
+	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></div></center>
+<<else>>
+	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
+<</if>>
+<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Power Status:] 		<span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Power Status:] 		<span id="computer-green">POSITIVE</span></center>
+<</if>>
+<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Filter Status:] 		<span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Filter Status:] 		<span id="computer-green">POSITIVE</span></center>
+<</if>>
+
+ <<set $waterTemp = " ">>
+</div><table style="width: 50%; margin: 0 auto;">
+  <tr>
+    <td><div class="astro-button-ambient"><<button "Dispense Ambient">><<set $waterTemp = "Ambient">><<goto "Dispense Water">><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-hot"><<button "Dispense Hot">><<set $waterTemp = "Hot">><<goto "Dispense Water">><</button>></div></td>
+  </tr>
+</table>
+ 
+ 
+ <div class="astro-button-left"><<button "Stop Inspection">><<goto "Water Puzzle">><</button>></div>
+ </div>
+
+ <<endnobr>>
+
+
+:: Inspect Panel {"position":"1625,25","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>DORMITORY TOILET REPAIR</u></strong></center>
+<center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
+<center><img src="https://i.imgur.com/SXgJleS.png" width="500" height="400" alt="Placeholder Title Image" /></center>
+
+<center>Pump Sensor</center>
+<div class="satellite-panel">
+<<if $panel.includes("ResetController") or $panel.includes("ReplacePumpSensor")>>
+	<center>[Power:] 		<span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Power:] 		<span id="computer-green">POSITIVE</span></center>
+<</if>>
+<<if $panel.includes("ReplacePump") or $panel.includes("ReplacePumpSensor")>>
+	<center>[Load:] 		<span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Load:] 		<span id="computer-green">POSITIVE</span></center>
+<</if>>
+<<if $panel.includes("ReplacePumpSensor") or $panel.includes("ReplaceControllerCard")>>
+	<center>[Voltage:] 		<span id="computer-amber">NEGATIVE</span></center>
+<<else>>
+	<center>[Voltage:] 		<span id="computer-green">POSITIVE</span></center>
+<</if>>
+
+<center>Conductivity Sensor: <<=$conductivity>></center>
+
+  <<if $panel.includes("ReplaceControllerCard") or $panel.includes("ResetController")>>
+      <center>Controller: 		<span id="computer-amber">OFFLINE</span></center>
+  <<else>>
+      <center>Controller: 		<span id="computer-green">ONLINE</span></center>
+  <</if>>
+ </div>
+ 
+ <div class="astro-button-left"><<button "Return">><<goto "Plumbing Puzzle">><</button>></div>
+ </div>
+ <<endnobr>>
+
+
+:: Life Support {"position":"1700,450","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>LIFE SUPPORT</u></strong></center>
+<center><img src="https://i.imgur.com/XaF88Gz_d.webp?maxwidth=760&fidelity=grand" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Hallway]]>><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-down"><<button [[Meeting Room]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Dormitory]]>><</button>></div></td>
+  </tr>
+</table>
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Mess Hall]]>><</button>></div></td>
+  </tr>
+      [[Oxygen Leak (Astronaut)|Oxy: Astronaut]]
+</table></div><<endnobr>>
+
+
+:: Manual Confirm {"position":"1050,750","size":"100,100"}
+<div class="ui-card">
+<<silently>>
+<<include "StoryInit">>
+<</silently>>
+You got it?
+<center><div class="button-right"><<button [[OPEN MANUAL]]>><</button>></div></center>
+<center><div class="button-left"><<button [[Back|Get Code]]>><</button>></div></center>
+</div>
+
+
+:: Manual Timer {"position":"50,1100","size":"100,100"}
+<<silently>>
+	<<repeat 1s>>
+		<<set $manualSeconds to $manualSeconds - 1>>
+		<<if $manualSeconds lte 0>>
+			<<goto 'Controller Error Screen'>>
+			<<stop>>
+		<</if>>
+	<</repeat>>
+<!-- This sample code was take from Twine SugarCube: Timed Passage with modifications-->
+<</silently>>
+
+
+:: Meeting Room {"position":"1700,600","size":"100,100"}
+<<run playBGM("meeting","audio/meetingBGM.mp3")>>
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>MEETING ROOM</u></strong></center>
+<center><img src="https://static01.nyt.com/images/2020/10/30/science/00SCI-OUTTHERE-SCENES12/00SCI-OUTTHERE-SCENES12-mediumSquareAt3X.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Hallway]]>><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-up"><<button [[Life Support]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Mess Hall]]>><</button>></div></td>
+  </tr>
+</table>
+</div><<endnobr>>
+
+
+:: Mess Hall {"position":"1850,600","size":"100,100"}
+<<nobr>><<silently>><<if $waterComplete is true>><<set $completedPuzzles to $completedPuzzles + 1>><</if>><</silently>>
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>MESS HALL</u></strong></center>
+<center><img src="https://cdn.zmescience.com/wp-content/uploads/2014/11/table.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Life Support]]>><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-up"><<button [[Dormitory]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="astro-button-right"><<button [[Command Center]]>><</button>></div></td>
+  </tr>
+</table>
+<table style="width: 57%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Meeting Room]]>><</button>></div></td>
+    <td style="text-align: center;"><div class="astro-button-down"><<button [[Air Lock]]>><</button>></div></td>
+  </tr>
+</table>
+<div class="satellite-panel">
+<<if $waterComplete is false>><div class="astro-button-issue"><<button [[!!!Water Dispenser!!!|Water Puzzle]]>><</button>></div><</if>>
+<<if $waterComplete is true>><div class="astro-button-complete">✓Water Recycling✓</div><<unset $waterComplete>><</if>></div></div><<endnobr>>
+
+
+:: OPEN MANUAL {"position":"800,900","size":"100,100"}
+<<run playBGM("meeting","audio/meetingBGM.mp3")>>
+<div class="ui-card">
+<<nobr>>
+  <center><span id="computer-amber"><strong><u>CHECKLIST</u></strong></span></center>
+
+  <<if $satelliteComplete>>
+    <span id="computer-green">* Satellite Adjustment (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* Satellite Adjustment (Located in Command Center in far right)</span><br>
+  <</if>>
+
+  <<if $toiletComplete>>
+    <span id="computer-green">* Toilet Repair (Located in Dormitory in upper ship)</span><br>
+  <<else>>
+    <span id="computer-amber">* Toilet Repair (Located in Dormitory in upper ship)</span><br>
+  <</if>>
+
+  <<if $waterComplete>>
+    <span id="computer-green">* Water Recycling Repair (Located in Mess Hall)</span><br>
+  <<else>>
+    <span id="computer-amber">* Water Recycling Repair (Located in Mess Hall)</span><br>
+  <</if>>
+
+  <<if $starsComplete>>
+    <span id="computer-green">* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)</span><br>
+  <</if>>
+
+  <<if $computerComplete>>
+    <span id="computer-green">* Computer Failure (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* Computer Failure (Located in Command Center in far right)</span><br>
+  <</if>>
+<</nobr>>
+<span id="computer-amber"><div class="button-right">
+<center><<button[[End Game|Game Completed Check]]>><</button>></center></div>
+<div class="ui-card">
+<center><span id="computer-white"><strong><u>BLUEPRINT</u></strong></span></center><span id="computer-white">
+<center><img src="https://i.imgur.com/UBC4CrU_d.webp?maxwidth=760&fidelity=grand" width="800" height="500"  alt="Blueprint Image" /></center>
+</span></div><div class="ui-card">
+<center><span id="computer-white"><strong><u>TABLE OF CONTENTS</u></strong>
+<div class="button-content"><center>
+<<button[[Antenna Repair]]>><</button>></center></div><div class="button-content">
+<center><<button[[Computer Failure]]>><</button>></center></div>
+<div class="button-content"><center><<button[[Oxygen Leak]]>><</button>></center></div><div class="button-content">
+<center><<button[[Plumbing Problems]]>><</button>></center></div>
+<div class="button-right"><div style="text-align: right;">
+<<button[[Next|OPEN MANUAL 2/2]]>><</button>></div></div></span></center><<include 'Manual Timer'>>
+
+
+:: OPEN MANUAL 2/2 {"position":"1000,900","size":"100,100"}
+<div class="ui-card">
+<<nobr>>
+  <center><span id="computer-amber"><strong><u>CHECKLIST</u></strong></span></center>
+
+  <<if $satelliteComplete>>
+    <span id="computer-green">* Satellite Adjustment (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* Satellite Adjustment (Located in Command Center in far right)</span><br>
+  <</if>>
+
+  <<if $toiletComplete>>
+    <span id="computer-green">* Plumbing Problems (Located in Dormitory in upper ship)</span><br>
+  <<else>>
+    <span id="computer-amber">* Plumbing Problems (Located in Dormitory in upper ship)</span><br>
+  <</if>>
+
+  <<if $waterComplete>>
+    <span id="computer-green">* Water Dispenser Repair (Located in Mess Hall)</span><br>
+  <<else>>
+    <span id="computer-amber">* Water Dispenser Repair (Located in Mess Hall)</span><br>
+  <</if>>
+
+  <<if $starsComplete>>
+    <span id="computer-green">* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)</span><br>
+  <</if>>
+
+  <<if $computerComplete>>
+    <span id="computer-green">* Computer Failure (Located in Command Center in far right)</span><br>
+  <<else>>
+    <span id="computer-amber">* Computer Failure (Located in Command Center in far right)</span><br>
+  <</if>>
+<</nobr>>
+<span id="computer-amber"><div class="button-right">
+<center><<button[[End Game|Game Completed Check]]>><</button>></center></div><div class="ui-card">
+<center><span id="computer-white"><strong><u>BLUEPRINT</u></strong></span></center><span id="computer-white">
+<center><img src="https://i.imgur.com/UBC4CrU_d.webp?maxwidth=760&fidelity=grand" width="800" height="500"  alt="Blueprint Image" /></center>
+</span></div><div class="ui-card">
+<center><span id="computer-white"><strong><u>TABLE OF CONTENTS</u></strong>
+<div class="button-content"><center>
+<<button[[Satellite Realignment]]>><</button>></center></div><div class="button-content"><center>
+<<button[[Solar Panel Repairs]]>><</button>></center></div><div class="button-content">
+<center><<button[[StarFix|StarFix: HOU Seed]]>><</button>></center></div>
+<div class="button-content"><center><<button[[Water Dispenser Repair]]>><</button>></center>
+</div><div class="button-left"><div style="text-align: left;">
+<<button[[Back|OPEN MANUAL]]>><</button>></div></div></span></center><<include 'Manual Timer'>>
+
+
+:: Oxy: Astronaut {"position":"1625,275","size":"100,100"}
+\:: Oxy: Astronaut
+<<run OXY_initScenario()>>
+
+<div class="oxy-card">
+  <b>Leak hint:</b> <span id="oxy-leak-tip">...</span>
+</div>
+
+<div class="oxy-card">
+  <div class="oxy-row"><b>Pressure:</b> <span id="oxy-pressure-num">--%</span></div>
+  <div class="oxy-gauge"><span id="oxy-gauge-bar"></span></div>
+  <div id="oxy-status" class="hint oxy-row">Adjust valves to stop the leak.</div>
+</div>
+
+<div class="oxy-card">
+  <b>Valves</b>
+  <div class="oxy-row">
+    <button id="v-Red"    class="valve" onclick="OXY_toggleValve('Red')">Red</button>
+    <button id="v-Blue"   class="valve" onclick="OXY_toggleValve('Blue')">Blue</button>
+    <button id="v-Yellow" class="valve" onclick="OXY_toggleValve('Yellow')">Yellow</button>
+    <button id="v-Green"  class="valve" onclick="OXY_toggleValve('Green')">Green</button>
+  </div>
+  <div class="oxy-row hint">Report the pressure and leak hint to Flight Controller.</div>
+  [[Life Support]]
+</div>
+
+<<script>>OXY_render();<</script>>
+
+<<if $oxy_sealed>>
+  <div class="oxy-card"><span class="good">Leak sealed! You can move on.</span></div>
+<</if>>
+<<if $oxy_failed>>
+  <div class="oxy-card"><span class="bad">Oxygen depleted. Try again.</span></div>
+[[Life Support]]
+
+<</if>>
+
+
+
+:: Oxy: Controller Manual {"position":"600,1300","size":"100,100"}
+\:: Oxy: Controller Manual
+<div class="oxy-card"><h3>Oxygen Leak – Flight Controller Manual</h3>
+<p>When the astronaut reports the leak hint and current pressure, apply the rules below and instruct valve operations.</p></div>
+
+<div class="oxy-card">
+  <h4>Valve roles</h4>
+  <ul>
+    <li><b>Red Valve</b> – Emergency cut-off (main line)</li>
+    <li><b>Blue Valve</b> – Keep O₂ circulation</li>
+    <li><b>Yellow Valve</b> – Aux relief</li>
+    <li><b>Green Valve</b> – Regenerator line</li>
+  </ul>
+</div>
+
+<div class="oxy-card">
+  <h4>Base rules (by leak location)</h4>
+  <ul>
+    <li>Leak on <b>Green Pipe</b> → Close <b>Red</b>, keep <b>Blue</b> open.</li>
+    <li>Leak on <b>Blue Pipe</b> → Open <b>Yellow</b>, close <b>Green</b>.</li>
+    <li>Leak on <b>Red Pipe</b> → Close <b>Blue</b>, open <b>Yellow</b>.</li>
+    <li>Leak on <b>Yellow Pipe</b> → Keep <b>Red</b> open, close <b>Green</b>.</li>
+  </ul>
+  <h4>Pressure corrections</h4>
+  <ul>
+    <li>If pressure <b>&lt; 80%</b> → additionally <b>close Yellow</b>.</li>
+    <li>If pressure <b>&lt; 50%</b> → <b>close all valves</b> and prepare manual O₂.</li>
+  </ul>
+  <p class="hint">Priority when multiple leaks are suspected: Green &gt; Red &gt; Blue &gt; Yellow.</p>
+</div>
+
+<div class="oxy-card">
+  <b>Example</b>: Astronaut reports 72% and “bubbles near Green pipe” → Close Red, keep Blue open; because 72% &lt; 80%, also close Yellow.
+</div>
+
+[[Oxygen Leak]]
+
+
+:: Oxygen Leak {"position":"600,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">OXYGEN LEAK REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">Oxygen is vital in any existing spacecraft for your crew, using machines like oxygen generators, pressurized oxygen tanks, or oxygen candles to produce oxygen
+
+Solar panels and a water recycling machine are also required to power the oxygen machines, in order to conduct electrolysis to make hydrogen and oxygen out of water
+
+Oxygen leaks can happen if the vacuum jumper hose malfunctioned that show signs of small tears that will require replacements, limited amount of electricity to power the oxygen machine, or the oxygen machine malfunctioned</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+
+<div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div>
+[[Oxygen Leak – Manual|Oxy: Controller Manual]]
+</div>
+<<include 'Manual Timer'>>
+
+
+:: Plumbing Complete {"position":"1850,50","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+    <<set $toiletComplete to true>>
+    <<set $panel.deleteAll($tempPanel)>>
+    <div class="astro-button-right"><center><<button[[All Errors Resolved|Dorm Toilet]]>><</button>></center></div>
+    </div>
+
+
+:: Plumbing Problems {"position":"750,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">Orbital Plumbing Problems</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Plumbing is very important for the ship, transporting water and waste to fit the needs of the astronauts. One very important plumbing function is to facilitate "space toilets" or "zero gravity toilets," which use airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft. However, even "orbital plumbing" is a task astronauts need to help solve to maintain the ship.
+
+Do I need to explain why astronauts would need to have a toilet in their spacecraft?
+</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Toilet Repair Instructions]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: Plumbing Puzzle {"position":"1700,150","size":"100,100"}
+<<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>DORMITORY TOILET REPAIR</u></strong></center>
+<center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
+<center><img src="https://i.imgur.com/SXgJleS.png" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $panel.deleteAll($tempPanel)>>
+
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: right;"><div class="astro-button-right"><<button "Inspect Equipment">><<goto "Inspect Panel">><</button>></div></td>
+  </tr>
+  </table >
+
+<<if $panel.includes("ReplacePump")>>
+  <center><div class="astro-button-action"><<button "Fix Pump">><<set $tempPanel = "ReplacePump">><<goto "Plumbing Puzzle">><</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action"><<button "Fix Pump">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+<</if>>
+
+<<if $panel.includes("ReplacePumpSensor")>>
+  <center><div class="astro-button-action"><<button "Replace Pump Sensor">><<set $tempPanel = "ReplacePumpSensor">><<goto "Plumbing Puzzle">><</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action"><<button "Replace Pump Sensor">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+<</if>>
+
+<<if $panel.includes("ReplaceConductivitySensor")>>
+  <center><div class="astro-button-action"><<button "Replace Conductivity Sensor">><<set $tempPanel = "ReplacePumpSensor">><<set $conductivity = 0>><<goto "Plumbing Puzzle">><</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action"><<button "Replace Conductivity Sensor">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+<</if>>
+
+<<if $panel.includes("ResetController")>>
+  <center><div class="astro-button-action"><<button "Press Reset Button">><<set $tempPanel = "ResetController">><<goto "Plumbing Puzzle">><</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action"><<button "Press Reset Button">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+<</if>>
+
+<<if $panel.includes("ReplaceControllerCard")>>
+  <center><div class="astro-button-action"><<button "Replace Controller Card">><<set $tempPanel = "ReplaceControllerCard">><<goto "Plumbing Puzzle">><</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action"><<button "Replace Controller Card">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+<</if>>
+
+<<if $panel.length == 0>>
+  <div class="astro-button-left"><<button "Replace Panel Cover">><<goto "Plumbing Complete">><</button>></div>
+<<else>>
+  <div class="astro-button-left"><<button "Replace Panel Cover">><<goto "Dorm Toilet">><</button>></div>
+<</if>>
+
+<<set $backToPuzzle to "Plumbing Puzzle">>
+</div><<endnobr>>
+
+<silently>
+<!-- <<if $panel.includes("ReplaceControllerCard")>>
+	<div class="astro-button-action">
+		<<button "Replace Controller Card">>
+        			<<set $tempPanel = "ReplaceControllerCard">>
+            	<<goto "Plumbing Puzzle">>
+         <</button>></div>
+		<<else>>
+ 				 <div class="astro-button-action">
+                 	<<button "Replace Controller Card">>
+                    		<<goto "Astronaut Incorrect Screen">>
+                     <</button>></div>
+		<</if>> -->
+</silently>
+
+
+:: Proceed {"position":"400,600","size":"100,100"}
+<div class="ui-card">
+  <center>This is a placeholder text to talk about the lore of the game.</center>
+  <center>I don't know the story, but I heard that it will be insanely epic.</center>
+  <center>Where will we go, who knows? What problems will we face? Who knows?</center>
+  <center>Something something something just start game.</center>
+
+  <center>
+    <div class="satellite-button-wrong">
+      <<button "BEGIN MISSION">>
+        <<goto "BEGIN MISSION">>
+      <</button>>
+    </div>
+  </center>
+</div>
+
+
+:: Radiation Shield Failure {"position":"500,1700","size":"100,100"}
+//Radiation shielding is important for keeping a space station safe from solar radiation. This radiation can seriously damage a ship and its components, so thin aluminum coating is required to keep all systems stable and running.
+
+Other materials can be used such as water or plastic. NASA uses a hybrid carbon/metal fabric to shield their space stations and other spacecraft. 
+
+Radiation shielding can be fixed either from the inside or the outside.
+
+[[FIX FROM INSIDE]]
+[[FIX FROM OUTSIDE]]
+
+
+<<include 'Manual Timer'>>
+
+
+:: Random Puzzle {"position":"800,100","size":"100,100"}
+<<include "Timer">>
+
+Computer Failure Puzzle
+
+<<link "WRONG ANSWER">>
+    <<set $seconds -= 10>>
+    <<goto "Begin Game">>
+<</link>>
+
+[[RIGHT ANSWER|Victory Screen]]
+
+
+:: Retired Puzzles {"position":"50,1600","size":"100,100"}
+<div class="ui-card"><center><h2 id="computer-amber">WATER RECYCLING MACHINE REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"><span class="text-14px">NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two code will tells if water needs to be refilled
+If the water recycling machine is malfunctioning, it could be due to four reasons
+* Pumping Issue
+* Filtration Issue
+* SD Card Issue
+* Sensor Issue
+It's important to check if the water recycling machine have enough water
+* More than 50%, no need for water resupply mission
+* Less than 50%, time to start a water resupply mission
+</span></span></div><div class="ui-card"><span id="computer-white">Please ask your astronaut for the error code.
+NOTE: CASE SENSITIVE <div class="button-completed"><<textbox "$code" "" "Water Recycling Machine Result">><<button "Enter">>
+	<<goto "Water Recycling Machine Result">>
+<</button>></div></span>
+<table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button>><</button>></div></td>
+    <td style="text-align: center;"><div class="button-completed"><<button >><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+<div class="ui-card"><center><h2 id="computer-amber">WATER RECYCLING MACHINE REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"><span class="text-14px">NOTE: Enter only TWO CHARACTERS AT A TIME in the text box below. The first two characters revals the malfunction error. The last two code will tells if water needs to be refilled
+If the water recycling machine is malfunctioning, it could be due to four reasons
+* Pumping Issue
+* Filtration Issue
+* SD Card Issue
+* Sensor Issue
+It's important to check if the water recycling machine have enough water
+* More than 50%, no need for water resupply mission
+* Less than 50%, time to start a water resupply mission
+</span></span></div><div class="ui-card"><span id="computer-white">
+<span id="computer-white"><<if $code == "7B">>There is a pumping issue in the water recycling system.
+Ask your astronaut to fix it.
+<<elseif$code == "2T">>There is a filtration issue in the water recycling system.
+Ask your astronaut to fix it.
+<<elseif$code == "9A">>There is a SD Card issue in the water recycling system.
+Ask your astronaut to fix it.
+<<elseif$code == "3C">>There is a sensor issue in the water recycling system.
+Ask your astronaut to fix it.
+<<elseif$code == "4G">>There is no issue with the water recycling system.
+But your astronaut still need to select "No Fix".
+<<elseif$code == "9Z">>It's displaying $fullWater %
+There is no need to refill the water recycling system
+But your astronaut still need to select "No Refill".
+<<elseif$code == "1A">>It's displaying $lowWater %
+There is a need to refill the water recycling system
+Ask your astronaut to request a resupply mission.
+<<else>>This is an invalid code.
+Ask your astronaut to double check.
+<</if>></span><table style="width: 70%;">
+  <tr><td><div class="button-left"><<button>><</button>></div></td>
+    <td style="text-align: center;"><div class="button-completed"><<button >><</button>></div></td></tr></table></span></div><<include 'Manual Timer'>>
+
+<<silently>>
+<div class="ui-card"><center><h1 id="computer-amber">TOILET REPAIR INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+If the toilet is malfunctioning, it could be due to three reasons
+* Pumping Issue
+* Sensor Issue
+* Leaking Issue
+</span></div>
+<div class="ui-card"><span id="computer-white">Please ask your astronaut for the error code. 
+NOTE: CASE SENSITIVE </span><div class="button-completed">
+<<textbox "$code" "" "Toilet Repair Result">><<button "Enter">>
+	<<goto "Toilet Repair Result">>
+<</button>></div><table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button>><</button>></div></td>
+    <td style="text-align: center;"><div class="button-completed"><<button >><</button>></div></td></tr></table></div>
+<</silently>>
+
+<div class="ui-card"><center><h1 id="computer-amber">TOILET REPAIR INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+If the toilet is malfunctioning, it could be due to three reasons
+* Pumping Issue
+* Sensor Issue
+* Leaking Issue
+</span></div><span id="computer-amber">
+<div class="ui-card"><span id="computer-white"><<if $code == "4C">>
+There is a pumping issue in the toilet.
+Ask your astronaut to fix it.
+<<elseif$code == "1A">>
+There is a sensor issue in the toilet.
+Ask your astronaut to fix it.
+<<elseif$code == "7D">>
+There is a leaking issue in the toilet.
+Ask your astronaut to fix it.
+<<elseif$code == "5B">>
+There is no issue with the toilet.
+But your astronaut still need to select "No Fix".
+<<else>>
+This is an invalid code.
+Ask your astronaut to double check.
+<</if>></span>
+<table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button>><</button>></div></td>
+    <td style="text-align: center;"><div class="button-completed"><<button >><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: SATELLITE Alpha {"position":"2050,975","size":"100,100"}
+<center><h1>Satellite 1</h1></center>
+
+<center><h2 id="altitude">Current Altitude: <span id="altitude-text">$input1 km</span></h2></center>
+<div class="satellite-panel">Move this satellite to the correct altitude!</div>
+
+<div id="satellite-img">
+<<if $satellite1>>
+  <center><img src="https://i.imgur.com/tYvEcL9.png" width="500" height="420"  alt="Placeholder Title Image" /></center>
+  <<else>>
+  <center><img src="https://i.imgur.com/RaqAGrl.png" width="500" height="480"  alt="Placeholder Title Image" /></center>
+<</if>>
+</div>
+
+<div class="satellite-panel"><<if $satellite1>>
+    <span id="s1"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span>
+    <<else>>
+    <span id="s1"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span>
+<</if>>
+
+<center>
+Edit satellite altitude below:
+<<textbox "$input1" $input1 autofocus>>
+<div class="altitude-button">
+<<button "Move Satellite">>
+    <<replace "#altitude-text">>$input1 km<</replace>>
+	<<if String($correct1).includes(String($input1).toLowerCase())>>
+    	<<replace "#s1">><span id="s1"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/tYvEcL9.png" width="500" height="450"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status1 to true>>
+        <<set $satellite1 to true>>
+	<<else>>
+    	<<replace "#s1">><span id="s1"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/RaqAGrl.png" width="500" height="420"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status1 to false>>
+        <<set $satellite1 to false>>
+        <<goto "Astronaut Incorrect Screen">>
+    <</if>>
+<</button>>
+</div>
+</center>
+
+<div class="astro-button-left"><<button[[BACK|Satellite Adjustment]]>><</button>></div>
+
+
+:: SATELLITE Beta {"position":"2175,975","size":"100,100"}
+<center><h1>Satellite 2</h1></center>
+
+<center><h2 id="altitude">Current Altitude: <span id="altitude-text">$input2 km</span></h2></center>
+<div class="satellite-panel">Move this satellite to the correct altitude!</div>
+
+<div id="satellite-img">
+<<if $satellite2>>
+  <center><img src="https://i.imgur.com/Hr2Pc0u.png" width="500" height="443"  alt="Placeholder Title Image" /></center>
+  <<else>>
+  <center><img src="https://i.imgur.com/4f6as44.png" width="500" height="420"  alt="Placeholder Title Image" /></center>
+<</if>>
+</div>
+
+<div class="satellite-panel"><<if $satellite2>>
+    <span id="s2"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span>
+    <<else>>
+    <span id="s2"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span>
+<</if>>
+
+<center>
+Edit satellite altitude below:
+<<textbox "$input2" $input2 autofocus>>
+<div class="altitude-button">
+<<button "Move Satellite">>
+    <<replace "#altitude-text">>$input2 km<</replace>>
+	<<if String($correct2).includes(String($input2).toLowerCase())>>
+    	<<replace "#s2">><span id="s2"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/Hr2Pc0u.png" width="500" height="443"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status2 to true>>
+        <<set $satellite2 to true>>
+	<<else>>
+    	<<replace "#s2">><span id="s2"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/4f6as44.png" width="500" height="420"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status2 to false>>
+        <<set $satellite2 to false>>
+        <<goto "Astronaut Incorrect Screen">>
+    <</if>>
+<</button>>
+</div>
+</center>
+
+<div class="astro-button-left"><<button[[BACK|Satellite Adjustment]]>><</button>></div>
+
+
+:: SATELLITE Delta {"position":"2425,975","size":"100,100"}
+<center><h1>Satellite 4</h1></center>
+
+<center><h2 id="altitude">Current Altitude: <span id="altitude-text">$input4 km</span></h2></center>
+<div class="satellite-panel">Move this satellite to the correct altitude!</div>
+
+<div id="satellite-img">
+<<if $satellite4>>
+  <center><img src="https://i.imgur.com/HN6hLJ5.png" width="500" height="360"  alt="Placeholder Title Image" /></center>
+  <<else>>
+  <center><img src="https://i.imgur.com/jaJgZrP.png" width="500" height="377"  alt="Placeholder Title Image" /></center>
+<</if>>
+</div>
+
+<div class="satellite-panel"><<if $satellite4>>
+    <span id="s4"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span>
+    <<else>>
+    <span id="s4"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span>
+<</if>>
+
+<center>
+Edit satellite altitude below:
+<<textbox "$input4" $input4 autofocus>>
+<div class="altitude-button">
+<<button "Move Satellite">>
+    <<replace "#altitude-text">>$input4 km<</replace>>
+	<<if String($correct4).includes(String($input4).toLowerCase())>>
+    	<<replace "#s4">><span id="s4"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/HN6hLJ5.png" width="500" height="360"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status4 to true>>
+        <<set $satellite4 to true>>
+	<<else>>
+    	<<replace "#s4">><span id="s4"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/jaJgZrP.png" width="500" height="377"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status4 to false>>
+        <<set $satellite4 to false>>
+        <<goto "Astronaut Incorrect Screen">>
+    <</if>>
+<</button>>
+</div>
+</center>
+
+<div class="astro-button-left"><<button[[BACK|Satellite Adjustment]]>><</button>></div>
+
+
+:: SATELLITE Gamma {"position":"2300,975","size":"100,100"}
+<center><h1>Satellite 3</h1></center>
+
+<center><h2 id="altitude">Current Altitude: <span id="altitude-text">$input3 km</span></h2></center>
+<div class="satellite-panel">Move this satellite to the correct altitude!</div>
+
+<div id="satellite-img">
+<<if $satellite3>>
+  <center><img src="https://i.imgur.com/YeX8jE2.png" width="500" height="250"  alt="Placeholder Title Image" /></center>
+  <<else>>
+  <center><img src="https://i.imgur.com/pgKUNTv.png" width="500" height="250"  alt="Placeholder Title Image" /></center>
+<</if>>
+</div>
+
+<div class="satellite-panel"><<if $satellite4>>
+    <span id="s3"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span>
+    <<else>>
+    <span id="s3"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span>
+<</if>>
+
+<center>
+Edit satellite altitude below:
+<<textbox "$input3" $input3 autofocus>>
+<div class="altitude-button">
+<<button "Move Satellite">>
+    <<replace "#altitude-text">>$input4 km<</replace>>
+	<<if String($correct3).includes(String($input3).toLowerCase())>>
+    	<<replace "#s3">><span id="s3"><center>Satellite Altitude: <span id="computer-green"><h1>Nominal</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/YeX8jE2.png" width="500" height="250"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status3 to true>>
+        <<set $satellite3 to true>>
+	<<else>>
+    	<<replace "#s3">><span id="s3"><center>Satellite Altitude: <span id="computer-amber"><h1>Incorrect</h1></span></center></span><</replace>>
+        <<replace "#satellite-img">><center><img src="https://i.imgur.com/pgKUNTv.png" width="500" height="420"  alt="Placeholder Title Image" /></center><</replace>>
+		<<set $status3 to false>>
+        <<set $satellite3 to false>>
+        <<goto "Astronaut Incorrect Screen">>
+    <</if>>
+<</button>>
+</div>
+</center>
+
+<div class="astro-button-left"><<button[[BACK|Satellite Adjustment]]>><</button>></div>
+
+
+:: Satellite Adjustment {"position":"2000,725","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<center><strong><u>Satellite Altitude Interface</u></strong></center>
+<div class="satellite-panel">Below are the interfaces for the four satellites this spacecraft has access to. Please ensure that they are at the correct altitudes!
+
+<center>Satellite hash:
+<h1>$sat_hash_hex</h1>
+<<if $satellite1 is false>><div class="satellite-button-wrong"><<button[[SATELLITE Alpha]]>><</button>></div>
+    <<else>><div class="satellite-button-correct"><<button[[SATELLITE Alpha]]>><</button>></div>
+<</if>><<if $satellite2 is false>><div class="satellite-button-wrong"><<button[[SATELLITE Beta]]>><</button>></div>
+    <<else>><div class="satellite-button-correct"><<button[[SATELLITE Beta]]>><</button>></div>
+<</if>><<if $satellite3 is false>><div class="satellite-button-wrong"><<button[[SATELLITE Gamma]]>><</button>></div>
+    <<else>><div class="satellite-button-correct"><<button[[SATELLITE Gamma]]>><</button>></div>
+<</if>><<if $satellite4 is false>><div class="satellite-button-wrong"><<button[[SATELLITE Delta]]>><</button>></div>
+    <<else>><div class="satellite-button-correct"><<button[[SATELLITE Delta]]>><</button>></div>
+<</if>></center></div>
+<<if $satellite1 is true and $satellite2 is true and $satellite3 is true and $satellite4 is true>>
+	<<set $satelliteComplete to true>>
+    <<set $completedPuzzles to $completedPuzzles + 1>>
+    <span id="success-text">All satellites have been restored to their proper altitudes!</span>
+    <<else>><div class="satellite-panel"><center><span id="warning-text">The satellites are misaligned!</span></center></div>
+<</if>>
+<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>></div>
+</div>
+<<set $backToPuzzle to "Satellite Puzzle">>
+
+
+:: Satellite Realignment {"position":"950,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">SATELLITE REALIGNMENT</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center>
+<span id="computer-green">Satellites are one of the most important spacecrafts in our daily lives. From naviagation, communication, and weather forecasting in our applications, and scientific research like climate change and our Solar System. Satellites also have thrusters in order to maintain orbit
+
+This spacecraft controls four satellites outside of it, each one responsible for a different function over Earth. These four satellites, unfortunately, are prone to engine/navigation malfunctions from solar flares, and often require remote adjustment to their altitudes</span><center><h1 id="computer-green">--------------------------------------------------</h1></center>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Satellite Realignment Instructions]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: Satellite Realignment Instructions {"position":"1000,1225","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">SATELLITE REALIGNMENT INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center>
+<span id="computer-amber">In order to adjust the satellites, an astronaut will have to change the satellites' altitudes using the provided text field. The astronaut will have to coordinate with you, mission control, in order to properly restore the satellites to their proper orbits. 
+
+ If the altitude text says "Incorrect", adjustment will be needed. Otherwise, if it says "Nominal", then the altitude is correct.</span>
+</div><div class="ui-card">
+<span id="computer-white">PLEASE ENTER THE SATELLITE HASH BELOW. Your astronaut will have it! </span><div class="button-completed">
+<<textbox "$sat_seed" "" "Correct Altitudes Screen">><<button "Enter">>
+	<<goto "Correct Altitudes Screen">>
+<</button>>
+</div>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|Satellite Realignment]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: Solar Panel Repairs {"position":"1100,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">SOLAR PANEL REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Most spacecraft operating in the Inner Solar System rely on solar panels to generate energy from sunlight. This energy is essential for the crew to carry out critical tasks like communication with the flight controllers, and maintain a livable environment on board, like producing oxygen
+
+Solar panels can be damaged by improper retraction, collisions with large space debris, or prolonged exposure to space radiation. Solar panel repairs will require spacewalk</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+
+<div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div>
+</div>
+<<include 'Manual Timer'>>
+
+
+:: StarFix Instructions {"position":"1250,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">STAR CONSTELLATIONS INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+You will be providing correct angle coordination to your astronaut for them to complete this puzzle. Ensure the astronaut is ready to enter the task code on their console
+
+NOTE: THIS PUZZLE WILL REQUIRE SCROLLING</span>
+<<set $sf_seed = ("TASK-" + random(1000,9999))>>
+<div class="ui-card"><h3>Task Code:<p class="good"><b><<print $sf_seed>></b></p></h3>
+  <div class="button-right">
+    <<button "Open the console">>
+      <<set $sf_stage = 1>>
+      <<goto "StarFix: Houston">>
+    <</button>>
+  </div>
+</div><table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|StarFix: HOU Seed]]>><</button>></div></td></tr></table></div>
+<<include 'Manual Timer'>>
+
+
+:: StarFix: ASTR Seed {"position":"2150,600","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<div class="ui-card">
+  <h3>Enter Task Code</h3>
+  <p class="hint">Ask the Flight Controller for the code and type it below.</p>
+  <<textbox "$sf_seed" autocapitalize="off" autocorrect="off">>
+  <div class="btnrow">
+   <div class="astro-button-right"><<button "Start Mission">></div>
+      <<if !$sf_seed or $sf_seed.trim()==="">>
+        <<replace "#msg">><span class="bad">Please enter the task code.</span><</replace>>
+      <<else>>
+        <<set $sf_seed = $sf_seed.trim()>>
+        <<set $sf_stage = 1>>
+        <<set $sf_current = 0>>
+        <<goto "StarFix: Scope">>
+      <</if>>
+    <</button>>
+  </div>
+  <div id="msg" class="hint"></div>
+</div>
+</div>
+<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>></div>
+<<set $backToPuzzle to "Stars Puzzle">>
+
+
+:: StarFix: Check {"position":"2400,600","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+<<set _ok = Math.abs($sf_current - _rec) <= 5>>
+
+<div class="ui-card">
+  <<if _ok>>
+    <p class="good">Calibration complete! Deviation ≤ 5°.</p>
+    <div class="btnrow">
+      <<button "continue">>
+        <<if $sf_stage >= $sf_totalStages>>
+          <<set $starsComplete to true>>
+          <<set $completedPuzzles to $completedPuzzles + 1>>
+          <<goto "Command Center">>
+        <<else>>
+          <<set $sf_stage += 1>>
+          <<set $sf_current = 0>>
+          <<goto "StarFix: Scope">>
+        <</if>>
+      <</button>>
+    </div>
+  <<else>>
+  	<<silently>><<set $strikes to $strikes - 1>><</silently>>
+    <p class="bad">Not aligned yet.</p>
+    <p class="bad">You received a strike.</p>
+    <div class="btnrow">
+      <<button "Return to continue adjustment">><<goto "StarFix: Scope">><</button>>
+    </div>
+  <</if>>
+</div>
+</div>
+
+
+:: StarFix: HOU Seed {"position":"1250,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">STAR CONSTELLATIONS</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Throughout history, humanity had use the constellation of stars, also known as celestial navigation, to navigate our planet. Star constellations normally depicting its connections as animals, inanimate objects, or mythological characters to understand where to navigate in the night sky. As of 2025, the International Astronomical Union recognizes 88 constellations
+
+Even though we have Global Positioning System (GPS) to navigate, we still use star constellations for any celestial events that are happening. For example, a meteor shower will appear near the constellation Orion the Hunter</span>
+<center><h1 id="computer-green">--------------------------------------------------</h1></center>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|StarFix Instructions]]>><</button>></div></td></tr></table></div>
+<<include 'Manual Timer'>>
+
+
+:: StarFix: Houston {"position":"1250,1400","size":"100,100"}
+<<set _pts = genConstellation($sf_seed, $sf_stage)>>
+<<set _rec = recommendAngle(_pts)>>
+
+<div class="ui-card">
+  <b>Mission Code:</b> <<print $sf_seed>>
+  　<b>Stage:</b> <<print $sf_stage>> / <<print $sf_totalStages>>
+</div>
+
+<div id="sf_svg_hou" class="ui-card">
+  Rendering constellation...
+</div>
+
+<div class="ui-card">
+  <p><b>Constellations to be seen (Answer View)</b>: Rendered above.</p>
+
+  <<if $sf_stage >= $sf_totalStages>>
+    <p class="good">The astronaut should have completed all stages.</p>
+    <div class="button-right">
+      <<button "End Mission">>
+        <<goto "OPEN MANUAL 2/2">>
+      <</button>>
+      <<set $starsComplete = true>>
+    </div>
+    <div class="button-left">
+      <<button "Restart Mission">>
+        <<set $sf_stage = 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+    </div>
+  <<else>>
+    <div class="button-right">
+      <<button "Next Stage (Click after astronaut passes)">>
+        <<set $sf_stage += 1>>
+        <<goto "StarFix: Houston">>
+      <</button>>
+    </div>
+    <div class="button-content">
+      <<button "Redraw">>
+        <<goto "StarFix: Houston">>
+      <</button>>
+    </div>
+  <</if>>
+</div>
+
+<script>
+(function () {
+  const v = SugarCube.State.variables;
+  const pts = genConstellation(v.sf_seed, v.sf_stage);
+  const rec = recommendAngle(pts);
+  const ptsAns = rotatePts(pts, rec);
+
+  // 先正常渲染星图
+  renderConstellationSVG("sf_svg_hou", ptsAns);
+
+  // 然后在该 SVG 上叠加象限（不依赖外部 CSS）
+  function addQuadrants(containerId) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    const svg = wrap.querySelector('svg');
+    if (!svg) return;
+
+    // 避免重复叠加
+    if (svg.querySelector('.quad-axes')) return;
+
+    const vb = svg.viewBox && svg.viewBox.baseVal ? svg.viewBox.baseVal : { width: 300, height: 300 };
+    const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function line(x1, y1, x2, y2) {
+      const el = document.createElementNS(ns, 'line');
+      el.setAttribute('x1', x1); el.setAttribute('y1', y1);
+      el.setAttribute('x2', x2); el.setAttribute('y2', y2);
+      el.setAttribute('stroke', '#d84343'); el.setAttribute('stroke-width', '2');
+      el.setAttribute('class', 'quad-axes');
+      svg.appendChild(el);
+    }
+
+    function label(text, x, y, anchor) {
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', anchor);
+      t.setAttribute('fill', '#d84343');
+      t.setAttribute('font-size', '12'); t.setAttribute('font-weight', '600');
+      t.setAttribute('class', 'quad-axes');
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+
+    line(cx, 0, cx, h);
+    line(0, cy, w, cy);
+    label('1',   w - 8, 14,   'end');
+    label('2',  8,     14,   'start');
+    label('3', 8,     h - 6,'start');
+    label('4',  w - 8, h - 6,'end');
+  }
+
+  addQuadrants('sf_svg_hou');
+})();
+</script>
+
+
+
+:: StarFix: Scope {"position":"2275,600","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+	<<if typeof $sf_stage === 'undefined'>><<set $sf_stage = 1>><</if>>
+	<<if typeof $sf_current === 'undefined'>><<set $sf_current = 0>><</if>>
+</div>
+
+<div class="ui-card">
+  <b>Task Code:</b> <<print $sf_seed>>　<b>Flight segment:</b> <<print $sf_stage>>
+</div>
+
+<div id="sf_svg_scope" class="ui-card">Loading telescope view…</div>
+
+<div class="ui-card">
+  <b>Current angle:</b> <span id="curAngle"><<print $sf_current>>°</span>
+  <div class="btnrow">
+    <<button "⟲ -10°">><<run SF_step(-10)>><</button>>
+    <<button "⟲ -5°">><<run SF_step(-5)>><</button>>
+    <<button "⟲ -1°">><<run SF_step(-1)>><</button>>
+    <<button "⟳ +1°">><<run SF_step(1)>><</button>>
+    <<button "⟳ +5°">><<run SF_step(5)>><</button>>
+    <<button "⟳ +10°">><<run SF_step(10)>><</button>>
+  </div>
+
+  <div class="btnrow">
+    <<button "Check Alignment">><<goto "StarFix: Check">><</button>>
+    <<button "Redraw">><<goto "StarFix: Scope">><</button>>
+  </div>
+  <p class="hint">Coordinate with the Flight Controller’s recommended heading/shape description, then check.</p>
+</div>
+
+<<script>>
+/* 首次进入时渲染一次 */
+SF_updateScope();
+<</script>>
+
+
+
+:: Start Game {"position":"250,600","size":"100,100"}
+<div class="ui-card">
+<center><h1 id="big-warning">WARNING!!!</h1></center>
+<center><h3 class="small-warning">THIS GAME IS NOT MEANT TO BE PLAYED WITH A SINGLE PERSON.</h3></center>
+<center><h3 class="small-warning">YOU ARE REQUIRED TO HAVE TWO PLAYERS IN SEPERATE DEVICES TO PLAY THIS GAME.</h3></center>
+
+<center>But of course, you could ignore this warning, I can't stop you.</center>
+
+  <center>
+  <div class="button-completed"><<button [[Proceed]]>><</button>></div>
+  </center>
+
+
+:: StoryInit {"position":"50,1300","size":"100,100"}
+<<set $rng to seedRand(String($gameCode))>>
+<<set $seconds to 10000>>
+<<set $manualSeconds to Math.floor($rng()*50 + 100)>>
+<<set $fullWater to Math.floor($rng()*40 + 60)>>
+<<set $lowWater to Math.floor($rng()*10 + 30)>>
+<<set $strikes to 3>>
+
+<!--To check if the puzzle is completed-->
+<<set $completedPuzzles to 0>>
+<<set $numOfPuzzles to 5>>
+
+<<set $waterComplete to false>>
+<<set $toiletComplete to false>>
+<<set $starsComplete to false>>
+<<set $satelliteComplete to false>>
+<<set $computerComplete to false>>
+
+<!--Plumbing Puzzle-->
+<<silently>><<set $arrayCodes = 
+["ResetController", "ReplacePump", "ReplacePumpSensor", "ReplaceControllerCard", "ReplaceConductivitySensor"]>>
+<<set $panel = [$arrayCodes[Math.floor($rng()*$arrayCodes.length)]]>>
+<<set $tempPanel = $arrayCodes[Math.floor($rng()*$arrayCodes.length)]>>
+<<if !$panel.includes($tempPanel)>>
+ 	<<set $panel.push($tempPanel)>>
+<</if>>
+<<set $tempPanel = "">>
+
+<<set $conductivity to Math.floor($rng()*800 + 1)>>
+<<if $panel.includes("ReplaceConductivitySensor")>>
+	<<set $conductivity to Math.floor($rng()*8000 + 800)>>
+<</if>>
+<</silently>>
+
+<!--Water Puzzle-->
+<<silently>>
+<<set $dispenserCodes = ["ReplaceFilter", "ReplacePump", "FlipSwitch", "ReplaceControllerCard", "ReplaceFans", "NoHeat"]>>
+<<set $dispErrs = [$dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]]>>
+<<set $tempDisp = $dispenserCodes[Math.floor($rng()*$dispenserCodes.length)]>>
+<<if !$dispErrs.includes($tempDisp)>>
+ 	<<set $dispErrs.push($tempDisp)>>
+<</if>>
+<<set $tempDisp = "">>
+<</silently>>
+
+<<set $victoryPassage to "Victory Screen">>
+<<set $gameOverPassage to "Game Over">>
+
+<!-- for satellite puzzle-->
+
+<<set $input1 to random(300, 1400)>>
+<<set $input2 to random(300, 1400)>>
+<<set $input3 to random(300, 1400)>>
+<<set $input4 to random(300, 1400)>>
+
+<<set $rng to seedRand(String($sat_hash))>>
+
+<<set $correct1 to Math.floor($rng()*1100 + 300)>>
+<<set $correct2 to Math.floor($rng()*1100 + 300)>>
+<<set $correct3 to Math.floor($rng()*1100 + 300)>>
+<<set $correct4 to Math.floor($rng()*1100 + 300)>>
+
+<<set $satellite1 to false>>
+<<set $satellite2 to false>>
+<<set $satellite3 to false>>
+<<set $satellite4 to false>>
+
+\:: StoryInit
+<<set $sf_totalStages = 3>>  /* 想改成几段就改这里 */
+
+<!--Computer Failure Puzzle-->
+<<set $computerRandIdx to random(0,3)>>
+
+<<set $computerCodesArr = ["HOUSTON", "ORLANDO", "BARSTOW", "HAMPTON"]>>
+<<set $houstonArr = ["SUOTNHO", "OHTONUS", "UTHSONO"]>>
+<<set $orlandoArr = ["LODONRA", "ADOORLN", "DRALONO"]>>
+<<set $barstowArr = ["SOBTAWR", "ARTSWOB", "RTAOWBS"]>>
+<<set $hamptonArr = ["ANTHPOM", "NOAMHPT", "OMPNHTA"]>>
+/*
+<<set $houstonMaskedArr = ["\\* * U * T O *", "\\* * U * T O *", "\\* O * * T O * ", "\\* * * S T O *"]>>
+<<set $orlandoMaskedArr = ["\\* R * * N D *", "\\* * L * N D *", "\\* R * A * D *", "\\* * L * N D *"]>>
+<<set $barstowMaskedArr = ["\\* * R * T O *", "\\* A * * T O *", "\\* A * * T O *", "\\* * R S T * *"]>>
+<<set $hamptonMaskedArr = ["\\* A M P * O *", "\\* * M P T * *", "\\* A M * T O *", "\\* * * P T O *"]>>
+*/
+<<set $ahouston = $houstonArr.random()>>
+<<set $aorlando = $orlandoArr.random()>>
+<<set $abarstow = $barstowArr.random()>>
+<<set $ahampton = $hamptonArr.random()>>
+/*
+<<set $mhouston = $houstonMaskedArr.random()>>
+<<set $morlando = $orlandoMaskedArr.random()>>
+<<set $mbarstow = $barstowMaskedArr.random()>>
+<<set $mhampton = $hamptonMaskedArr.random()>>
+*/
+<<set $computerCorrect = $computerCodesArr[$computerRandIdx]>>
+<<set $hiddenSolution = $computerCorrect>>
+<<set $hiddenSolution = generateCoveredWord($hiddenSolution, 4, $gameCode)>>
+/*
+<<if $computerCorrect == "HOUSTON">>
+<center><pre><<print $mhouston>></pre></center>
+<<elseif $computerCorrect == "ORLANDO">>
+<center><pre><<print $morlando>></pre></center>
+<<elseif $computerCorrect == "BARSTOW">>
+<center><pre><<print $mbarstow>></pre></center>
+<<elseif $computerCorrect == "HAMPTON">>
+<center><pre><<print $mhampton>></pre></center>
+<</if>>
+*/
+
+
+* Satellite Adjustment (Located in Command Center in far right)
+* Toilet Repair	(Located in Dormitory in upper ship)
+* Water Recycling Repair (Located in Mess Hall)
+* StarFix (Stars Constellation) Realignment (Located in Command Center in far right)
+* Computer Failure (Located in Command Center in far right)
+* Oxygen Leak Checks (Scatterd around the ship)
+
+
+:: Strikes {"position":"50,900","size":"100,100"}
+<span id="strikes">Strike(s): $strikes</span><<silently>>
+<<if $strikes == 0>> <<goto "Game Over">><</if>><</silently>>
+
+
+:: Timer {"position":"50,1000","size":"100,100"}
+<span id="countdown">The spacecraft will explode in $seconds seconds.</span>
+<<silently>>
+    <<repeat 1s>>
+        <<set $seconds to $seconds - 1>>
+        <<if $seconds gt 0>>
+            <<replace "#countdown">>The spacecraft will explode in $seconds seconds.<</replace>>
+        <<else>>
+			<<replace "#countdown">><</replace>>
+			<<goto "Game Over">>
+			<<stop>>
+        <</if>>
+    <</repeat>>
+ <!-- This sample code was take from Twine SugarCube: Timed Passage with modifications--><</silently>>
+
+
+:: Toilet Repair Instructions {"position":"750,1250","size":"100,100"}
+<div class="ui-card">
+  <h1 id="computer-amber" style="text-align:center;">ORBITAL PLUMBING INSTRUCTIONS</h1>
+  <hr>
+
+  <p id="computer-amber">
+    Problems with orbital plumbing can be caused by several factors, including:
+  </p>
+  <ul id="computer-amber">
+    <li>Controller Card issues</li>
+    <li>Pump issues</li>
+    <li>Sensor issues</li>
+    <li>System configuration issues</li>
+  </ul>
+
+  <p id="computer-amber">
+    Have your astronaut inspect the equipment and relay any information given by the system.
+    Errors with certain components may have multiple causes, so ensure the statuses of other components
+    are taken into account as well—even after repair.
+  </p>
+</div>
+
+<div class="ui-card">
+  <h3 id="computer-amber">Pump Sensor Power</h3>
+  <ul>
+    <li>The <b>Power Status</b> represents whether the pump sensor is functioning properly.</li>
+    <li>Issues here may be caused by a faulty sensor.</li>
+    <li>If no other issues exist with the pump’s sensor, reconfiguring the system via the <b>Reset</b> button may be necessary.</li>
+  </ul>
+</div>
+
+<div class="ui-card">
+  <h3 id="computer-amber">Pump Sensor Load</h3>
+  <ul>
+    <li>The <b>Load Status</b> detects whether the pump is maintaining the required water pressure.</li>
+    <li>A negative load status could indicate the need for a replacement pump.</li>
+    <li>It may also derive from a faulty sensor.</li>
+  </ul>
+</div>
+
+<div class="ui-card">
+  <h3 id="computer-amber">Pump Sensor Voltage</h3>
+  <ul>
+    <li>The <b>Voltage Status</b> monitors whether the pump assembly is currently receiving the correct amount of power.</li>
+    <li>This could point to electrical issues, but may also simply be the result of a faulty pump sensor.</li>
+    <li>If several other components fail to receive proper power, the <b>Controller Card</b> may be at fault.</li>
+  </ul>
+</div>
+
+<div class="ui-card">
+  <h3 id="computer-amber">Conductivity Readings</h3>
+  <ul>
+    <li>Pure water isn’t conductive; any conductivity represents impurities in the water.</li>
+    <li>For most of the U.S., drinking water ranges from <b>50–1500&nbsp;µS/cm</b>. For our ship, readings should not exceed <b>800&nbsp;µS/cm</b>.</li>
+    <li>Readings above this level likely signify a faulty <b>Conductivity Sensor</b>.</li>
+    <li>It may also be insufficient power to the device, indicating a <b>Controller Card</b> issue.</li>
+  </ul>
+</div>
+
+<div class="ui-card">
+  <h3 id="computer-amber">Controller Card Output</h3>
+  <ul>
+    <li>The light on the Controller Card indicates whether the card is functioning and linking components.</li>
+    <li>If the light is off, the system may need to be reconfigured using the <b>Reset</b> button (sensors like the Pump Sensor may not work as intended).</li>
+    <li>If the light is off and several components lack power, the Controller Card is likely faulty and should be replaced.</li>
+  </ul>
+</div>
+
+<div class="ui-card">
+  <table style="width:70%; margin:0 auto;">
+    <tr>
+      <td>
+        <div class="button-left">
+          <<button "Back">>
+            <<goto "Plumbing Problems">>
+          <</button>>
+        </div>
+      </td>
+      <td style="text-align:center;">
+        <div class="button-completed">
+          <<button "COMPLETE">>
+            <<set $toiletComplete = true>>
+            <<goto "OPEN MANUAL">>
+          <</button>>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
+:: Toilet Repair Result {"position":"1250,1600","size":"100,100"}
+
+
+
+:: Turn On Computer {"position":"500,825","size":"100,100"}
+
+
+
+:: Victory Check {"position":"150,1300","size":"100,100"}
+$completedPuzzles / $numOfPuzzles puzzles completed<<silently>><<if $completedPuzzles == $numOfPuzzles>> <<goto "Victory Screen">><</if>><</silently>>
+
+
+:: Victory Screen {"position":"300,400","size":"100,100"}
+<div class="ui-card">
+<center><h1 id="win-text">YOU WIN!!!</h1></center>
+
+<center>Your spacecraft is now in stable conditions and you should celebrate with your team!</center>
+<center>And if you are playing solo, well I don't know what to say. Congrats?</center>
+
+<center>But something is over there, something bright...</center>
+<center>This next week of development!</center>
+<center>We haven't found any large bugs on our own, so our plan is to have our designers ramp up playtesting and conducting player interviews, going on the hunt for bugs and bug-level issues over the next two days.</center>
+<center>While this is going on, we intend to have our programmers begin implementing simple settings, as that was a notable bug/issue our playtesters felt needed addressing.</center>
+<center>Finally, on Wednesdy, we will begin shifting gears towards fixing the remaining bugs and finalizing any last minute production decisions, as well as compiling the SME's we've held throughout the course.</center>
+
+
+
+<center>
+  <div class="button-completed"><<button [[Back to Menu]]>><</button>></div>
+  </center>
+</div>
+
+
+:: Water Dispenser Repair {"position":"1450,1075","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">POTABLE WATER DISPENSER REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+The Potable Water Dispenser is vital for our astronauts' way of life, helping with hydration, hygiene, research, as well as food preparation. Additionally, this “rehydration station” is part of one of the most powerful water filtration systems, capable of filtering wastewater sources, like urine or sweat, into potable-quality drinkable water for our astronauts. The dispenser is given iodinated water, clear of all harmful elements, and uses an iodine filter to remove the biocide, leaving behind perfectly safe potable water.
+
+In 2023, NASA reported that the ISS was able to recycle 98 percent of their wastewater, a major enginnering achivement that helped reduce the need for continuous resupply missions to transport water.
+</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Water Repair Instructions]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: Water Puzzle {"position":"1400,300","size":"100,100"}
+<<nobr>>
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+<<silently>><<include "Victory Check">><</silently>>
+<center><strong><u>MESS ROOM</u></strong></center>
+<center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
+<center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempDisp)>>
+
+<table style="width: 100%;">
+  <tr>
+    <td style="text-align: right;">
+      <div class="astro-button-right">
+        <<button "Inspect Dispenser">><<goto "Inspect Dispenser">><</button>>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<<if $dispErrs.includes("FlipSwitch")>>
+  <center><div class="astro-button-action">
+  <<button "Flip Switch">>
+  <<set $tempDisp = "FlipSwitch">>
+  <<goto "Water Puzzle">>
+  <</button>></div></center>
+<<else>>
+  <center><div class="astro-button-action">
+  <<button "Flip Switch">>
+  <<goto "Astronaut Incorrect Screen">>
+  <</button>></div></center>
+<</if>>
+
+  <<if $dispErrs.includes("ReplaceFilter")>>
+    <center><div class="astro-button-action"><<button "Replace Filter">><<set $tempDisp = "ReplaceFilter">><<goto "Water Puzzle">><</button>></div></center>
+  <<else>>
+    <center><div class="astro-button-action"><<button "Replace Filter">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+  <</if>>
+
+  <<if $dispErrs.includes("ReplacePump")>>
+    <center><div class="astro-button-action">
+    <<button "Replace Pump">>
+    <<set $tempDisp = "ReplacePump">>
+    <<goto "Water Puzzle">><</button>>
+    </div></center>
+  <<else>>
+    <center><div class="astro-button-action">
+    <<button "Replace Pump">>
+    <<goto "Astronaut Incorrect Screen">>
+    <</button>>
+    </div></center>
+  <</if>>
+
+  <<if $dispErrs.includes("ReplaceControllerCard")>>
+    <center><div class="astro-button-action">
+    <<button "Replace Controller Card">>
+    <<set $tempDisp = "ReplaceControllerCard">>
+    <<goto "Water Puzzle">><</button>></div></center>
+  <<else>>
+    <center><div class="astro-button-action">
+    <<button "Replace Controller Card">>
+    <<goto "Astronaut Incorrect Screen">>
+    <</button>></div></center>
+  <</if>>
+
+  <<if $dispErrs.includes("ReplaceFans")>>
+    <center><div class="astro-button-action"><<button "Replace Fans">><<set $tempDisp = "ReplaceFans">><<goto "Water Puzzle">><</button>></div></center>
+  <<else>>
+    <center><div class="astro-button-action"><<button "Replace Fans">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
+  <</if>>
+
+  <<if $dispErrs.length == 0>>
+    <div class="astro-button-left"><<button "Leave Dispenser">>
+    <<goto "Dispenser Complete">>
+    <</button>>
+    </div>
+  <<else>>
+    <div class="astro-button-left"><<button "Leave Dispenser">>
+    <<goto "Mess Hall">>
+    <</button>></div>
+  <</if>>
+
+<<set $backToPuzzle to "Water Puzzle">>
+</div>
+<<endnobr>>
+
+<silently>
+<!-- <<if $panel.includes("ReplaceControllerCard")>>
+	<div class="astro-button-action">
+		<<button "Replace Controller Card">>
+        			<<set $tempPanel = "ReplaceControllerCard">>
+            	<<goto "Plumbing Puzzle">>
+         <</button>></div>
+		<<else>>
+ 				 <div class="astro-button-action">
+                 	<<button "Replace Controller Card">>
+                    		<<goto "Astronaut Incorrect Screen">>
+                     <</button>></div>
+		<</if>> -->
+</silently>
+
+
+:: Water Recycling Machine Result {"position":"1400,1600","size":"100,100"}
+
+
+
+:: Water Repair Instructions {"position":"1525,1275","size":"100,100"}
+<div class="ui-card"><center><h2 id="computer-amber">POTABLE WATER DISPENSER REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"> If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:
+* Controller Card Issues
+* Cooling Issues
+* Filtration Issues
+* Pumping Issues
+* Sensor Issues
+* Human Error
+Have your astronaut inspect the equipment and relay any information given by the system. Additionally, ask your astronaut to dispense water to check for quality. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+<div class="ui-card">Power Status
+*The Power Status represents whether or not the system is properly recieving DC power to fuel its processes.
+*After confirming the device is powered on, if the Power Status of the device is negative, the issue may stem from a malfunctioning Controller Card. 
+</div>
+<div class="ui-card">Filter Status
+*The Filter Status represents the device's ability to filter iodine from water.
+*A negative Filter Status typically signifies a need for a new filter replacement.
+*Issues powering the filter may also cause a filter error.
+</div>
+<div class="ui-card">Dispensing Water:
+*A pump system draws water through the potable water dispenser.
+*A failure in the pump system could result in improper flow.
+</div>
+<div class="ui-card">Maintaining Internal Temperature:
+*Proper cooling must be maintainted within the unit, with the unit's inlet and outlet fans providing airflow to cool down its components.
+*Issues with the fans could result in improper cooling of the dispenser's equipment and may result in elevated water temperatures.
+*A heater within the unit allows for hot water to be dispensed for various needs.
+*The heating assembly can supply two (2) liters of hot water every 30 minutes. Beyond this, the heater will need time to continue providing hot water. This is not an issue.
+</div>
+
+</span></div><div class="ui-card"><span id="computer-white"></span>
+<table style="width: 70%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div></td>
+    <td style="text-align: center;">
+  <div class="button-completed">
+    <<button "COMPLETE">>
+      <<set $waterComplete = true>>
+      <<goto "OPEN MANUAL 2/2">>
+    <</button>>
+  </div>
+</td></tr></table></div><<include 'Manual Timer'>>
+
+
+:: StoryScript [script]
+Config.history.controls = false;
+
+	/* ==== StarFix: seeded constellation module ==== */
+/* 1) 固定种子随机 */
+window.seedRand = function(seed){
+  let h=1779033703^seed.length;
+  for (let i=0;i<seed.length;i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 3432918353);
+    h = (h<<13)|(h>>>19);
+  }
+  return function(){
+    h = Math.imul(h ^ (h>>>16), 2246822507);
+    h = Math.imul(h ^ (h>>>13), 3266489909);
+    h = (h ^ (h>>>16)) >>> 0;
+    return h / 4294967296;
+  };
+};
+
+/* 2) 基于 seed + stage 生成“星座”点列（简单折线） */
+window.genConstellation = function(seed, stage){
+  const rng = seedRand(seed + "|" + stage);
+  const n = 5 + Math.floor(rng()*3); // 5~7 个点
+  const pts = [];
+  for(let i=0;i<n;i++){
+    pts.push({ x: Math.floor(rng()*80 - 40), y: Math.floor(rng()*80 - 40) });
+  }
+  pts.sort((a,b)=>a.x-b.x);
+  return pts;
+};
+
+/* 3) 推荐角度（将平均朝向调回水平） */
+window.recommendAngle = function(pts){
+  if(!pts || !pts.length) return 0;
+  const angs = [];
+  for(let i=1;i<pts.length;i++){
+    const dx = pts[i].x - pts[i-1].x;
+    const dy = pts[i].y - pts[i-1].y;
+    angs.push(Math.atan2(dy, dx));
+  }
+  const avg = angs.reduce((a,b)=>a+b,0)/angs.length;
+  return Math.round(-avg * 180/Math.PI);
+};
+
+/* 4) 旋转点列 */
+window.rotatePts = function(pts, deg){
+  const rad = deg * Math.PI/180;
+  const cos = Math.cos(rad), sin = Math.sin(rad);
+  return pts.map(p => ({
+    x: Math.round(p.x*cos - p.y*sin),
+    y: Math.round(p.x*sin + p.y*cos)
+  }));
+};
+
+/* 5) 渲染为 SVG */
+window.renderConstellationSVG = function(containerId, pts, opts = {}){
+  const scale = opts.scale ?? 3;
+  const w = 300, h = 300, cx = Math.round(w/2), cy = Math.round(h/2);
+  const toPath = (arr)=>arr.map((p,i)=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return (i===0?`M ${X} ${Y}`:`L ${X} ${Y}`);
+  }).join(" ");
+  const stars = (arr)=>arr.map(p=>{
+    const X = cx + p.x*scale, Y = cy - p.y*scale;
+    return `<circle cx="${X}" cy="${Y}" r="2"></circle>`;
+  }).join("");
+  const path = toPath(pts);
+  const svg = `
+    <svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="0" y="0" width="${w}" height="${h}" class="sky-bg"></rect>
+      <g><path d="${path}" class="star-link" fill="none"></path>${stars(pts)}</g>
+      <circle cx="${cx}" cy="${cy}" r="4" class="reticle"></circle>
+    </svg>`;
+  const el = document.getElementById(containerId);
+  if(el){ el.innerHTML = svg; }
+};
+
+// 让 State 在任何 SugarCube 2 环境都可用
+(function(){
+  if (typeof window.State === 'undefined' && window.SugarCube && SugarCube.State) {
+    window.State = SugarCube.State;
+  }
+})();
+
+// satellite puzzle (using richard's generator!)
+
+let sat_hash = Math.floor(Math.random() * 10000000);
+State.variables.sat_hash = sat_hash;
+let sat_hash_hex = sat_hash.toString(16).toUpperCase();
+State.variables.sat_hash_hex = sat_hash_hex;
+
+window.setSatellites = function (seedHex) {
+  console.log(seedHex);
+  const seed = parseInt(seedHex, 16);
+  console.log(seed);
+  const rng1 = seedRand(String(seed));
+  State.variables.correct1 = Math.floor(rng1()*1100 + 300);
+  console.log(State.variables.correct1);
+  State.variables.correct2 = Math.floor(rng1()*1100 + 300);
+  console.log(State.variables.correct2);
+  State.variables.correct3 = Math.floor(rng1()*1100 + 300);
+  console.log(State.variables.correct3);
+  State.variables.correct4 = Math.floor(rng1()*1100 + 300);
+  console.log(State.variables.correct4);
+}
+
+//Function to randomize letter placement
+window.generateCoveredWord = function(word, numBlanks, seedHex) {
+  const seed = parseInt(seedHex, 16);
+  const rng1 = seedRand(String(seed));
+ let arrWord = Array.from(word);
+  for(let i = 0; i < numBlanks;i++) {
+  	let rand = Math.floor(rng1()*arrWord.length);
+    while(arrWord[rand] == '*') {
+      rand = Math.floor(rng1()*arrWord.length);
+    }
+    arrWord[rand] = '*';
+  }
+  let blockedWord = arrWord.join('');
+  blockedWord = "\\" + blockedWord;
+  return blockedWord;
+}
+
+/*StarFix*/
+window.addQuadrants = function (containerId) {
+  const wrap = document.getElementById(containerId);
+  if (!wrap) return;
+  const svg = wrap.querySelector('svg');
+  if (!svg) return;
+
+  svg.querySelectorAll('.quad-axes').forEach(n => n.remove());
+
+  const vb = svg.viewBox && svg.viewBox.baseVal ? svg.viewBox.baseVal : { width: 300, height: 300 };
+  const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  function line(x1, y1, x2, y2) {
+    const el = document.createElementNS(ns, 'line');
+    el.setAttribute('x1', x1); el.setAttribute('y1', y1);
+    el.setAttribute('x2', x2); el.setAttribute('y2', y2);
+    el.setAttribute('stroke', '#d84343'); el.setAttribute('stroke-width', '2');
+    el.setAttribute('class', 'quad-axes');
+    svg.appendChild(el);
+  }
+  function label(text, x, y, anchor) {
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', y);
+    t.setAttribute('text-anchor', anchor);
+    t.setAttribute('fill', '#d84343');
+    t.setAttribute('font-size', '12'); t.setAttribute('font-weight', '600');
+    t.setAttribute('class', 'quad-axes');
+    t.textContent = text;
+    svg.appendChild(t);
+  }
+
+  line(cx, 0, cx, h);
+  line(0, cy, w, cy);
+  label('1',   w - 8,  14,  'end');
+  label('2',  8,      14,  'start');
+  label('3', 8,      h-6, 'start');
+  label('4',  w - 8,  h-6, 'end');
+};
+
+window.SF_updateScope = function () {
+  const v = SugarCube.State.variables;
+  const angle = (v.sf_current || 0);
+  const ptsRot = rotatePts(genConstellation(v.sf_seed, v.sf_stage), v.sf_current);
+  renderConstellationSVG('sf_svg_scope', ptsRot);
+  addQuadrants('sf_svg_scope');
+};
+
+
+window.SF_step = function (deg) {
+  const v = SugarCube.State.variables;
+  let a = (v.sf_current || 0) + deg;
+  a = ((a + 180) % 360 + 360) % 360 - 180;
+  v.sf_current = Math.round(a);
+  const el = document.getElementById('curAngle');
+  if (el) el.textContent = v.sf_current + '°';
+  SF_updateScope();
+};
+
+$(document).on(':passagedisplay', function () {
+  const box = document.getElementById('sf_svg_scope');
+  if (!box || typeof window.SF_updateScope !== 'function') return;
+
+  const v = SugarCube.State.variables;
+  if (typeof v.sf_stage === 'undefined') v.sf_stage = 1;
+  if (typeof v.sf_current === 'undefined') v.sf_current = 0;
+
+  SF_updateScope();
+});
+
+// ------- Simple BGM Manager -------
+window._bgm = new Audio();
+window._bgm.loop = true;
+window._bgm.volume = 0.5;
+
+(function () {
+  function unlockOnce() {
+    window._bgm.play().catch(function() {});
+    document.removeEventListener('pointerdown', unlockOnce);
+    document.removeEventListener('keydown', unlockOnce);
+  }
+  document.addEventListener('pointerdown', unlockOnce);
+  document.addEventListener('keydown', unlockOnce);
+})();
+
+window.playBGM = function (id, src) {
+  try {
+    var abs = new URL(src, location.href).href;
+    if (window._bgm.src !== abs) {
+      window._bgm.pause();
+      window._bgm.src = abs;
+      window._bgm.load();
+    }
+    window._bgm.play().catch(function(e){
+      console.warn('Autoplay blocked, click once to enable sound.', e);
+    });
+    window.currentBGMId = id;
+  } catch (e) {
+    console.error('playBGM error:', e);
+  }
+};
+
+window.stopBGM = function () {
+  window._bgm.pause();
+  window._bgm.currentTime = 0;
+};
+
+// ========= Oxygen Leak core =========
+(function(){
+  const V = () => SugarCube.State.variables;
+
+  window.OXY_initScenario = function() {
+    const v = V();
+    v.oxy_pressure = Math.floor(Math.random()*21) + 70;
+    const pipes = ['Green','Blue','Red','Yellow'];
+    v.oxy_leak = pipes[Math.floor(Math.random()*pipes.length)];
+    v.oxy_valves = { Red:true, Blue:true, Yellow:true, Green:true };
+    v.oxy_sealed = false; v.oxy_failed = false; v.oxy_okTicks = 0;
+    OXY_stopLoop(); OXY_startLoop();
+    setTimeout(OXY_render, 0);
+  };
+
+  window.OXY_expected = function() {
+    const v = V();
+    const exp = { Red:true, Blue:true, Yellow:true, Green:true };
+    switch (v.oxy_leak) {
+      case 'Green':  exp.Red=false;  exp.Blue=true;  break;
+      case 'Blue':   exp.Yellow=true;exp.Green=false;break;
+      case 'Red':    exp.Blue=false; exp.Yellow=true;break;
+      case 'Yellow': exp.Red=true;   exp.Green=false;break;
+    }
+    if (v.oxy_pressure < 80) exp.Yellow = false;
+    if (v.oxy_pressure < 50) { exp.Red=false; exp.Blue=false; exp.Yellow=false; exp.Green=false; }
+    return exp;
+  };
+
+  window.OXY_isCorrect = function() {
+    const v = V(), exp = OXY_expected(), valves = v.oxy_valves;
+    for (const k in exp) if (valves[k] !== exp[k]) return false;
+    return true;
+  };
+
+  window.OXY_tick = function() {
+    const v = V();
+    if (v.oxy_failed || v.oxy_sealed) return;
+    const correct = OXY_isCorrect();
+
+    if (correct) {
+      v.oxy_pressure = Math.min(100, v.oxy_pressure + 1);
+      v.oxy_okTicks = (v.oxy_okTicks||0) + 1;
+    } else {
+      const exp = OXY_expected();
+      let bad = 0;
+      for (const k in exp) if (v.oxy_valves[k] !== exp[k]) bad++;
+      const drop = 1 + bad;
+      v.oxy_pressure = Math.max(0, v.oxy_pressure - drop);
+      v.oxy_okTicks = 0;
+    }
+
+    if (v.oxy_pressure <= 0) { v.oxy_failed = true; OXY_stopLoop(); }
+    if (v.oxy_okTicks >= 3) { v.oxy_sealed = true; OXY_stopLoop(); }
+    OXY_render();
+  };
+
+  window.OXY_startLoop = function(){
+    OXY_stopLoop();
+    window._oxyTimer = setInterval(OXY_tick, 1000);
+    OXY_tick();
+  };
+
+  window.OXY_stopLoop = function(){
+    if (window._oxyTimer) { clearInterval(window._oxyTimer); window._oxyTimer = null; }
+  };
+
+  window.OXY_toggleValve = function(color){
+    const v = V();
+    v.oxy_valves[color] = !v.oxy_valves[color];
+    OXY_render();
+  };
+
+  window.OXY_render = function(){
+    const v = V();
+    const num = document.getElementById('oxy-pressure-num');
+    const bar = document.getElementById('oxy-gauge-bar');
+    if (num) num.textContent = (v.oxy_pressure|0) + '%';
+    if (bar) bar.style.width = Math.max(0, Math.min(100, v.oxy_pressure)) + '%';
+
+    ['Red','Blue','Yellow','Green'].forEach(c=>{
+      const b = document.getElementById('v-'+c);
+      if (b) {
+        const open = v.oxy_valves[c];
+        b.textContent = c + ': ' + (open ? 'OPEN' : 'CLOSED');
+        b.className = 'valve ' + (open ? 'open' : 'closed');
+      }
+    });
+
+    const tip = document.getElementById('oxy-leak-tip');
+    if (tip) tip.textContent = 'Bubbles observed near ' + v.oxy_leak + ' pipe.';
+    const st = document.getElementById('oxy-status');
+    if (st) {
+      if (v.oxy_failed) st.innerHTML = '<span class="bad"> Oxygen depleted. Mission failed.</span>';
+      else if (v.oxy_sealed) st.innerHTML = '<span class="good"> Leak sealed! Pressure stabilizing.</span>';
+      else st.textContent = 'Adjust valves to stop the leak.';
+    }
+  };
+})();
+
+:: StoryStylesheet [stylesheet]
+#menu-saves, #menu-restart {
+	display: none;
+}
+
+#menu-core {
+	display: none;
+}
+
+#menu-item-saves, #menu-item-restart {
+	display: none;
+}
+
+#begin-button a {
+  	font-size: 20px;
+  	font-weight: bold;
+	color: red;
+}
+
+#big-warning {
+	color: yellow;
+}
+
+#lose-text {
+	color: red;
+}
+
+#win-text {
+	color: lime;
+}
+
+#success-text, #win-text {
+	color: lime;
+}
+
+#warning-text {
+ 	color: orange; 
+}
+
+.small-warning {
+  	margin: 0px;
+	padding: 1px;
+  	line-height: 20%;
+}
+
+a.yellow-link {
+    color: yellow;
+}
+
+.text-14px{
+  font-size: 14px;
+}
+
+/* Satellite Puzzle UI */
+
+.status-text {
+  font-size: 20px;
+  text-align: center;
+}
+
+.altitude-button button {
+  background-color: #2a1a00;
+  border: 2px dashed #ff8800;
+  color: #ff8800;
+  font-size: 20px;
+}
+
+.altitude-button button:hover {
+  background-color: #ff8800;
+  border: 3px dashed black;
+  color: black;
+  font-size: 25px;
+}
+
+#altitude-text {
+  color: red;
+  font-family: "Lucida Sans";
+}
+
+.satellite-panel {
+  background-color: #0a0a0a;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid #444444;
+}
+
+.satellite-button-wrong button {
+  background-color: #2e0a0a;
+  padding: 5px;
+  margin: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: 1px solid red;
+  color: red;
+}
+
+.satellite-button-wrong button:hover {
+  background-color: #1a1a1a;
+  color: black;
+  background-color: red;
+}
+
+.satellite-button-correct button {
+  background-color: #0a2e0a;
+  margin: 0px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: 1px solid lime;
+  color: lime;
+}
+
+.satellite-button-correct button:hover {
+  background-color: #1a1a1a;
+  color: black;
+  background-color: lime;
+}
+
+ /*UI Buttons for the astronaut*/
+
+.astro-button-right button {
+  background-color: #00c3ff; 
+  color: #001f4d;
+  margin: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 4px solid #001f4d;
+  clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+}
+
+.astro-button-right button:hover {
+  background-color: #001f4d; 
+  border: 4px solid #00c3ff;
+  color: #00c3ff;
+}
+
+.astro-button-left button {
+  background-color: #00c3ff; 
+  color: #001f4d;
+  margin: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 4px solid #001f4d;
+  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 20% 100%);
+}
+
+.astro-button-left button:hover {
+  background-color: #001f4d; 
+  border: 4px solid #00c3ff;
+  color: #00c3ff;
+}
+
+.astro-button-up button {
+  background-color: #00c3ff; 
+  color: #001f4d;
+  margin: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 4px solid #001f4d;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.astro-button-up button:hover {
+  background-color: #001f4d; 
+  border: 4px solid #00c3ff;
+  color: #00c3ff;
+}
+
+.astro-button-down button {
+  background-color: #00c3ff; 
+  color: #001f4d;
+  margin: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 4px solid #001f4d;
+  clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+}
+
+.astro-button-down button:hover {
+  background-color: #001f4d; 
+  border: 4px solid #00c3ff;
+  color: #00c3ff;
+}
+
+.astro-button-issue button {
+  border-radius: 15px 15px 15px 15px;
+  background-color: #FFD300; 
+  border: 4px solid #BA8E23;
+  color: #6e5102;
+}
+
+.astro-button-issue button:hover {
+  border-radius: 15px 15px 15px 15px;
+  background-color: #6e5102; 
+  border: 4px solid #FFD300;
+  color: #FFD300;
+  font-weight: bold;
+}
+
+
+.astro-button-complete {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #45CC2D;
+  border: 4px solid #2B332A;
+  color: #2B332A;
+  display: inline-block;   
+  padding: 5px;       
+}
+
+.astro-button-action button {
+  background-color: #9EFCFF; 
+  color: #176161;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  clip-path: polygon(
+    10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%
+  );
+}
+
+.astro-button-action button:hover {
+  background-color: #176161; 
+  border: 4px solid #176161;
+  color: #9EFCFF;
+}
+
+.astro-button-ambient button {
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+    width: 120px;
+    text-align: center;
+    background-color: #319af5;
+    color: #033f73;
+    letter-spacing: 1px;
+    border: 4px solid #0670cc;
+    padding: 3px 23px;
+}
+
+.astro-button-ambient button:hover{
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+    width: 120px;
+    text-align: center;
+    background-color: #033f73;
+    color: #319af5;
+    letter-spacing: 1px;
+    border: 4px solid #319af5;
+    padding: 3px 23px;
+}
+
+.astro-button-hot button {
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+    width: 120px;
+    text-align: center;
+    background-color: #fa1b33;
+    color: #4f020a;
+    letter-spacing: 1px;
+    border: 4px solid #4f020a;
+    padding: 3px 23px;
+}
+
+.astro-button-hot button:hover{
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+    width: 120px;
+    text-align: center;
+    background-color: #4f020a;
+    color: #fa1b33;
+    letter-spacing: 1px;
+    border: 4px solid #fa1b33;
+    padding: 3px 23px;
+}
+
+.astro-button-deadend button{
+  background-color: #5e5f61; 
+  color: #bdbebf;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  clip-path: polygon(
+    10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%
+  );
+}
+
+ /*UI Buttons for the controller*/
+
+.button-left button {
+    border-radius: 15px 1px 1px 15px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #000a1a;
+    color: #FFB000;
+    letter-spacing: 1px;
+    border: 1px solid #FFB000;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-left button:hover {
+    border-radius: 15px 1px 1px 15px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #9c3914;
+    color: #FFB000;
+    letter-spacing: 1px;
+    border: 1px solid #FFB000;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-right button {
+    border-radius: 1px 15px 15px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #000a1a;
+    color: #33FF33;
+    letter-spacing: 1px;
+    border: 1px solid #33FF33;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-right button:hover {
+    border-radius: 1px 15px 15px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #0d6904;
+    color: #33FF33;
+    letter-spacing: 1px;
+    border: 1px solid #33FF33;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-content button {
+    border-radius: 1px 1px 1px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #000a1a;
+    color: #C9C7AF;
+    letter-spacing: 1px;
+    border: 1px solid #C9C7AF;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-content button:hover {
+    border-radius: 1px 1px 1px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #545454;
+    color: #C9C7AF;
+    letter-spacing: 1px;
+    border: 1px solid #C9C7AF;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-completed button {
+    border-radius: 15px 15px 15px 15px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #000a1a;
+    color: #33FF33;
+    letter-spacing: 1px;
+    border: 1px solid #33FF33;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-completed button:hover {
+    border-radius: 15px 15px 15px 15px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #0d6904;
+    color: #33FF33;
+    letter-spacing: 1px;
+    border: 1px solid #33FF33;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+#completed-text {
+    color: palegreen;
+}
+
+#computer-green {
+    color: #33FF33;
+}
+
+#computer-amber {
+    color: #FFB000;
+}
+
+#computer-white {
+    color: #C9C7AF;
+}
+
+.text-14px{
+  font-size: 14px;
+}
+
+/* ==== StarFix styles ==== */
+.sky-bg { fill: #0b1020; }
+.star-link { stroke: #7fd0ff; stroke-width: 2; }
+svg circle { fill: #fff; }
+.reticle { fill: none; stroke: #ffd54a; stroke-width: 1.5; }
+.ui-card { border: 1px solid #2b2f45; border-radius: 10px; padding: 12px; margin: 10px 0; background: #121422; }
+.btnrow button { margin-right: 6px; margin-bottom: 6px; }
+.hint { color: #9ad; }
+.bad { color: #f88; }
+.good { color: #9f9; }
