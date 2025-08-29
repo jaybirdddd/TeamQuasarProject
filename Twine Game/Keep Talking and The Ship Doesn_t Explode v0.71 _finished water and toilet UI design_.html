@@ -721,6 +721,74 @@ $(document).on(':passagedisplay', function () {
   SF_updateScope();
 });
 
+/* StarFix Tick marks overlay */
+(function () {
+  function drawTicks(containerId, step = 20, tick = 5, showNumbers = true) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    const svg = wrap.querySelector('svg');
+    if (!svg) return;
+
+    svg.querySelectorAll('.quad-tick').forEach(n => n.remove());
+
+    const vb = svg.viewBox && svg.viewBox.baseVal ? svg.viewBox.baseVal : { width: 300, height: 300 };
+    const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function line(x1, y1, x2, y2) {
+      const e = document.createElementNS(ns, 'line');
+      e.setAttribute('x1', x1); e.setAttribute('y1', y1);
+      e.setAttribute('x2', x2); e.setAttribute('y2', y2);
+      e.setAttribute('stroke', '#d84343');
+      e.setAttribute('stroke-width', '1');        
+      e.setAttribute('class', 'quad-tick');
+      svg.appendChild(e);
+    }
+    function label(text, x, y, anchor) {
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', anchor);
+      t.setAttribute('fill', '#d84343');
+      t.setAttribute('font-size', '9');
+      t.setAttribute('class', 'quad-tick');
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+
+    for (let x = cx + step, i = 1; x < w; x += step, i++) {
+      line(x, cy - tick, x, cy + tick);
+      if (showNumbers) label(i, x, cy - 6, 'middle');
+    }
+    
+    for (let x = cx - step, i = -1; x > 0; x -= step, i--) {
+      line(x, cy - tick, x, cy + tick);
+      if (showNumbers) label(i, x, cy - 6, 'middle');
+    }
+    
+    for (let y = cy - step, i = 1; y > 0; y -= step, i++) {
+      line(cx - tick, y, cx + tick, y);
+      if (showNumbers) label(i, cx + 10, y + 3, 'start');
+    }
+    
+    for (let y = cy + step, i = -1; y < h; y += step, i--) {
+      line(cx - tick, y, cx + tick, y);
+      if (showNumbers) label(i, cx + 10, y + 3, 'start');
+    }
+  }
+
+  
+  const _origAddQuadrants = window.addQuadrants;
+  window.addQuadrants = function (containerId) {
+    if (typeof _origAddQuadrants === 'function') _origAddQuadrants(containerId);
+    drawTicks(containerId); 
+  };
+
+  $(document).on(':passagedisplay', function () {
+    ['sf_svg_scope', 'sf_svg_hou'].forEach(id => drawTicks(id));
+  });
+})();
+
+
 // ------- Simple BGM Manager -------
 window._bgm = new Audio();
 window._bgm.loop = true;
@@ -2164,6 +2232,70 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
   addQuadrants(&#39;sf_svg_hou&#39;);
 })();
 &lt;/script&gt;
+
+// StarFix Tick marks overlay
+
+&lt;script&gt;
+(function () {
+  
+  function drawTicks(containerId, step = 20, tick = 5, showNumbers = true) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    const svg = wrap.querySelector(&#39;svg&#39;);
+    if (!svg) return;
+
+    
+    svg.querySelectorAll(&#39;.quad-tick&#39;).forEach(n =&gt; n.remove());
+
+    const vb = svg.viewBox &amp;&amp; svg.viewBox.baseVal ? svg.viewBox.baseVal : { width: 300, height: 300 };
+    const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+    const ns = &#39;http://www.w3.org/2000/svg&#39;;
+
+    function line(x1, y1, x2, y2) {
+      const e = document.createElementNS(ns, &#39;line&#39;);
+      e.setAttribute(&#39;x1&#39;, x1); e.setAttribute(&#39;y1&#39;, y1);
+      e.setAttribute(&#39;x2&#39;, x2); e.setAttribute(&#39;y2&#39;, y2);
+      e.setAttribute(&#39;stroke&#39;, &#39;#d84343&#39;);
+      e.setAttribute(&#39;stroke-width&#39;, &#39;1&#39;);       
+      e.setAttribute(&#39;class&#39;, &#39;quad-tick&#39;);
+      svg.appendChild(e);
+    }
+    function label(text, x, y, anchor) {
+      const t = document.createElementNS(ns, &#39;text&#39;);
+      t.setAttribute(&#39;x&#39;, x); t.setAttribute(&#39;y&#39;, y);
+      t.setAttribute(&#39;text-anchor&#39;, anchor);
+      t.setAttribute(&#39;fill&#39;, &#39;#d84343&#39;);
+      t.setAttribute(&#39;font-size&#39;, &#39;9&#39;);
+      t.setAttribute(&#39;class&#39;, &#39;quad-tick&#39;);
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+
+    
+    for (let x = cx + step, i = 1; x &lt; w; x += step, i++) {
+      line(x, cy - tick, x, cy + tick);
+      if (showNumbers) label(i, x, cy - 6, &#39;middle&#39;);
+    }
+    for (let x = cx - step, i = -1; x &gt; 0; x -= step, i--) {
+      line(x, cy - tick, x, cy + tick);
+      if (showNumbers) label(i, x, cy - 6, &#39;middle&#39;);
+    }
+    
+    for (let y = cy - step, i = 1; y &gt; 0; y -= step, i++) {
+      line(cx - tick, y, cx + tick, y);
+      if (showNumbers) label(i, cx + 10, y + 3, &#39;start&#39;);
+    }
+    for (let y = cy + step, i = -1; y &lt; h; y += step, i--) {
+      line(cx - tick, y, cx + tick, y);
+      if (showNumbers) label(i, cx + 10, y + 3, &#39;start&#39;);
+    }
+  }
+
+  requestAnimationFrame(function () { drawTicks(&#39;sf_svg_hou&#39;); });
+  setTimeout(function(){ drawTicks(&#39;sf_svg_hou&#39;); }, 0);
+})();
+&lt;/script&gt;
+
 </tw-passagedata><tw-passagedata pid="60" name="StarFix: Scope" tags="" position="2275,600" size="100,100">&lt;div class=&quot;ui-card&quot;&gt;&lt;div class=&quot;satellite-panel&quot;&gt;&lt;&lt;include &quot;Gameplay Rules&quot;&gt;&gt;&lt;/div&gt;
 	&lt;&lt;if typeof $sf_stage === &#39;undefined&#39;&gt;&gt;&lt;&lt;set $sf_stage = 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 	&lt;&lt;if typeof $sf_current === &#39;undefined&#39;&gt;&gt;&lt;&lt;set $sf_current = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
