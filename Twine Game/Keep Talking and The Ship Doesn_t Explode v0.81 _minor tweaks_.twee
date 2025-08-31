@@ -1,5 +1,5 @@
 :: StoryTitle
-Keep Talking and The Ship Doesn_t Explode v0.71 (finished water and toilet UI design)
+Keep Talking and The Ship Doesn_t Explode v0.81 (minor tweaks)
 
 
 :: StoryData
@@ -20,9 +20,12 @@ Keep Talking and The Ship Doesn_t Explode v0.71 (finished water and toilet UI de
 <center>The only way to fix the spacecraft is to ask your flight controller on how to solve these problems</center>
 <center>Your goal is to provide clear communication with your flight controllers to obtain the correct answers to restore your spacecraft into safe conditions</center>
 <center>Every incorrect action will time you out for a few seconds AND will receive a strike. </center>
-<center>If you ran out of time, or that you are on your third strike, your spacecraft will explode (don't ask me why it explodes, it just does) </center>
-<center>NOTE!!!</center><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center>
-</div><div class="ui-card">
+<center>If you ran out of time or strikes, your spacecraft will explode (don't ask me why it explodes, it just does) </center>
+<center><span id="big-warning">NOTE!!!</span></center><span id="big-warning"><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME
+
+Depending on your screen size, you WILL have to scroll</center></span>
+<center><span id="lose-text">DISCLAIMER:</span></center><span id="lose-text"> <center>While the images of the International Space Station (ISS) is real, it is ONLY USED for gameplay experience. This game is NOT an accurate representation of the layout of the ISS</center></span>
+<div class="ui-card">
 <center><div class="astro-button-right"><<button [[BEGIN MISSION|Enter Code]]>><</button>></div></center>
 <center><div class="astro-button-left"><<button [[NVM GO BACK|BEGIN MISSION]]>><</button>></div></center>
 </div>
@@ -109,6 +112,14 @@ Antenna will be in need of repair if its damaged, broken, or facing limited or d
 :: Button Prototyping {"position":"225,1600","size":"100,100"}
 Astronaut UI Button Testing
 
+  <span class="big-warning">Ensure you entered "TASK-" and the four digit number 	in the task code</span>
+  
+  <center><span id="big-warning">NOTE!!!</span></center><span id="big-warning"><center>MAKE SURE YOUR FLIGHT CONTROLLER IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME</center></span>
+
+<div class="astro-button-disclaimer"><<button "DISCLAIMER">><</button>></div>
+
+<div class="button-disclaimer"><<button "DISCLAIMER">><</button>></div>
+
 <div class="astro-button-right"><<button "Mess Room">><</button>></div>
 <div class="astro-button-left"><<button "Hallway">><</button>></div>
 <div class="astro-button-up"><<button "Life Support">><</button>></div>
@@ -143,6 +154,8 @@ Astronaut UI Button Testing
 
 <div class="astro-button-deadend"><<button "Dead End">><</button>></div>
 
+.astro-button-disclaimer 
+
 
 :: Command Center {"position":"2000,600","size":"100,100"}
 <<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div><<silently>><<include "Victory Check">><</silently>>
@@ -174,14 +187,14 @@ Astronaut UI Button Testing
   <div class="satellite-panel">
   <<if $satelliteComplete is false>>
     <div class="astro-button-issue">
-      <<button "!!!Satellite!!!">>
+      <<button "!!!Satellite Realignment!!!">>
         <<goto "Satellite Adjustment">>
       <</button>>
     </div>
   <</if>>
   <<if $computerComplete is false>>
     <div class="astro-button-issue">
-      <<button "!!!Computer!!!">>
+      <<button "!!!Computer Failure!!!">>
         <<goto "Computer Rebooting">>
       <</button>>
     </div>
@@ -228,7 +241,7 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 *<span id="warning-text">$abarstow</span>
 *<span id="warning-text">$ahampton</span>
 </div><div class="ui-card">
-<table style="width: 70%;">
+<table style="width: 100%;">
   <tr>
     <td><div class="button-left"><<button [[Back|Computer Failure]]>><</button>></div></td>
     <td style="text-align: center;">
@@ -238,7 +251,15 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
       <<goto "OPEN MANUAL">>
     <</button>>
   </div>
-</td></tr></table></div>
+</td>
+<td style="text-align: right;">
+  <div class="button-disclaimer">
+    <<button "DISCLAIMER">>
+      <<goto "Disclaimer Computer Failure">>
+    <</button>>
+  </div>
+</td></tr>
+</table></div>
 
 <<include 'Manual Timer'>>
 <<silently>>
@@ -284,8 +305,11 @@ Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
 <</if>><</button>>
 </div>
 
-<div class="astro-button-left"><<button [[Back|Command Center]]>><</button>></div>
-</div>
+<table style="width: 100%;">
+  <tr>
+    <td><div class="astro-button-left"><<button [[Back|Command Center]]>><</button>></div></td>
+   <td style="text-align: right;"><div class="astro-button-disclaimer"><<button [[DISCLAIMER|Disclaimer Astro Computer Failure]]>><</button>></div></td></tr></table>
+
 
 
 :: Controller Error Screen {"position":"400,825","size":"100,100"}
@@ -298,13 +322,13 @@ Enter Reboot Code:<<textbox "$computerFailureUserInput" "" >><<button "Enter">>
   <<elseif $room_choice is 3>>
   <<set _psg to 'Antenna Repair'>>
   <<elseif $room_choice is 4>>
-  <<set _psg to 'Plumbing Problems'>>
+  <<set _psg to 'Orbital Plumbing Problems'>>
   <<elseif $room_choice is 5>>
   <<set _psg to 'Oxygen Leak'>>
    <<else>>
   <<set _psg to 'Water Dispenser Repair'>>
 <</if>></silently>
-/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Plumbing Problems', 'Water Dispenser Repair', 'Oxygen Leak')>> */ 
+/* <<set _psg to either('Solar Panel Repairs', 'Computer Failure', 'Antenna Repair', 'Orbital Plumbing Problems', 'Water Dispenser Repair', 'Oxygen Leak')>> */ 
 <center><div class="ui-card"><span id="computer-amber">
   RESTARTING COMPUTER<br>
   PLEASE BE EXTREMELY PATIENT<br>
@@ -339,13 +363,13 @@ SATELLITE Delta - <span id="satval4">$correct4 km</span></span>
   <div class="button-completed">
     <<button "COMPLETE">>
       <<set $satelliteComplete = true>>
-      <<goto "OPEN MANUAL">>
+      <<goto "OPEN MANUAL 2/2">>
     <</button>>
   </div>
 </td></tr></table></div><<include 'Manual Timer'>>
 
 
-:: Correct Computer Code {"position":"450,1375","size":"100,100"}
+:: Correct Computer Code {"position":"350,1250","size":"100,100"}
 <div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">The bottom are the answers for the astronaut to reboot the computer to negate the computer failure
 
 Your astronaut should read out the code they are seeing. Any asterisks that they are seeing are empty charactes that are needed to reboot the computer. Use the letters the astronaut reported to identify the correct code from the set of possible codes.
@@ -368,6 +392,121 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <</silently>>
 
 
+:: Disclaimer Astro Computer Failure {"position":"2600,200","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+
+This is where we put the computer failure disclaimer
+
+<div class="astro-button-left"><<button [[Back|Computer Rebooting]]>><</button>></div>
+
+
+
+:: Disclaimer Astro Orbital Plumbing {"position":"2600,0","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+
+This is where we put the orbital plumbing disclaimer
+
+<div class="astro-button-left"><<button [[Back|Plumbing Puzzle]]>><</button>></div>
+
+
+:: Disclaimer Astro Satellite Realignment {"position":"2600,300","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+
+This is where we put the satellite realignment disclaimer
+
+<div class="astro-button-left"><<button [[Back|Satellite Adjustment]]>><</button>></div>
+
+
+:: Disclaimer Astro Stars Constellations {"position":"2600,400","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+
+This is where we put the stars constellation disclaimer
+
+<div class="astro-button-left"><<button [[Back|StarFix: ASTR Seed]]>><</button>></div>
+
+
+:: Disclaimer Astro Water Repair {"position":"2600,100","size":"100,100"}
+<div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
+
+This is where we put the water dispenser disclaimer
+
+<div class="astro-button-left"><<button [[Back|Water Puzzle]]>><</button>></div>
+
+
+:: Disclaimer Computer Failure {"position":"450,1400","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">COMPUTER FAILURE DISCLAIMER</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+
+This is the placeholder disclaimer for the computer failure puzzle
+
+</span>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button [[Back|Computer Failure Instructions]]>><</button>></div></td>
+</tr></table></div>
+
+<<include 'Manual Timer'>>
+
+
+
+:: Disclaimer Orbital Plumbing {"position":"700,1400","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">Orbital Plumbing Problems Disclaimer</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+
+This is where we put the placeholder for the disclaimer for the orbital plumbing
+
+</span>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|Toilet Repair Instructions]]>><</button>></div></td>
+    </tr></table></div>
+    
+<<include 'Manual Timer'>>
+
+
+:: Disclaimer Satellite Realignment {"position":"1050,1375","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">SATELLITE REALIGNMENT DISCLAIMER</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center>
+<span id="computer-amber">
+
+This is where we put the satellite realignmnet disclaimer
+
+</span>
+</div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left">
+    <<button[[Back|Satellite Realignment Instructions]]>><</button>>
+    </div>
+    </td>
+    </tr></table></div><<include 'Manual Timer'>>
+
+
+:: Disclaimer Stars Constellations {"position":"1375,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">STAR CONSTELLATIONS DISCLAIMER</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+
+This is where we put the satellite realignmnet disclaimer
+
+</span></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|StarFix Instructions]]>><</button>></div></td>
+    </tr></table></div>
+<<include 'Manual Timer'>>
+
+
+:: Disclaimer Water Repair {"position":"1700,1400","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">POTABLE WATER DISPENSER REPAIR DISCLAIMER</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+
+This is where we put the water dispenser repair disclaimer
+
+</span></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|Water Repair Instructions]]>><</button>></div></td>
+    </tr></table></div>
+<<include 'Manual Timer'>>
+
+
 :: Dispense Water {"position":"1100,300","size":"100,100"}
 <<nobr>>
 <div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
@@ -375,24 +514,23 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <center><strong><u>MESS ROOM</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="550" height="400" alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempPanel)>>
 
 <div class="satellite-panel">
-<<if $panel.includes("FlipSwitch")>>
-	<center>[Switch Position:] <span id="computer-amber">OFF</span></center>
+<<if $dispErrs.includes("FlipSwitch")>>
+	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></center>
 <<else>>
-	<center>[Switch Position:] <span id="computer-green">ON</span></center>
+	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
 <</if>>
-
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Power Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<if $dispErrs.includes("FlipSwitch") or $dispErrs.includes("ReplaceControllerCard")>>
+	<center>[Power Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
-	<center>[Power Status:] <span id="computer-green">POSITIVE</span></center>
+	<center>[Power Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
-
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
-	<center>[Filter Status:] <span id="computer-amber">NEGATIVE</span></center>
+<<if $dispErrs.includes("ReplaceFilter") or $dispErrs.includes("ReplaceControllerCard")>>
+	<center>[Filter Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
-	<center>[Filter Status:] <span id="computer-green">POSITIVE</span></center>
+	<center>[Filter Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
 
 <<if $waterTemp == "Ambient">>
@@ -427,7 +565,6 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 <<endnobr>>
 
 
-
 :: Dispenser Complete {"position":"1325,450","size":"100,100"}
 <div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
     <<set $waterComplete to true>>
@@ -443,7 +580,7 @@ Your astronaut should read out the code they are seeing. Any asterisks that they
 https://blog.museumofflight.org/hubfs/Space%20toilet1.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
 <table style="width: 100%;">
   <tr><td style="text-align: center;"><div class="astro-button-down"><<button [[Dormitory]]>><</button>></div></td> </tr> </table> <div class="satellite-panel">
-<<if $toiletComplete is false>><div class="astro-button-issue"><<button [[!!!Access Toilet Hardware!!!|Plumbing Puzzle]]>><</button>></div><</if>>
+<<if $toiletComplete is false>><div class="astro-button-issue"><<button [[!!!Orbital  Plumbing!!!|Plumbing Puzzle]]>><</button>></div><</if>>
 
 <<if $toiletComplete is true>><div class="astro-button-complete">✓Toilet✓</div><<unset $toiletComplete>><</if>>
 </div></div><<endnobr>>
@@ -520,8 +657,10 @@ PLEASE ENTER THE GAME CODE BELOW! Your Mission Control will have it!
 <center>The only way to fix the spacecraft is to provide directions for your astronaut to solve these problems</center>
 <center>Your goal is to provide clear communication and instructions with your astronaut to restore the spacecraft into safe conditions</center>
 <center>Your manual may randomly restart on their own in different intervals as the game progresses</center>
-<center>When your astronaut completed all of their tasks and receive a victory screen, then you are allow to select the "Finished" button (not in yet)</center>
-<center>NOTE!!!</center><center>MAKE SURE YOUR ASTRONAUT IS READY TO START THE GAME</center></div><div class="ui-card">
+<center>When your astronaut completed all of their tasks and receive a victory screen, then you are allow to select the "End Game" button, This rule also applies when your astronaut receives a game over screen</center>
+<center><span id="big-warning">NOTE!!!</span></center><span id="big-warning"><center>MAKE SURE YOUR ASTRONAUT IS READY TO OPEN THEIR MANUAL BEFORE STARTING THE GAME
+
+Depending on your screen size, you WILL have to scroll</center></span></div><div class="ui-card">
 <center><div class="button-right"><<button [[OPEN MANUAL|Get Code]]>><</button>></div></center>
 <center><div class="button-left"><<button [[NVM GO BACK|BEGIN MISSION]]>><</button>></div></center>
 
@@ -556,16 +695,12 @@ PLEASE ENTER THE GAME CODE BELOW! Your Mission Control will have it!
 :: Game Over {"position":"300,200","size":"100,100"}
 <div class="ui-card">
 <center><h1 id="lose-text">Game Over...</h1></center>
-
+<<set $resetCounter to true>>
 <center>Your spacecraft exploded, and if you are the astronaut, you must pretend that you are dead and exploded into a million pieces.
 </center>
 <center>And if you are playing solo, I beg you to please get a homie to play with you, you rule breaker!</center>
 
 <center>But something is over there, something bright...</center>
-<center>This next week of development!</center>
-<center>We haven't found any large bugs on our own, so our plan is to have our designers ramp up playtesting and conducting player interviews, going on the hunt for bugs and bug-level issues over the next two days.</center>
-<center>While this is going on, we intend to have our programmers begin implementing simple settings, as that was a notable bug/issue our playtesters felt needed addressing.</center>
-<center>Finally, on Wednesday, we will begin shifting gears towards fixing the remaining bugs and finalizing any last minute production decisions, as well as compiling the SME interviews we've held throughout the course.</center>
 
 <center>
   <div class="button-completed"><<button [[Back to Menu]]>><</button>></div>
@@ -615,24 +750,26 @@ Give the Astronaut your hash: <<print $gameCode>>
 <center><strong><u>MESS ROOM</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/1dts6XX_d.webp?maxwidth=760&fidelity=grand" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $dispErrs.deleteAll($tempPanel)>>
 
 <div class="satellite-panel">
-<<if $panel.includes("FlipSwitch")>>
-	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></div></center>
+<<if $dispErrs.includes("FlipSwitch")>>
+	<center>[Switch Position:] 		<span id="computer-amber">OFF</span></center>
 <<else>>
 	<center>[Switch Position:] 		<span id="computer-green">ON</span></center>
 <</if>>
-<<if $panel.includes("FlipSwitch") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("FlipSwitch") or $dispErrs.includes("ReplaceControllerCard")>>
 	<center>[Power Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Power Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
-<<if $panel.includes("ReplaceFilter") or $panel.includes("ReplaceControllerCard")>>
+<<if $dispErrs.includes("ReplaceFilter") or $dispErrs.includes("ReplaceControllerCard")>>
 	<center>[Filter Status:] 		<span id="computer-amber">NEGATIVE</span></center>
 <<else>>
 	<center>[Filter Status:] 		<span id="computer-green">POSITIVE</span></center>
 <</if>>
 
+<center><span id="computer-green">You can dispense the water as much as you like, without penalty, to complete this puzzle</span></center>
  <<set $waterTemp = " ">>
 </div><table style="width: 50%; margin: 0 auto;">
   <tr>
@@ -654,6 +791,7 @@ Give the Astronaut your hash: <<print $gameCode>>
 <center><strong><u>DORMITORY TOILET REPAIR</u></strong></center>
 <center><span id="lose-text">NOTE: THIS IMAGE IS NOT PART OF THE PUZZLE</span></center>
 <center><img src="https://i.imgur.com/SXgJleS.png" width="500" height="400" alt="Placeholder Title Image" /></center>
+<<set $panel.deleteAll($tempPanel)>>
 
 <center>Pump Sensor</center>
 <div class="satellite-panel">
@@ -702,7 +840,6 @@ Give the Astronaut your hash: <<print $gameCode>>
   <tr>
     <td style="text-align: right;"><div class="astro-button-right"><<button [[Mess Hall]]>><</button>></div></td>
   </tr>
-      [[Oxygen Leak (Astronaut)|Oxy: Astronaut]]
 </table></div><<endnobr>>
 
 
@@ -731,7 +868,6 @@ You got it?
 
 
 :: Meeting Room {"position":"1700,600","size":"100,100"}
-<<run playBGM("meeting","audio/meetingBGM.mp3")>>
 <<nobr>><div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
 <center><strong><u>MEETING ROOM</u></strong></center>
 <center><img src="https://static01.nyt.com/images/2020/10/30/science/00SCI-OUTTHERE-SCENES12/00SCI-OUTTHERE-SCENES12-mediumSquareAt3X.jpg" width="500" height="400"  alt="Placeholder Title Image" /></center>
@@ -770,7 +906,6 @@ You got it?
 
 
 :: OPEN MANUAL {"position":"800,900","size":"100,100"}
-<<run playBGM("meeting","audio/meetingBGM.mp3")>>
 <div class="ui-card">
 <<nobr>>
   <center><span id="computer-amber"><strong><u>CHECKLIST</u></strong></span></center>
@@ -816,7 +951,7 @@ You got it?
 <<button[[Antenna Repair]]>><</button>></center></div><div class="button-content">
 <center><<button[[Computer Failure]]>><</button>></center></div>
 <div class="button-content"><center><<button[[Oxygen Leak]]>><</button>></center></div><div class="button-content">
-<center><<button[[Plumbing Problems]]>><</button>></center></div>
+<center><<button[[Orbital Plumbing Problems]]>><</button>></center></div>
 <div class="button-right"><div style="text-align: right;">
 <<button[[Next|OPEN MANUAL 2/2]]>><</button>></div></div></span></center><<include 'Manual Timer'>>
 
@@ -871,81 +1006,16 @@ You got it?
 <<button[[Back|OPEN MANUAL]]>><</button>></div></div></span></center><<include 'Manual Timer'>>
 
 
-:: Oxy: Astronaut {"position":"1625,275","size":"100,100"}
-\:: Oxy: Astronaut
-<<run OXY_initScenario()>>
+:: Orbital Plumbing Problems {"position":"750,1100","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-white">Orbital Plumbing Problems</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
+Plumbing is very important for the ship, transporting water and waste to fit the needs of the astronauts. One very important plumbing function is to facilitate "space toilets" or "zero gravity toilets," which use airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft. However, even "orbital plumbing" is a task astronauts need to help solve to maintain the ship.
 
-<div class="oxy-card">
-  <b>Leak hint:</b> <span id="oxy-leak-tip">...</span>
-</div>
-
-<div class="oxy-card">
-  <div class="oxy-row"><b>Pressure:</b> <span id="oxy-pressure-num">--%</span></div>
-  <div class="oxy-gauge"><span id="oxy-gauge-bar"></span></div>
-  <div id="oxy-status" class="hint oxy-row">Adjust valves to stop the leak.</div>
-</div>
-
-<div class="oxy-card">
-  <b>Valves</b>
-  <div class="oxy-row">
-    <button id="v-Red"    class="valve" onclick="OXY_toggleValve('Red')">Red</button>
-    <button id="v-Blue"   class="valve" onclick="OXY_toggleValve('Blue')">Blue</button>
-    <button id="v-Yellow" class="valve" onclick="OXY_toggleValve('Yellow')">Yellow</button>
-    <button id="v-Green"  class="valve" onclick="OXY_toggleValve('Green')">Green</button>
-  </div>
-  <div class="oxy-row hint">Report the pressure and leak hint to Flight Controller.</div>
-  [[Life Support]]
-</div>
-
-<<script>>OXY_render();<</script>>
-
-<<if $oxy_sealed>>
-  <div class="oxy-card"><span class="good">Leak sealed! You can move on.</span></div>
-<</if>>
-<<if $oxy_failed>>
-  <div class="oxy-card"><span class="bad">Oxygen depleted. Try again.</span></div>
-[[Life Support]]
-
-<</if>>
-
-
-
-:: Oxy: Controller Manual {"position":"600,1300","size":"100,100"}
-\:: Oxy: Controller Manual
-<div class="oxy-card"><h3>Oxygen Leak – Flight Controller Manual</h3>
-<p>When the astronaut reports the leak hint and current pressure, apply the rules below and instruct valve operations.</p></div>
-
-<div class="oxy-card">
-  <h4>Valve roles</h4>
-  <ul>
-    <li><b>Red Valve</b> – Emergency cut-off (main line)</li>
-    <li><b>Blue Valve</b> – Keep O₂ circulation</li>
-    <li><b>Yellow Valve</b> – Aux relief</li>
-    <li><b>Green Valve</b> – Regenerator line</li>
-  </ul>
-</div>
-
-<div class="oxy-card">
-  <h4>Base rules (by leak location)</h4>
-  <ul>
-    <li>Leak on <b>Green Pipe</b> → Close <b>Red</b>, keep <b>Blue</b> open.</li>
-    <li>Leak on <b>Blue Pipe</b> → Open <b>Yellow</b>, close <b>Green</b>.</li>
-    <li>Leak on <b>Red Pipe</b> → Close <b>Blue</b>, open <b>Yellow</b>.</li>
-    <li>Leak on <b>Yellow Pipe</b> → Keep <b>Red</b> open, close <b>Green</b>.</li>
-  </ul>
-  <h4>Pressure corrections</h4>
-  <ul>
-    <li>If pressure <b>&lt; 80%</b> → additionally <b>close Yellow</b>.</li>
-    <li>If pressure <b>&lt; 50%</b> → <b>close all valves</b> and prepare manual O₂.</li>
-  </ul>
-  <p class="hint">Priority when multiple leaks are suspected: Green &gt; Red &gt; Blue &gt; Yellow.</p>
-</div>
-
-<div class="oxy-card">
-  <b>Example</b>: Astronaut reports 72% and “bubbles near Green pipe” → Close Red, keep Blue open; because 72% &lt; 80%, also close Yellow.
-</div>
-
-[[Oxygen Leak]]
+Do I need to explain why astronauts would need to have a toilet in their spacecraft?
+</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
+<table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div></td>
+    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Toilet Repair Instructions]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
 
 
 :: Oxygen Leak {"position":"600,1100","size":"100,100"}
@@ -957,29 +1027,16 @@ Oxygen leaks can happen if the vacuum jumper hose malfunctioned that show signs 
 <center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
 
 <div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div>
-[[Oxygen Leak – Manual|Oxy: Controller Manual]]
 </div>
 <<include 'Manual Timer'>>
 
 
-:: Plumbing Complete {"position":"1850,50","size":"100,100"}
+:: Plumbing Complete {"position":"1850,25","size":"100,100"}
 <div class="ui-card"><div class="satellite-panel"><<include "Gameplay Rules">></div>
     <<set $toiletComplete to true>>
     <<set $panel.deleteAll($tempPanel)>>
     <div class="astro-button-right"><center><<button[[All Errors Resolved|Dorm Toilet]]>><</button>></center></div>
     </div>
-
-
-:: Plumbing Problems {"position":"750,1100","size":"100,100"}
-<div class="ui-card"><center><h1 id="computer-white">Orbital Plumbing Problems</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
-Plumbing is very important for the ship, transporting water and waste to fit the needs of the astronauts. One very important plumbing function is to facilitate "space toilets" or "zero gravity toilets," which use airflow and vacuums to collect liquid and solid waste to reduce bacteria inside the spacecraft. However, even "orbital plumbing" is a task astronauts need to help solve to maintain the ship.
-
-Do I need to explain why astronauts would need to have a toilet in their spacecraft?
-</span><center><h1 id="computer-green">--------------------------------------------------</h1></center></div><div class="ui-card">
-<table style="width: 100%;">
-  <tr>
-    <td><div class="button-left"><<button[[Back|OPEN MANUAL]]>><</button>></div></td>
-    <td style="text-align: right;"><div class="button-right"><<button [[Instructions|Toilet Repair Instructions]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
 
 
 :: Plumbing Puzzle {"position":"1700,150","size":"100,100"}
@@ -1009,7 +1066,7 @@ Do I need to explain why astronauts would need to have a toilet in their spacecr
 <</if>>
 
 <<if $panel.includes("ReplaceConductivitySensor")>>
-  <center><div class="astro-button-action"><<button "Replace Conductivity Sensor">><<set $tempPanel = "ReplacePumpSensor">><<set $conductivity = 0>><<goto "Plumbing Puzzle">><</button>></div></center>
+  <center><div class="astro-button-action"><<button "Replace Conductivity Sensor">><<set $tempPanel = "ReplaceConductivitySensor">><<set $conductivity = 0>><<goto "Plumbing Puzzle">><</button>></div></center>
 <<else>>
   <center><div class="astro-button-action"><<button "Replace Conductivity Sensor">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
 <</if>>
@@ -1031,24 +1088,12 @@ Do I need to explain why astronauts would need to have a toilet in their spacecr
 <<else>>
   <div class="astro-button-left"><<button "Replace Panel Cover">><<goto "Dorm Toilet">><</button>></div>
 <</if>>
+<table style="width: 100%;">
+  <tr><td style="text-align: right;"><div class="astro-button-disclaimer"><<button [[DISCLAIMER|Disclaimer Astro Orbital Plumbing]]>><</button>></div></td></tr></table>
 
 <<set $backToPuzzle to "Plumbing Puzzle">>
 </div><<endnobr>>
 
-<silently>
-<!-- <<if $panel.includes("ReplaceControllerCard")>>
-	<div class="astro-button-action">
-		<<button "Replace Controller Card">>
-        			<<set $tempPanel = "ReplaceControllerCard">>
-            	<<goto "Plumbing Puzzle">>
-         <</button>></div>
-		<<else>>
- 				 <div class="astro-button-action">
-                 	<<button "Replace Controller Card">>
-                    		<<goto "Astronaut Incorrect Screen">>
-                     <</button>></div>
-		<</if>> -->
-</silently>
 
 
 :: Proceed {"position":"400,600","size":"100,100"}
@@ -1065,7 +1110,15 @@ Do I need to explain why astronauts would need to have a toilet in their spacecr
       <</button>>
     </div>
   </center>
+    <center>
+    <div class="satellite-button-wrong">
+      <<button "BACK">>
+        <<goto "Start Game">>
+      <</button>>
+    </div>
+  </center>
 </div>
+
 
 
 :: Radiation Shield Failure {"position":"500,1700","size":"100,100"}
@@ -1393,7 +1446,10 @@ Edit satellite altitude below:
     <span id="success-text">All satellites have been restored to their proper altitudes!</span>
     <<else>><div class="satellite-panel"><center><span id="warning-text">The satellites are misaligned!</span></center></div>
 <</if>>
-<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>></div>
+<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>>
+  <table style="width: 100%;">
+  <tr>
+   <td style="text-align: right;"><div class="astro-button-disclaimer"><<button [[DISCLAIMER|Disclaimer Astro Satellite Realignment]]>><</button>></div></td></tr></table></div>
 </div>
 <<set $backToPuzzle to "Satellite Puzzle">>
 
@@ -1423,7 +1479,18 @@ This spacecraft controls four satellites outside of it, each one responsible for
 </div>
 <table style="width: 100%;">
   <tr>
-    <td><div class="button-left"><<button[[Back|Satellite Realignment]]>><</button>></div></td></tr></table></div><<include 'Manual Timer'>>
+    <td><div class="button-left">
+    <<button[[Back|Satellite Realignment]]>><</button>>
+    </div>
+    </td>
+    <td style="text-align: right;">
+  <div class="button-disclaimer">
+    <<button "DISCLAIMER">>
+      <<goto "Disclaimer Satellite Realignment">>
+    <</button>>
+  </div>
+</td>
+    </tr></table></div><<include 'Manual Timer'>>
 
 
 :: Solar Panel Repairs {"position":"1100,1100","size":"100,100"}
@@ -1453,7 +1520,14 @@ NOTE: THIS PUZZLE WILL REQUIRE SCROLLING</span>
   </div>
 </div><table style="width: 100%;">
   <tr>
-    <td><div class="button-left"><<button[[Back|StarFix: HOU Seed]]>><</button>></div></td></tr></table></div>
+    <td><div class="button-left"><<button[[Back|StarFix: HOU Seed]]>><</button>></div></td>
+    <td style="text-align: right;">
+  <div class="button-disclaimer">
+    <<button "DISCLAIMER">>
+      <<goto "Disclaimer Stars Constellations">>
+    <</button>>
+  </div>
+</td></tr></table></div>
 <<include 'Manual Timer'>>
 
 
@@ -1462,6 +1536,7 @@ NOTE: THIS PUZZLE WILL REQUIRE SCROLLING</span>
 <div class="ui-card">
   <h3>Enter Task Code</h3>
   <p class="hint">Ask the Flight Controller for the code and type it below.</p>
+  <span id="big-warning">Ensure you entered "TASK-" and the four digit number 	in the task code</span>
   <<textbox "$sf_seed" autocapitalize="off" autocorrect="off">>
   <div class="btnrow">
    <div class="astro-button-right"><<button "Start Mission">></div>
@@ -1478,8 +1553,11 @@ NOTE: THIS PUZZLE WILL REQUIRE SCROLLING</span>
   <div id="msg" class="hint"></div>
 </div>
 </div>
-<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>></div>
-<<set $backToPuzzle to "Stars Puzzle">>
+<div class="astro-button-left"><<button[[BACK|Command Center]]>><</button>>
+<table style="width: 100%;">
+  <tr>
+   <td style="text-align: right;"><div class="astro-button-disclaimer"><<button [[DISCLAIMER|Disclaimer Astro Stars Constellations]]>><</button>></div></td></tr></table></div><<set $backToPuzzle to "Stars Puzzle">>
+
 
 
 :: StarFix: Check {"position":"2400,600","size":"100,100"}
@@ -1630,9 +1708,9 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
   addQuadrants('sf_svg_hou');
 })();
 </script>
-
+<<silently>>
 // StarFix Tick marks overlay
-
+<</silently>>
 <script>
 (function () {
   
@@ -1694,7 +1772,57 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 })();
 </script>
 
+<script>
+/* Dashed grid (same style as scope): bright red, 50% opacity */
+(function () {
+  function drawGrid(containerId, step = 20, color = '#ff5555', opacity = 0.5) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    const svg = wrap.querySelector('svg');
+    if (!svg) return;
 
+    // 清理旧网格
+    svg.querySelectorAll('.quad-grid').forEach(n => n.remove());
+
+    const vb = (svg.viewBox && svg.viewBox.baseVal) ? svg.viewBox.baseVal : { width: 300, height: 300 };
+    const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function vline(x) {
+      const el = document.createElementNS(ns, 'line');
+      el.setAttribute('x1', x); el.setAttribute('y1', 0);
+      el.setAttribute('x2', x); el.setAttribute('y2', h);
+      el.setAttribute('stroke', color);
+      el.setAttribute('stroke-opacity', opacity);
+      el.setAttribute('stroke-dasharray', '4 4');
+      el.setAttribute('stroke-width', '0.8');
+      el.setAttribute('class', 'quad-grid');
+      svg.appendChild(el);
+    }
+    function hline(y) {
+      const el = document.createElementNS(ns, 'line');
+      el.setAttribute('x1', 0); el.setAttribute('y1', y);
+      el.setAttribute('x2', w); el.setAttribute('y2', y);
+      el.setAttribute('stroke', color);
+      el.setAttribute('stroke-opacity', opacity);
+      el.setAttribute('stroke-dasharray', '4 4');
+      el.setAttribute('stroke-width', '0.8');
+      el.setAttribute('class', 'quad-grid');
+      svg.appendChild(el);
+    }
+
+    // 从中心向四周铺，保留中轴为实线
+    for (let x = cx + step; x < w; x += step) vline(x);
+    for (let x = cx - step; x > 0;  x -= step) vline(x);
+    for (let y = cy + step; y < h; y += step) hline(y);
+    for (let y = cy - step; y > 0;  y -= step) hline(y);
+  }
+
+  // 在渲染/刻度之后再叠一次（两次触发更稳妥）
+  requestAnimationFrame(() => drawGrid('sf_svg_hou'));
+  setTimeout(() => drawGrid('sf_svg_hou'), 0);
+})();
+</script>
 
 
 :: StarFix: Scope {"position":"2275,600","size":"100,100"}
@@ -1704,7 +1832,8 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 </div>
 
 <div class="ui-card">
-  <b>Task Code:</b> <<print $sf_seed>>　<b>Flight segment:</b> <<print $sf_stage>>
+  <b>Task Code:</b> <<print $sf_seed>>　<b>Flight segment:</b> <<print $sf_stage>> 
+<<button[[INCORRECT TASK CODE|StarFix: ASTR Seed]]>><</button>>
 </div>
 
 <div id="sf_svg_scope" class="ui-card">Loading telescope view…</div>
@@ -1712,12 +1841,12 @@ Even though we have Global Positioning System (GPS) to navigate, we still use st
 <div class="ui-card">
   <b>Current angle:</b> <span id="curAngle"><<print $sf_current>>°</span>
   <div class="btnrow">
-    <<button "⟲ -10°">><<run SF_step(-10)>><</button>>
-    <<button "⟲ -5°">><<run SF_step(-5)>><</button>>
-    <<button "⟲ -1°">><<run SF_step(-1)>><</button>>
-    <<button "⟳ +1°">><<run SF_step(1)>><</button>>
-    <<button "⟳ +5°">><<run SF_step(5)>><</button>>
-    <<button "⟳ +10°">><<run SF_step(10)>><</button>>
+    <<button "⟲ +10°">><<run SF_step(10)>><</button>>
+  <<button "⟲ +5°">><<run SF_step(5)>><</button>>
+  <<button "⟲ +1°">><<run SF_step(1)>><</button>>
+  <<button "⟳ -1°">><<run SF_step(-1)>><</button>>
+  <<button "⟳ -5°">><<run SF_step(-5)>><</button>>
+    <<button "⟳ -10°">><<run SF_step(-10)>><</button>>
   </div>
 
   <div class="btnrow">
@@ -1735,25 +1864,52 @@ SF_updateScope();
 
 
 :: Start Game {"position":"250,600","size":"100,100"}
+<<silently>>
+<<if $seconds is undefined or $resetCounter == true>>
+	<<set $resetCounter to false>>
+    <<set $seconds to 600>>
+    <<set $strikes to 3>>
+<</if>>
+<<if $strikes is undefined or $resetCounter == true>>
+	<<set $resetCounter to false>>
+    <<set $seconds to 600>>
+    <<set $strikes to 3>>
+<</if>>
+<</silently>>
 <div class="ui-card">
 <center><h1 id="big-warning">WARNING!!!</h1></center>
 <center><h3 class="small-warning">THIS GAME IS NOT MEANT TO BE PLAYED WITH A SINGLE PERSON.</h3></center>
 <center><h3 class="small-warning">YOU ARE REQUIRED TO HAVE TWO PLAYERS IN SEPERATE DEVICES TO PLAY THIS GAME.</h3></center>
 
 <center>But of course, you could ignore this warning, I can't stop you.</center>
+<center>
+<h3 class="small-warning"><u>SETTINGS</u></h3>
+<center><span id="big-warning">NOTE:</span></center><span id="big-warning"> <center>Ensure that you select "Confirm" on each side, and double check the settings set on this bottom display</center></span>
+<div class="satellite-panel">Game Set to <<= $seconds >> second(s).
+    Strike(s): <<= $strikes >></div>
+Duration of the game (in seconds) (Default 600, or 10 minutes):
+<<textbox "$seconds_input" "0" autofocus>> <<button "Confirm">>
+<<goto "Start Game">>
+	<<set $seconds to Number($seconds_input)>>
+<</button>>
+Number of strikes (Default 3):
+<<textbox "$strikes_input" "0" autofocus>> <<button "Confirm">>
+<<goto "Start Game">>
+	<<set $strikes to Number($strikes_input)>>
+<</button>>
 
   <center>
   <div class="button-completed"><<button [[Proceed]]>><</button>></div>
   </center>
+  
+  <<if $seconds is NaN>><div class="astro-button-issue"><<button [[!!!Water Dispenser!!!|Water Puzzle]]>><</button>></div><</if>>
 
 
 :: StoryInit {"position":"50,1300","size":"100,100"}
 <<set $rng to seedRand(String($gameCode))>>
-<<set $seconds to 10000>>
 <<set $manualSeconds to Math.floor($rng()*50 + 100)>>
 <<set $fullWater to Math.floor($rng()*40 + 60)>>
 <<set $lowWater to Math.floor($rng()*10 + 30)>>
-<<set $strikes to 3>>
 
 <!--To check if the puzzle is completed-->
 <<set $completedPuzzles to 0>>
@@ -1886,99 +2042,64 @@ SF_updateScope();
  <!-- This sample code was take from Twine SugarCube: Timed Passage with modifications--><</silently>>
 
 
-:: Toilet Repair Instructions {"position":"750,1250","size":"100,100"}
-<div class="ui-card">
-  <h1 id="computer-amber" style="text-align:center;">ORBITAL PLUMBING INSTRUCTIONS</h1>
-  <hr>
-
-  <p id="computer-amber">
-    Problems with orbital plumbing can be caused by several factors, including:
-  </p>
-  <ul id="computer-amber">
-    <li>Controller Card issues</li>
-    <li>Pump issues</li>
-    <li>Sensor issues</li>
-    <li>System configuration issues</li>
-  </ul>
-
-  <p id="computer-amber">
-    Have your astronaut inspect the equipment and relay any information given by the system.
-    Errors with certain components may have multiple causes, so ensure the statuses of other components
-    are taken into account as well—even after repair.
-  </p>
+:: Toilet Repair Instructions {"position":"700,1250","size":"100,100"}
+<div class="ui-card"><center><h1 id="computer-amber">ORBITAL PLUMBING INSTRUCTIONS</h1></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber">
+Problems with orbital plumbing can be caused by several factors, including:<span id="computer-green">
+* Controller Card Issues
+* Pump Issues
+* Sensor Issues
+* System Configuration issues
+</span>
+Have your astronaut inspect the equipment and relay any information given by the system. Errors with certain components <span id="computer-green">may be the result of several issues</span>, so ensure the statuses of other components are taken into account as well, <span id="computer-green">even after repair</span>.
+<div class="ui-card">Pump Sensor Power
+*The Power Status represents whether or not the pump sensor is properly functioning.
+*Issues with the Pump Sensor's <span id="computer-green">Power Status</span> may be caused by a <span id="computer-green">faulty sensor</span>.
+*Reconfiguring the system may be necessary <span id="computer-green">if no other issues exist with the pump's sensor</span> by <span id="computer-green">using the Reset Button</span>.
+</div>
+<div class="ui-card">Pump Sensor Load
+*The <span id="computer-green">Load Status</span> detects if the pump is maintaining the required water pressure.
+*A <span id="computer-green">negative</span> load status could signify the need for a <span id="computer-green">replacement pump</span>.
+*<span id="computer-green">Alongside other sensor issues</span>, problems with the Load Status may also derive from a <span id="computer-green">faulty sensor</span>.
+</div>
+<div class="ui-card">Pump Sensor Voltage
+*The <span id="computer-green">Voltage Status</span> monitors if the pump assembly is currently recieving the right amount of power.
+*While this could mean electrical issues exist, this may simply be the result of a <span id="computer-green">faulty Pump Sensor</span>.
+*<span id="computer-green">If several components fail to recieve proper power</span>, this may instead be the result of a <span id="computer-green">faulty Controller Card</span>.
+</div>
+<div class="ui-card">Conductivity Readings
+*Pure water isn't conductive, therefore, any conductivity represents impurities in the water.
+*For most of the US, drinking water ranges from 50 to 1500 µS/cm. For the purposes of our ship, the <span id="computer-green">conductivity readings will not exceed 800 µS/cm</span>.
+*If the readings <span id="computer-green">exceed this level of conductivity</span>, this likely signifies a <span id="computer-green">faulty Conductivity Sensor</span>
+*This may also be an issue of <span id="computer-green">insufficient power</span> being given to the device instead, signifying a <span id="computer-green">Controller Card issue</span>.
+</div>
+<div class="ui-card">Controller Card Output
+*The light on the <span id="computer-green">Controller Card</span> displays whether or not the card is functioning properly, connecting together several components of the assembly.
+*If the light is <span id="computer-green">off</span>, the system may need to be reconfigured using the <span id="computer-green">Reset Button</span>, as components like the <span id="computer-green">Pump Sensor may not work</span> as intended.
+*If the light is <span id="computer-green">off and several components have issues recieving electrical power</span>, the <span id="computer-green">Controller Card is faulty</span> and needs to be replaced.
 </div>
 
-<div class="ui-card">
-  <h3 id="computer-amber">Pump Sensor Power</h3>
-  <ul>
-    <li>The <b>Power Status</b> represents whether the pump sensor is functioning properly.</li>
-    <li>Issues here may be caused by a faulty sensor.</li>
-    <li>If no other issues exist with the pump’s sensor, reconfiguring the system via the <b>Reset</b> button may be necessary.</li>
-  </ul>
-</div>
-
-<div class="ui-card">
-  <h3 id="computer-amber">Pump Sensor Load</h3>
-  <ul>
-    <li>The <b>Load Status</b> detects whether the pump is maintaining the required water pressure.</li>
-    <li>A negative load status could indicate the need for a replacement pump.</li>
-    <li>It may also derive from a faulty sensor.</li>
-  </ul>
-</div>
-
-<div class="ui-card">
-  <h3 id="computer-amber">Pump Sensor Voltage</h3>
-  <ul>
-    <li>The <b>Voltage Status</b> monitors whether the pump assembly is currently receiving the correct amount of power.</li>
-    <li>This could point to electrical issues, but may also simply be the result of a faulty pump sensor.</li>
-    <li>If several other components fail to receive proper power, the <b>Controller Card</b> may be at fault.</li>
-  </ul>
-</div>
-
-<div class="ui-card">
-  <h3 id="computer-amber">Conductivity Readings</h3>
-  <ul>
-    <li>Pure water isn’t conductive; any conductivity represents impurities in the water.</li>
-    <li>For most of the U.S., drinking water ranges from <b>50–1500&nbsp;µS/cm</b>. For our ship, readings should not exceed <b>800&nbsp;µS/cm</b>.</li>
-    <li>Readings above this level likely signify a faulty <b>Conductivity Sensor</b>.</li>
-    <li>It may also be insufficient power to the device, indicating a <b>Controller Card</b> issue.</li>
-  </ul>
-</div>
-
-<div class="ui-card">
-  <h3 id="computer-amber">Controller Card Output</h3>
-  <ul>
-    <li>The light on the Controller Card indicates whether the card is functioning and linking components.</li>
-    <li>If the light is off, the system may need to be reconfigured using the <b>Reset</b> button (sensors like the Pump Sensor may not work as intended).</li>
-    <li>If the light is off and several components lack power, the Controller Card is likely faulty and should be replaced.</li>
-  </ul>
-</div>
-
-<div class="ui-card">
-  <table style="width:70%; margin:0 auto;">
-    <tr>
-      <td>
-        <div class="button-left">
-          <<button "Back">>
-            <<goto "Plumbing Problems">>
-          <</button>>
-        </div>
-      </td>
-      <td style="text-align:center;">
-        <div class="button-completed">
-          <<button "COMPLETE">>
-            <<set $toiletComplete = true>>
-            <<goto "OPEN MANUAL">>
-          <</button>>
-        </div>
-      </td>
-    </tr>
-  </table>
-</div>
+<div class="ui-card"><span id="computer-white"> </span><div class="button-completed">
+</div><table style="width: 100%;">
+  <tr>
+    <td><div class="button-left"><<button[[Back|Orbital Plumbing Problems]]>><</button>></div></td>
+    <td style="text-align: center;">
+  <div class="button-completed">
+    <<button "COMPLETE">>
+      <<set $toiletComplete = true>>
+      <<goto "OPEN MANUAL">>
+    <</button>>
+  </div>
+</td>
+  	<td style="text-align: right;">
+  <div class="button-disclaimer">
+    <<button "DISCLAIMER">>
+      <<goto "Disclaimer Orbital Plumbing">>
+    <</button>>
+  </div>
+</td></tr></table></div>
 
 
-
-:: Toilet Repair Result {"position":"1250,1600","size":"100,100"}
+:: Toilet Repair Result {"position":"1300,1800","size":"100,100"}
 
 
 
@@ -1993,17 +2114,11 @@ $completedPuzzles / $numOfPuzzles puzzles completed<<silently>><<if $completedPu
 :: Victory Screen {"position":"300,400","size":"100,100"}
 <div class="ui-card">
 <center><h1 id="win-text">YOU WIN!!!</h1></center>
-
+<<set $resetCounter to true>>
 <center>Your spacecraft is now in stable conditions and you should celebrate with your team!</center>
 <center>And if you are playing solo, well I don't know what to say. Congrats?</center>
 
 <center>But something is over there, something bright...</center>
-<center>This next week of development!</center>
-<center>We haven't found any large bugs on our own, so our plan is to have our designers ramp up playtesting and conducting player interviews, going on the hunt for bugs and bug-level issues over the next two days.</center>
-<center>While this is going on, we intend to have our programmers begin implementing simple settings, as that was a notable bug/issue our playtesters felt needed addressing.</center>
-<center>Finally, on Wednesdy, we will begin shifting gears towards fixing the remaining bugs and finalizing any last minute production decisions, as well as compiling the SME's we've held throughout the course.</center>
-
-
 
 <center>
   <div class="button-completed"><<button [[Back to Menu]]>><</button>></div>
@@ -2011,7 +2126,7 @@ $completedPuzzles / $numOfPuzzles puzzles completed<<silently>><<if $completedPu
 </div>
 
 
-:: Water Dispenser Repair {"position":"1450,1075","size":"100,100"}
+:: Water Dispenser Repair {"position":"1475,1050","size":"100,100"}
 <div class="ui-card"><center><h1 id="computer-white">POTABLE WATER DISPENSER REPAIR</h1></center><center><h1 id="computer-white">--------------------------------------------------</h1></center><span id="computer-green">
 The Potable Water Dispenser is vital for our astronauts' way of life, helping with hydration, hygiene, research, as well as food preparation. Additionally, this “rehydration station” is part of one of the most powerful water filtration systems, capable of filtering wastewater sources, like urine or sweat, into potable-quality drinkable water for our astronauts. The dispenser is given iodinated water, clear of all harmful elements, and uses an iodine filter to remove the biocide, leaving behind perfectly safe potable water.
 
@@ -2093,7 +2208,7 @@ In 2023, NASA reported that the ISS was able to recycle 98 percent of their wast
     <center><div class="astro-button-action"><<button "Replace Fans">><<goto "Astronaut Incorrect Screen">><</button>></div></center>
   <</if>>
 
-  <<if $dispErrs.length == 0>>
+  <<if $dispErrs.length == 0 || $dispErrs.length == 1 && $dispErrs == "NoHeat">>
     <div class="astro-button-left"><<button "Leave Dispenser">>
     <<goto "Dispenser Complete">>
     <</button>>
@@ -2103,69 +2218,67 @@ In 2023, NASA reported that the ISS was able to recycle 98 percent of their wast
     <<goto "Mess Hall">>
     <</button>></div>
   <</if>>
+  
+  <table style="width: 100%;">
+  <tr>
+   <td style="text-align: right;"><div class="astro-button-disclaimer"><<button [[DISCLAIMER|Disclaimer Astro Water Repair]]>><</button>></div></td></tr></table>
 
 <<set $backToPuzzle to "Water Puzzle">>
 </div>
 <<endnobr>>
 
-<silently>
-<!-- <<if $panel.includes("ReplaceControllerCard")>>
-	<div class="astro-button-action">
-		<<button "Replace Controller Card">>
-        			<<set $tempPanel = "ReplaceControllerCard">>
-            	<<goto "Plumbing Puzzle">>
-         <</button>></div>
-		<<else>>
- 				 <div class="astro-button-action">
-                 	<<button "Replace Controller Card">>
-                    		<<goto "Astronaut Incorrect Screen">>
-                     <</button>></div>
-		<</if>> -->
-</silently>
 
 
-:: Water Recycling Machine Result {"position":"1400,1600","size":"100,100"}
+:: Water Recycling Machine Result {"position":"1450,1800","size":"100,100"}
 
 
 
-:: Water Repair Instructions {"position":"1525,1275","size":"100,100"}
-<div class="ui-card"><center><h2 id="computer-amber">POTABLE WATER DISPENSER REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"> If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:
+:: Water Repair Instructions {"position":"1550,1250","size":"100,100"}
+<div class="ui-card"><center><h2 id="computer-amber">POTABLE WATER DISPENSER REPAIR INSTRUCTIONS</h2></center><center><h1 id="computer-amber">--------------------------------------------------</h1></center><span id="computer-amber"> If the potable water dispenser is malfunctioning, the result could be caused by several factors, including:<span id="computer-green">
 * Controller Card Issues
 * Cooling Issues
 * Filtration Issues
 * Pumping Issues
 * Sensor Issues
 * Human Error
-Have your astronaut inspect the equipment and relay any information given by the system. Additionally, ask your astronaut to dispense water to check for quality. Errors with certain components may be the result of several issues, so ensure the statuses of other components are taken into account as well, even after repair.
+</span>
+Have your astronaut inspect the equipment and relay any information given by the system. Additionally, <span id="computer-green">ask your astronaut to dispense water</span> to check for quality. Errors with certain components <span id="computer-green">may be the result of several issues</span>, so ensure the statuses of other components are taken into account as well, <span id="computer-green">even after repair</span>.
 <div class="ui-card">Power Status
-*The Power Status represents whether or not the system is properly recieving DC power to fuel its processes.
-*After confirming the device is powered on, if the Power Status of the device is negative, the issue may stem from a malfunctioning Controller Card. 
+*The <span id="computer-green">Power Status</span> represents whether or not the system is properly recieving DC power to fuel its processes.
+*After confirming the device is <span id="computer-green">powered on</span>, if the Power Status of the device is <span id="computer-green">negative</span>, the issue may stem from a <span id="computer-green">malfunctioning Controller Card</span>. 
 </div>
 <div class="ui-card">Filter Status
-*The Filter Status represents the device's ability to filter iodine from water.
-*A negative Filter Status typically signifies a need for a new filter replacement.
-*Issues powering the filter may also cause a filter error.
+*The <span id="computer-green">Filter Status</span> represents the device's ability to filter iodine from water.
+*A <span id="computer-green">negative</span> Filter Status typically signifies a need for a <span id="computer-green">new filter replacement</span>.
+*<span id="computer-green">Issues powering the filter</span> may also cause a filter error.
 </div>
 <div class="ui-card">Dispensing Water:
-*A pump system draws water through the potable water dispenser.
-*A failure in the pump system could result in improper flow.
+*A <span id="computer-green">pump system</span> draws water through the potable water dispenser.
+*A <span id="computer-green">failure in the pump system</span> could result in <span id="computer-green">improper flow</span>.
 </div>
 <div class="ui-card">Maintaining Internal Temperature:
-*Proper cooling must be maintainted within the unit, with the unit's inlet and outlet fans providing airflow to cool down its components.
-*Issues with the fans could result in improper cooling of the dispenser's equipment and may result in elevated water temperatures.
+*Proper cooling must be maintainted within the unit, with the unit's <span id="computer-green">inlet and outlet fans</span> providing airflow to cool down its components.
+*Issues with the fans could result in <span id="computer-green">improper cooling</span> of the dispenser's equipment and may result in <span id="computer-green">elevated water temperatures</span>.
 *A heater within the unit allows for hot water to be dispensed for various needs.
-*The heating assembly can supply two (2) liters of hot water every 30 minutes. Beyond this, the heater will need time to continue providing hot water. This is not an issue.
+*The heating assembly can supply two (2) liters of hot water every 30 minutes. <span id="computer-green">Beyond this, the heater will need time</span> to continue providing hot water. <span id="computer-green">This is not an issue</span>.
 </div>
 
 </span></div><div class="ui-card"><span id="computer-white"></span>
-<table style="width: 70%;">
+<table style="width: 100%;">
   <tr>
-    <td><div class="button-left"><<button[[Back|OPEN MANUAL 2/2]]>><</button>></div></td>
+    <td><div class="button-left"><<button[[Back|Water Dispenser Repair]]>><</button>></div></td>
     <td style="text-align: center;">
   <div class="button-completed">
     <<button "COMPLETE">>
       <<set $waterComplete = true>>
       <<goto "OPEN MANUAL 2/2">>
+    <</button>>
+  </div>
+</td>
+<td style="text-align: right;">
+  <div class="button-disclaimer">
+    <<button "DISCLAIMER">>
+      <<goto "Disclaimer Water Repair">>
     <</button>>
   </div>
 </td></tr></table></div><<include 'Manual Timer'>>
@@ -2431,6 +2544,67 @@ $(document).on(':passagedisplay', function () {
   });
 })();
 
+/* StarFix dashed grid overlay — append only */
+(function () {
+  function drawGrid(containerId, step = 20, color = '#ff5555', opacity = 0.5) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    const svg = wrap.querySelector('svg');
+    if (!svg) return;
+
+    // 清理旧网格
+    svg.querySelectorAll('.quad-grid').forEach(n => n.remove());
+
+    const vb = (svg.viewBox && svg.viewBox.baseVal) ? svg.viewBox.baseVal : { width: 300, height: 300 };
+    const w = vb.width, h = vb.height, cx = w / 2, cy = h / 2;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function vline(x) {
+      const el = document.createElementNS(ns, 'line');
+      el.setAttribute('x1', x); el.setAttribute('y1', 0);
+      el.setAttribute('x2', x); el.setAttribute('y2', h);
+      el.setAttribute('stroke', color);
+      el.setAttribute('stroke-opacity', opacity);
+      el.setAttribute('stroke-dasharray', '4 4');   // 虚线
+      el.setAttribute('stroke-width', '0.8');
+      el.setAttribute('class', 'quad-grid');
+      svg.appendChild(el);
+    }
+    function hline(y) {
+      const el = document.createElementNS(ns, 'line');
+      el.setAttribute('x1', 0); el.setAttribute('y1', y);
+      el.setAttribute('x2', w); el.setAttribute('y2', y);
+      el.setAttribute('stroke', color);
+      el.setAttribute('stroke-opacity', opacity);
+      el.setAttribute('stroke-dasharray', '4 4');
+      el.setAttribute('stroke-width', '0.8');
+      el.setAttribute('class', 'quad-grid');
+      svg.appendChild(el);
+    }
+
+    // 从中心向四周铺，保留中轴为实线（不画在 cx/cy 上）
+    for (let x = cx + step; x < w; x += step) vline(x);
+    for (let x = cx - step; x > 0;  x -= step) vline(x);
+    for (let y = cy + step; y < h; y += step) hline(y);
+    for (let y = cy - step; y > 0;  y -= step) hline(y);
+  }
+
+  // 再次包一层：在“刻度 + 象限”之后，叠加网格
+  const _prevAddQuadrants = window.addQuadrants; // 此时是你已包装过（带刻度）的版本
+  window.addQuadrants = function (containerId) {
+    if (typeof _prevAddQuadrants === 'function') _prevAddQuadrants(containerId);
+    drawGrid(containerId);  // 追加虚线网格
+  };
+
+  // 兜底：进入段落后尝试铺网格（渲染稍晚也能覆盖到）
+  $(document).on(':passagedisplay', function () {
+    ['sf_svg_scope', 'sf_svg_hou'].forEach(id => {
+      // 下一帧再画，确保 SVG 已插入
+      requestAnimationFrame(() => drawGrid(id));
+      setTimeout(() => drawGrid(id), 0);
+    });
+  });
+})();
 
 // ------- Simple BGM Manager -------
 window._bgm = new Audio();
@@ -2468,106 +2642,6 @@ window.stopBGM = function () {
   window._bgm.pause();
   window._bgm.currentTime = 0;
 };
-
-// ========= Oxygen Leak core =========
-(function(){
-  const V = () => SugarCube.State.variables;
-
-  window.OXY_initScenario = function() {
-    const v = V();
-    v.oxy_pressure = Math.floor(Math.random()*21) + 70;
-    const pipes = ['Green','Blue','Red','Yellow'];
-    v.oxy_leak = pipes[Math.floor(Math.random()*pipes.length)];
-    v.oxy_valves = { Red:true, Blue:true, Yellow:true, Green:true };
-    v.oxy_sealed = false; v.oxy_failed = false; v.oxy_okTicks = 0;
-    OXY_stopLoop(); OXY_startLoop();
-    setTimeout(OXY_render, 0);
-  };
-
-  window.OXY_expected = function() {
-    const v = V();
-    const exp = { Red:true, Blue:true, Yellow:true, Green:true };
-    switch (v.oxy_leak) {
-      case 'Green':  exp.Red=false;  exp.Blue=true;  break;
-      case 'Blue':   exp.Yellow=true;exp.Green=false;break;
-      case 'Red':    exp.Blue=false; exp.Yellow=true;break;
-      case 'Yellow': exp.Red=true;   exp.Green=false;break;
-    }
-    if (v.oxy_pressure < 80) exp.Yellow = false;
-    if (v.oxy_pressure < 50) { exp.Red=false; exp.Blue=false; exp.Yellow=false; exp.Green=false; }
-    return exp;
-  };
-
-  window.OXY_isCorrect = function() {
-    const v = V(), exp = OXY_expected(), valves = v.oxy_valves;
-    for (const k in exp) if (valves[k] !== exp[k]) return false;
-    return true;
-  };
-
-  window.OXY_tick = function() {
-    const v = V();
-    if (v.oxy_failed || v.oxy_sealed) return;
-    const correct = OXY_isCorrect();
-
-    if (correct) {
-      v.oxy_pressure = Math.min(100, v.oxy_pressure + 1);
-      v.oxy_okTicks = (v.oxy_okTicks||0) + 1;
-    } else {
-      const exp = OXY_expected();
-      let bad = 0;
-      for (const k in exp) if (v.oxy_valves[k] !== exp[k]) bad++;
-      const drop = 1 + bad;
-      v.oxy_pressure = Math.max(0, v.oxy_pressure - drop);
-      v.oxy_okTicks = 0;
-    }
-
-    if (v.oxy_pressure <= 0) { v.oxy_failed = true; OXY_stopLoop(); }
-    if (v.oxy_okTicks >= 3) { v.oxy_sealed = true; OXY_stopLoop(); }
-    OXY_render();
-  };
-
-  window.OXY_startLoop = function(){
-    OXY_stopLoop();
-    window._oxyTimer = setInterval(OXY_tick, 1000);
-    OXY_tick();
-  };
-
-  window.OXY_stopLoop = function(){
-    if (window._oxyTimer) { clearInterval(window._oxyTimer); window._oxyTimer = null; }
-  };
-
-  window.OXY_toggleValve = function(color){
-    const v = V();
-    v.oxy_valves[color] = !v.oxy_valves[color];
-    OXY_render();
-  };
-
-  window.OXY_render = function(){
-    const v = V();
-    const num = document.getElementById('oxy-pressure-num');
-    const bar = document.getElementById('oxy-gauge-bar');
-    if (num) num.textContent = (v.oxy_pressure|0) + '%';
-    if (bar) bar.style.width = Math.max(0, Math.min(100, v.oxy_pressure)) + '%';
-
-    ['Red','Blue','Yellow','Green'].forEach(c=>{
-      const b = document.getElementById('v-'+c);
-      if (b) {
-        const open = v.oxy_valves[c];
-        b.textContent = c + ': ' + (open ? 'OPEN' : 'CLOSED');
-        b.className = 'valve ' + (open ? 'open' : 'closed');
-      }
-    });
-
-    const tip = document.getElementById('oxy-leak-tip');
-    if (tip) tip.textContent = 'Bubbles observed near ' + v.oxy_leak + ' pipe.';
-    const st = document.getElementById('oxy-status');
-    if (st) {
-      if (v.oxy_failed) st.innerHTML = '<span class="bad"> Oxygen depleted. Mission failed.</span>';
-      else if (v.oxy_sealed) st.innerHTML = '<span class="good"> Leak sealed! Pressure stabilizing.</span>';
-      else st.textContent = 'Adjust valves to stop the leak.';
-    }
-  };
-})();
 
 :: StoryStylesheet [stylesheet]
 #menu-saves, #menu-restart {
@@ -2860,7 +2934,55 @@ a.yellow-link {
   );
 }
 
+.astro-button-disclaimer button {
+  background-color: #910438; 
+  color: #380213;
+  margin: 0px;
+  padding: 5px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 6px solid #380213;
+  clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+}
+
+.astro-button-disclaimer button:hover {
+  background-color: #380213; 
+  border: 6px solid #690d2a;
+  color: #f53873;
+}
+
+
  /*UI Buttons for the controller*/
+
+.button-disclaimer button {
+    font-weight: bold;
+    border-radius: 1px 15px 15px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #910438;
+    color: #380213;
+    letter-spacing: 1px;
+    border: 3px solid #380213;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
+.button-disclaimer button:hover {
+    font-weight: bold;
+    border-radius: 1px 15px 15px 1px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    background-color: #380213;
+    color: #f53873;
+    letter-spacing: 1px;
+    border: 3px solid #690d2a;
+    padding: 3px 23px;
+    font-size:90%;
+}
+
 
 .button-left button {
     border-radius: 15px 1px 1px 15px;
